@@ -50,6 +50,7 @@
         - lecture: introduce concepts wth live coding, saved to a history.txt file uploaded afterwards
         - exercises: practice the concepts
     - please remember to keep your audio muted when not speaking
+    - online vs. in-person? room E02.054 is currently assigned
 
 #### Outline
 
