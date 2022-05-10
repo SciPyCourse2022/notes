@@ -1,2 +1,2 @@
-# here is a comment
-print('hello world')
+# print a greeting to screen:
+print('hello world!')

@@ -1,0 +1,1142 @@
+
+mspacek@Godel:~/SciPyCourse2022/notes$ ipython
+Python 3.8.10 (default, Mar 15 2022, 12:22:08)
+Type 'copyright', 'credits' or 'license' for more information
+IPython 8.1.1 -- An enhanced Interactive Python. Type '?' for help.
+
+In [1]: 1 + 2 + 3
+Out[1]: 6
+
+In [2]: ls
+00_intro/            03_collections/  06_fileio_mpl/    09_pandas/      12_organizing/  homework3/  old_notes/
+01_Python_basics/    04_numpy/        07_mpl_matrices/  10_stats/       homework1/      homework4/  README.md
+02_Python_basics_2/  05_numpy_dtype/  08_images/        11_clustering/  homework2/      homework5/
+
+In [3]: cd 00_intro/
+/home/mspacek/SciPyCourse2022/notes/00_intro
+
+In [4]: ls
+ 00_intro.md    Figure_1.png   LFP_analysis_example.py  'The Incredible Growth of Python _ Stack Overflow.pdf'
+ 00_intro.pdf   Figure_2.png   LFP_example_data.npy
+
+In [5]: run -i LFP_analysis_example.py
+
+In [6]:
+mspacek@Godel:~/SciPyCourse2022/notes$ pwd
+/home/mspacek/SciPyCourse2022/notes
+mspacek@Godel:~/SciPyCourse2022/notes$ ls
+00_intro            03_collections  06_fileio_mpl    09_pandas      12_organizing  homework3  old_notes
+01_Python_basics    04_numpy        07_mpl_matrices  10_stats       homework1      homework4  README.md
+02_Python_basics_2  05_numpy_dtype  08_images        11_clustering  homework2      homework5
+mspacek@Godel:~/SciPyCourse2022/notes$ ls -l
+total 80
+drwxrwxr-x 2 mspacek mspacek 4096 May 10 12:46 00_intro
+drwxrwxr-x 2 mspacek mspacek 4096 May  6 07:21 01_Python_basics
+drwxrwxr-x 2 mspacek mspacek 4096 May  4 07:51 02_Python_basics_2
+drwxrwxr-x 2 mspacek mspacek 4096 May  4 07:51 03_collections
+drwxrwxr-x 2 mspacek mspacek 4096 May  4 07:51 04_numpy
+drwxrwxr-x 2 mspacek mspacek 4096 May  4 07:51 05_numpy_dtype
+drwxrwxr-x 2 mspacek mspacek 4096 May  4 07:51 06_fileio_mpl
+drwxrwxr-x 2 mspacek mspacek 4096 May  4 07:51 07_mpl_matrices
+drwxrwxr-x 2 mspacek mspacek 4096 May  4 07:51 08_images
+drwxrwxr-x 2 mspacek mspacek 4096 May  4 07:51 09_pandas
+drwxrwxr-x 2 mspacek mspacek 4096 May  4 07:51 10_stats
+drwxrwxr-x 2 mspacek mspacek 4096 May  4 07:51 11_clustering
+drwxrwxr-x 3 mspacek mspacek 4096 May  4 07:51 12_organizing
+drwxrwxr-x 3 mspacek mspacek 4096 May  4 07:51 homework1
+drwxrwxr-x 3 mspacek mspacek 4096 May  4 07:51 homework2
+drwxrwxr-x 3 mspacek mspacek 4096 May  4 07:51 homework3
+drwxrwxr-x 3 mspacek mspacek 4096 May  4 07:51 homework4
+drwxrwxr-x 3 mspacek mspacek 4096 May  4 07:57 homework5
+drwxrwxr-x 4 mspacek mspacek 4096 May  4 07:51 old_notes
+-rw-rw-r-- 1 mspacek mspacek   20 Mar 28  2017 README.md
+mspacek@Godel:~/SciPyCourse2022/notes$ cd 00_intro/
+mspacek@Godel:~/SciPyCourse2022/notes/00_intro$ ls
+ 00_intro.md    Figure_1.png   LFP_analysis_example.py   LFP_example_power_dB.npy
+ 00_intro.pdf   Figure_2.png   LFP_example_data.npy     'The Incredible Growth of Python _ Stack Overflow.pdf'
+mspacek@Godel:~/SciPyCourse2022/notes/00_intro$ cd ..
+mspacek@Godel:~/SciPyCourse2022/notes$ pwd
+/home/mspacek/SciPyCourse2022/notes
+mspacek@Godel:~/SciPyCourse2022/notes$ cd -
+/home/mspacek/SciPyCourse2022/notes/00_intro
+mspacek@Godel:~/SciPyCourse2022/notes/00_intro$ cd -
+/home/mspacek/SciPyCourse2022/notes
+mspacek@Godel:~/SciPyCourse2022/notes$ cd -
+/home/mspacek/SciPyCourse2022/notes/00_intro
+mspacek@Godel:~/SciPyCourse2022/notes/00_intro$ cd -
+/home/mspacek/SciPyCourse2022/notes
+mspacek@Godel:~/SciPyCourse2022/notes$ cd -
+/home/mspacek/SciPyCourse2022/notes/00_intro
+mspacek@Godel:~/SciPyCourse2022/notes/00_intro$ cd ..
+mspacek@Godel:~/SciPyCourse2022/notes$ ls
+00_intro            03_collections  06_fileio_mpl    09_pandas      12_organizing  homework3  old_notes
+01_Python_basics    04_numpy        07_mpl_matrices  10_stats       homework1      homework4  README.md
+02_Python_basics_2  05_numpy_dtype  08_images        11_clustering  homework2      homework5
+mspacek@Godel:~/SciPyCourse2022/notes$ cd 03_collections/
+mspacek@Godel:~/SciPyCourse2022/notes/03_collections$ cd ..
+mspacek@Godel:~/SciPyCourse2022/notes$ cd 00_intro/
+mspacek@Godel:~/SciPyCourse2022/notes/00_intro$ mkdir test
+mspacek@Godel:~/SciPyCourse2022/notes/00_intro$ ls
+ 00_intro.md    Figure_2.png              LFP_example_power_dB.npy
+ 00_intro.pdf   LFP_analysis_example.py   test
+ Figure_1.png   LFP_example_data.npy     'The Incredible Growth of Python _ Stack Overflow.pdf'
+mspacek@Godel:~/SciPyCourse2022/notes/00_intro$ cd test/
+mspacek@Godel:~/SciPyCourse2022/notes/00_intro/test$ ls
+mspacek@Godel:~/SciPyCourse2022/notes/00_intro/test$ ls -l
+total 0
+mspacek@Godel:~/SciPyCourse2022/notes/00_intro/test$ touch test_file.txt
+mspacek@Godel:~/SciPyCourse2022/notes/00_intro/test$ ls -l
+total 0
+-rw-rw-r-- 1 mspacek mspacek 0 May 10 12:56 test_file.txt
+mspacek@Godel:~/SciPyCourse2022/notes/00_intro/test$ mv test_file.txt ..
+mspacek@Godel:~/SciPyCourse2022/notes/00_intro/test$ ls
+mspacek@Godel:~/SciPyCourse2022/notes/00_intro/test$ cd ..
+mspacek@Godel:~/SciPyCourse2022/notes/00_intro$ ls
+ 00_intro.md    Figure_2.png              LFP_example_power_dB.npy  'The Incredible Growth of Python _ Stack Overflow.pdf'
+ 00_intro.pdf   LFP_analysis_example.py   test
+ Figure_1.png   LFP_example_data.npy      test_file.txt
+mspacek@Godel:~/SciPyCourse2022/notes/00_intro$ rm test
+test/          test_file.txt
+mspacek@Godel:~/SciPyCourse2022/notes/00_intro$ rm test_file.txt
+mspacek@Godel:~/SciPyCourse2022/notes/00_intro$ ls
+ 00_intro.md    Figure_2.png              LFP_example_power_dB.npy
+ 00_intro.pdf   LFP_analysis_example.py   test
+ Figure_1.png   LFP_example_data.npy     'The Incredible Growth of Python _ Stack Overflow.pdf'
+mspacek@Godel:~/SciPyCourse2022/notes/00_intro$ cp Figure_1.png test
+mspacek@Godel:~/SciPyCourse2022/notes/00_intro$ ls
+ 00_intro.md    Figure_2.png              LFP_example_power_dB.npy
+ 00_intro.pdf   LFP_analysis_example.py   test
+ Figure_1.png   LFP_example_data.npy     'The Incredible Growth of Python _ Stack Overflow.pdf'
+mspacek@Godel:~/SciPyCourse2022/notes/00_intro$ cd test
+mspacek@Godel:~/SciPyCourse2022/notes/00_intro/test$ ls
+Figure_1.png
+mspacek@Godel:~/SciPyCourse2022/notes/00_intro/test$ rm Figure_1.png
+mspacek@Godel:~/SciPyCourse2022/notes/00_intro/test$ cd ..
+mspacek@Godel:~/SciPyCourse2022/notes/00_intro$ cat shopping_list.txt
+cat: shopping_list.txt: No such file or directory
+mspacek@Godel:~/SciPyCourse2022/notes/00_intro$ ls
+ 00_intro.md    Figure_2.png              LFP_example_power_dB.npy
+ 00_intro.pdf   LFP_analysis_example.py   test
+ Figure_1.png   LFP_example_data.npy     'The Incredible Growth of Python _ Stack Overflow.pdf'
+mspacek@Godel:~/SciPyCourse2022/notes/00_intro$ cat LFP_analysis_example.py
+import numpy as np
+import matplotlib as mpl
+from matplotlib import pyplot as plt
+
+# load data:
+mV = np.load('LFP_example_data.npy') # voltage signal, in mV
+V = mV / 1000 # convert to V
+npoints = len(V)
+sampfreq = 1000 # Hz
+t = np.arange(npoints) / sampfreq
+
+# plot all data:
+f1, a1 = plt.subplots(figsize=(10, 3)) # create a figure and axes
+a1.plot(t, V, '-', c='black')
+a1.set_xlim((t[0], t[-1])) # set hard x limits
+a1.set_title('LFP example data')
+a1.set_xlabel('Time (s)')
+a1.set_ylabel('Voltage (V)')
+
+# calculate spectrogram using Welch's periodogram method:
+winwidth = 5 # window width, seconds
+winwidthsamples = int(winwidth * sampfreq)
+P, freqs, t = mpl.mlab.specgram(V, winwidthsamples, sampfreq)
+
+# set frequency limits:
+fmin, fmax = 0, 50 # set frequency limits, in Hz
+lo, hi = freqs.searchsorted([fmin, fmax])
+P, freqs = P[lo:hi], freqs[lo:hi]
+
+# convert power to dB and set power limits:
+P = 10 * np.log10(P)
+pmax = 200 # dB
+P[P > pmax] = pmax
+
+# plot the spectrogram:
+f2, a2 = plt.subplots(figsize=(10, 3)) # create a figure and axes
+P = P[::-1] # flip P array vertically for plotting
+extent = t[0], t[-1], freqs[0], freqs[-1]
+a2.imshow(P, extent=extent, cmap='hot') # plot power as an image
+a2.axis('tight')
+a2.set_xlabel('Time (s)')
+a2.set_ylabel('Frequency (Hz)')
+a2.set_title('LFP example spectrogram')
+f2.tight_layout(pad=0.3) # crop figure to contents
+
+# save power in dB to a file:
+np.save('LFP_example_power_dB.npy', P)
+mspacek@Godel:~/SciPyCourse2022/notes/00_intro$ cat > shopping_list.txt
+apples
+oranges
+eggs
+
+
+
+mspacek@Godel:~/SciPyCourse2022/notes/00_intro$ ls
+ 00_intro.md    Figure_2.png              LFP_example_power_dB.npy  'The Incredible Growth of Python _ Stack Overflow.pdf'
+ 00_intro.pdf   LFP_analysis_example.py   shopping_list.txt
+ Figure_1.png   LFP_example_data.npy      test
+mspacek@Godel:~/SciPyCourse2022/notes/00_intro$ ls -l
+total 31856
+-rw-rw-r-- 1 mspacek mspacek     4671 May  8 15:49  00_intro.md
+-rw------- 1 mspacek mspacek    51243 May  8 11:34  00_intro.pdf
+-rw-rw-r-- 1 mspacek mspacek   124282 Apr 20  2021  Figure_1.png
+-rw-rw-r-- 1 mspacek mspacek   482390 Apr 20  2021  Figure_2.png
+-rw-rw-r-- 1 mspacek mspacek     1443 Apr 19  2021  LFP_analysis_example.py
+-rw-rw-r-- 1 mspacek mspacek 28810056 Apr 25  2017  LFP_example_data.npy
+-rw-rw-r-- 1 mspacek mspacek  1478128 May 10 12:46  LFP_example_power_dB.npy
+-rw-rw-r-- 1 mspacek mspacek       23 May 10 13:02  shopping_list.txt
+drwxrwxr-x 2 mspacek mspacek     4096 May 10 12:59  test
+-rw------- 1 mspacek mspacek  1643599 Feb 23  2018 'The Incredible Growth of Python _ Stack Overflow.pdf'
+mspacek@Godel:~/SciPyCourse2022/notes/00_intro$ cat shopping_list.txt
+apples
+oranges
+eggs
+
+
+
+mspacek@Godel:~/SciPyCourse2022/notes/00_intro$ ls -l
+total 31856
+-rw-rw-r-- 1 mspacek mspacek     4671 May  8 15:49  00_intro.md
+-rw------- 1 mspacek mspacek    51243 May  8 11:34  00_intro.pdf
+-rw-rw-r-- 1 mspacek mspacek   124282 Apr 20  2021  Figure_1.png
+-rw-rw-r-- 1 mspacek mspacek   482390 Apr 20  2021  Figure_2.png
+-rw-rw-r-- 1 mspacek mspacek     1443 Apr 19  2021  LFP_analysis_example.py
+-rw-rw-r-- 1 mspacek mspacek 28810056 Apr 25  2017  LFP_example_data.npy
+-rw-rw-r-- 1 mspacek mspacek  1478128 May 10 12:46  LFP_example_power_dB.npy
+-rw-rw-r-- 1 mspacek mspacek       23 May 10 13:02  shopping_list.txt
+drwxrwxr-x 2 mspacek mspacek     4096 May 10 12:59  test
+-rw------- 1 mspacek mspacek  1643599 Feb 23  2018 'The Incredible Growth of Python _ Stack Overflow.pdf'
+mspacek@Godel:~/SciPyCourse2022/notes/00_intro$ ls -l
+total 31856
+-rw-rw-r-- 1 mspacek mspacek     4671 May  8 15:49  00_intro.md
+-rw------- 1 mspacek mspacek    51243 May  8 11:34  00_intro.pdf
+-rw-rw-r-- 1 mspacek mspacek   124282 Apr 20  2021  Figure_1.png
+-rw-rw-r-- 1 mspacek mspacek   482390 Apr 20  2021  Figure_2.png
+-rw-rw-r-- 1 mspacek mspacek     1443 Apr 19  2021  LFP_analysis_example.py
+-rw-rw-r-- 1 mspacek mspacek 28810056 Apr 25  2017  LFP_example_data.npy
+-rw-rw-r-- 1 mspacek mspacek  1478128 May 10 12:46  LFP_example_power_dB.npy
+-rw-rw-r-- 1 mspacek mspacek       23 May 10 13:02  shopping_list.txt
+drwxrwxr-x 2 mspacek mspacek     4096 May 10 12:59  test
+-rw------- 1 mspacek mspacek  1643599 Feb 23  2018 'The Incredible Growth of Python _ Stack Overflow.pdf'
+mspacek@Godel:~/SciPyCourse2022/notes/00_intro$ ls -l > file_list.txt
+mspacek@Godel:~/SciPyCourse2022/notes/00_intro$ ls -l
+total 31860
+-rw-rw-r-- 1 mspacek mspacek     4671 May  8 15:49  00_intro.md
+-rw------- 1 mspacek mspacek    51243 May  8 11:34  00_intro.pdf
+-rw-rw-r-- 1 mspacek mspacek   124282 Apr 20  2021  Figure_1.png
+-rw-rw-r-- 1 mspacek mspacek   482390 Apr 20  2021  Figure_2.png
+-rw-rw-r-- 1 mspacek mspacek      784 May 10 13:04  file_list.txt
+-rw-rw-r-- 1 mspacek mspacek     1443 Apr 19  2021  LFP_analysis_example.py
+-rw-rw-r-- 1 mspacek mspacek 28810056 Apr 25  2017  LFP_example_data.npy
+-rw-rw-r-- 1 mspacek mspacek  1478128 May 10 12:46  LFP_example_power_dB.npy
+-rw-rw-r-- 1 mspacek mspacek       23 May 10 13:02  shopping_list.txt
+drwxrwxr-x 2 mspacek mspacek     4096 May 10 12:59  test
+-rw------- 1 mspacek mspacek  1643599 Feb 23  2018 'The Incredible Growth of Python _ Stack Overflow.pdf'
+mspacek@Godel:~/SciPyCourse2022/notes/00_intro$ cat file_list.txt
+total 31856
+-rw-rw-r-- 1 mspacek mspacek     4671 May  8 15:49 00_intro.md
+-rw------- 1 mspacek mspacek    51243 May  8 11:34 00_intro.pdf
+-rw-rw-r-- 1 mspacek mspacek   124282 Apr 20  2021 Figure_1.png
+-rw-rw-r-- 1 mspacek mspacek   482390 Apr 20  2021 Figure_2.png
+-rw-rw-r-- 1 mspacek mspacek        0 May 10 13:04 file_list.txt
+-rw-rw-r-- 1 mspacek mspacek     1443 Apr 19  2021 LFP_analysis_example.py
+-rw-rw-r-- 1 mspacek mspacek 28810056 Apr 25  2017 LFP_example_data.npy
+-rw-rw-r-- 1 mspacek mspacek  1478128 May 10 12:46 LFP_example_power_dB.npy
+-rw-rw-r-- 1 mspacek mspacek       23 May 10 13:02 shopping_list.txt
+drwxrwxr-x 2 mspacek mspacek     4096 May 10 12:59 test
+-rw------- 1 mspacek mspacek  1643599 Feb 23  2018 The Incredible Growth of Python _ Stack Overflow.pdf
+mspacek@Godel:~/SciPyCourse2022/notes/00_intro$ mv --help
+Usage: mv [OPTION]... [-T] SOURCE DEST
+  or:  mv [OPTION]... SOURCE... DIRECTORY
+  or:  mv [OPTION]... -t DIRECTORY SOURCE...
+Rename SOURCE to DEST, or move SOURCE(s) to DIRECTORY.
+
+Mandatory arguments to long options are mandatory for short options too.
+      --backup[=CONTROL]       make a backup of each existing destination file
+  -b                           like --backup but does not accept an argument
+  -f, --force                  do not prompt before overwriting
+  -i, --interactive            prompt before overwrite
+  -n, --no-clobber             do not overwrite an existing file
+If you specify more than one of -i, -f, -n, only the final one takes effect.
+      --strip-trailing-slashes  remove any trailing slashes from each SOURCE
+                                 argument
+  -S, --suffix=SUFFIX          override the usual backup suffix
+  -t, --target-directory=DIRECTORY  move all SOURCE arguments into DIRECTORY
+  -T, --no-target-directory    treat DEST as a normal file
+  -u, --update                 move only when the SOURCE file is newer
+                                 than the destination file or when the
+                                 destination file is missing
+  -v, --verbose                explain what is being done
+  -Z, --context                set SELinux security context of destination
+                                 file to default type
+      --help     display this help and exit
+      --version  output version information and exit
+
+The backup suffix is '~', unless set with --suffix or SIMPLE_BACKUP_SUFFIX.
+The version control method may be selected via the --backup option or through
+the VERSION_CONTROL environment variable.  Here are the values:
+
+  none, off       never make backups (even if --backup is given)
+  numbered, t     make numbered backups
+  existing, nil   numbered if numbered backups exist, simple otherwise
+  simple, never   always make simple backups
+
+GNU coreutils online help: <https://www.gnu.org/software/coreutils/>
+Full documentation at: <https://www.gnu.org/software/coreutils/mv>
+or available locally via: info '(coreutils) mv invocation'
+mspacek@Godel:~/SciPyCourse2022/notes/00_intro$ mv --help
+Usage: mv [OPTION]... [-T] SOURCE DEST
+  or:  mv [OPTION]... SOURCE... DIRECTORY
+  or:  mv [OPTION]... -t DIRECTORY SOURCE...
+Rename SOURCE to DEST, or move SOURCE(s) to DIRECTORY.
+
+Mandatory arguments to long options are mandatory for short options too.
+      --backup[=CONTROL]       make a backup of each existing destination file
+  -b                           like --backup but does not accept an argument
+  -f, --force                  do not prompt before overwriting
+  -i, --interactive            prompt before overwrite
+  -n, --no-clobber             do not overwrite an existing file
+If you specify more than one of -i, -f, -n, only the final one takes effect.
+      --strip-trailing-slashes  remove any trailing slashes from each SOURCE
+                                 argument
+  -S, --suffix=SUFFIX          override the usual backup suffix
+  -t, --target-directory=DIRECTORY  move all SOURCE arguments into DIRECTORY
+  -T, --no-target-directory    treat DEST as a normal file
+  -u, --update                 move only when the SOURCE file is newer
+                                 than the destination file or when the
+                                 destination file is missing
+  -v, --verbose                explain what is being done
+  -Z, --context                set SELinux security context of destination
+                                 file to default type
+      --help     display this help and exit
+      --version  output version information and exit
+
+The backup suffix is '~', unless set with --suffix or SIMPLE_BACKUP_SUFFIX.
+The version control method may be selected via the --backup option or through
+the VERSION_CONTROL environment variable.  Here are the values:
+
+  none, off       never make backups (even if --backup is given)
+  numbered, t     make numbered backups
+  existing, nil   numbered if numbered backups exist, simple otherwise
+  simple, never   always make simple backups
+
+GNU coreutils online help: <https://www.gnu.org/software/coreutils/>
+Full documentation at: <https://www.gnu.org/software/coreutils/mv>
+or available locally via: info '(coreutils) mv invocation'
+mspacek@Godel:~/SciPyCourse2022/notes/00_intro$ cd ..
+mspacek@Godel:~/SciPyCourse2022/notes$ ls
+00_intro            03_collections  06_fileio_mpl    09_pandas      12_organizing  homework3  old_notes
+01_Python_basics    04_numpy        07_mpl_matrices  10_stats       homework1      homework4  README.md
+02_Python_basics_2  05_numpy_dtype  08_images        11_clustering  homework2      homework5
+mspacek@Godel:~/SciPyCourse2022/notes$ ls
+00_intro            03_collections  06_fileio_mpl    09_pandas      12_organizing  homework3  old_notes
+01_Python_basics    04_numpy        07_mpl_matrices  10_stats       homework1      homework4  README.md
+02_Python_basics_2  05_numpy_dtype  08_images        11_clustering  homework2      homework5
+mspacek@Godel:~/SciPyCourse2022/notes$ mkdir tmp
+mspacek@Godel:~/SciPyCourse2022/notes$ ls -l
+total 84
+drwxrwxr-x 3 mspacek mspacek 4096 May 10 13:04 00_intro
+drwxrwxr-x 2 mspacek mspacek 4096 May  6 07:21 01_Python_basics
+drwxrwxr-x 2 mspacek mspacek 4096 May  4 07:51 02_Python_basics_2
+drwxrwxr-x 2 mspacek mspacek 4096 May  4 07:51 03_collections
+drwxrwxr-x 2 mspacek mspacek 4096 May  4 07:51 04_numpy
+drwxrwxr-x 2 mspacek mspacek 4096 May  4 07:51 05_numpy_dtype
+drwxrwxr-x 2 mspacek mspacek 4096 May  4 07:51 06_fileio_mpl
+drwxrwxr-x 2 mspacek mspacek 4096 May  4 07:51 07_mpl_matrices
+drwxrwxr-x 2 mspacek mspacek 4096 May  4 07:51 08_images
+drwxrwxr-x 2 mspacek mspacek 4096 May  4 07:51 09_pandas
+drwxrwxr-x 2 mspacek mspacek 4096 May  4 07:51 10_stats
+drwxrwxr-x 2 mspacek mspacek 4096 May  4 07:51 11_clustering
+drwxrwxr-x 3 mspacek mspacek 4096 May  4 07:51 12_organizing
+drwxrwxr-x 3 mspacek mspacek 4096 May  4 07:51 homework1
+drwxrwxr-x 3 mspacek mspacek 4096 May  4 07:51 homework2
+drwxrwxr-x 3 mspacek mspacek 4096 May  4 07:51 homework3
+drwxrwxr-x 3 mspacek mspacek 4096 May  4 07:51 homework4
+drwxrwxr-x 3 mspacek mspacek 4096 May  4 07:57 homework5
+drwxrwxr-x 4 mspacek mspacek 4096 May  4 07:51 old_notes
+-rw-rw-r-- 1 mspacek mspacek   20 Mar 28  2017 README.md
+drwxrwxr-x 2 mspacek mspacek 4096 May 10 13:19 tmp
+mspacek@Godel:~/SciPyCourse2022/notes$ cd tmp
+mspacek@Godel:~/SciPyCourse2022/notes/tmp$ pwd
+/home/mspacek/SciPyCourse2022/notes/tmp
+mspacek@Godel:~/SciPyCourse2022/notes/tmp$ touch test.txt
+mspacek@Godel:~/SciPyCourse2022/notes/tmp$ ls -l
+total 0
+-rw-rw-r-- 1 mspacek mspacek 0 May 10 13:19 test.txt
+mspacek@Godel:~/SciPyCourse2022/notes/tmp$ mv test.txt empty.txt
+mspacek@Godel:~/SciPyCourse2022/notes/tmp$ ls
+empty.txt
+mspacek@Godel:~/SciPyCourse2022/notes/tmp$ cat > test2.txt
+hello
+world
+mspacek@Godel:~/SciPyCourse2022/notes/tmp$ cat test2.txt
+hello
+world
+mspacek@Godel:~/SciPyCourse2022/notes/tmp$ cp test2.txt test3.txt
+mspacek@Godel:~/SciPyCourse2022/notes/tmp$ ls
+empty.txt  test2.txt  test3.txt
+mspacek@Godel:~/SciPyCourse2022/notes/tmp$ ls -l
+total 8
+-rw-rw-r-- 1 mspacek mspacek  0 May 10 13:19 empty.txt
+-rw-rw-r-- 1 mspacek mspacek 12 May 10 13:22 test2.txt
+-rw-rw-r-- 1 mspacek mspacek 12 May 10 13:24 test3.txt
+mspacek@Godel:~/SciPyCourse2022/notes/tmp$ rm test2.txt
+mspacek@Godel:~/SciPyCourse2022/notes/tmp$ ls
+empty.txt  test3.txt
+mspacek@Godel:~/SciPyCourse2022/notes/tmp$ ls -l
+total 4
+-rw-rw-r-- 1 mspacek mspacek  0 May 10 13:19 empty.txt
+-rw-rw-r-- 1 mspacek mspacek 12 May 10 13:24 test3.txt
+mspacek@Godel:~/SciPyCourse2022/notes/tmp$ ls -l > tmp_list.txt
+mspacek@Godel:~/SciPyCourse2022/notes/tmp$ ls
+empty.txt  test3.txt  tmp_list.txt
+mspacek@Godel:~/SciPyCourse2022/notes/tmp$ cat tmp_list.txt
+total 4
+-rw-rw-r-- 1 mspacek mspacek  0 May 10 13:19 empty.txt
+-rw-rw-r-- 1 mspacek mspacek 12 May 10 13:24 test3.txt
+-rw-rw-r-- 1 mspacek mspacek  0 May 10 13:28 tmp_list.txt
+mspacek@Godel:~/SciPyCourse2022/notes/tmp$ cd ..
+mspacek@Godel:~/SciPyCourse2022/notes$ ls
+00_intro            03_collections  06_fileio_mpl    09_pandas      12_organizing  homework3  old_notes
+01_Python_basics    04_numpy        07_mpl_matrices  10_stats       homework1      homework4  README.md
+02_Python_basics_2  05_numpy_dtype  08_images        11_clustering  homework2      homework5  tmp
+mspacek@Godel:~/SciPyCourse2022/notes$ ls tmp
+empty.txt  test3.txt  tmp_list.txt
+mspacek@Godel:~/SciPyCourse2022/notes$ ls /
+bin   core  etc   initrd.img      lib    lib64       media  opt   root  sbin  swapfile  tmp  var      vmlinuz.old
+boot  dev   home  initrd.img.old  lib32  lost+found  mnt    proc  run   srv   sys       usr  vmlinuz
+mspacek@Godel:~/SciPyCourse2022/notes$ ls /home
+mspacek
+mspacek@Godel:~/SciPyCourse2022/notes$ ls
+00_intro            03_collections  06_fileio_mpl    09_pandas      12_organizing  homework3  old_notes
+01_Python_basics    04_numpy        07_mpl_matrices  10_stats       homework1      homework4  README.md
+02_Python_basics_2  05_numpy_dtype  08_images        11_clustering  homework2      homework5  tmp
+mspacek@Godel:~/SciPyCourse2022/notes$ cp tmp tmp2
+cp: -r not specified; omitting directory 'tmp'
+mspacek@Godel:~/SciPyCourse2022/notes$ cp --help
+Usage: cp [OPTION]... [-T] SOURCE DEST
+  or:  cp [OPTION]... SOURCE... DIRECTORY
+  or:  cp [OPTION]... -t DIRECTORY SOURCE...
+Copy SOURCE to DEST, or multiple SOURCE(s) to DIRECTORY.
+
+Mandatory arguments to long options are mandatory for short options too.
+  -a, --archive                same as -dR --preserve=all
+      --attributes-only        don't copy the file data, just the attributes
+      --backup[=CONTROL]       make a backup of each existing destination file
+  -b                           like --backup but does not accept an argument
+      --copy-contents          copy contents of special files when recursive
+  -d                           same as --no-dereference --preserve=links
+  -f, --force                  if an existing destination file cannot be
+                                 opened, remove it and try again (this option
+                                 is ignored when the -n option is also used)
+  -i, --interactive            prompt before overwrite (overrides a previous -n
+                                  option)
+  -H                           follow command-line symbolic links in SOURCE
+  -l, --link                   hard link files instead of copying
+  -L, --dereference            always follow symbolic links in SOURCE
+  -n, --no-clobber             do not overwrite an existing file (overrides
+                                 a previous -i option)
+  -P, --no-dereference         never follow symbolic links in SOURCE
+  -p                           same as --preserve=mode,ownership,timestamps
+      --preserve[=ATTR_LIST]   preserve the specified attributes (default:
+                                 mode,ownership,timestamps), if possible
+                                 additional attributes: context, links, xattr,
+                                 all
+      --no-preserve=ATTR_LIST  don't preserve the specified attributes
+      --parents                use full source file name under DIRECTORY
+  -R, -r, --recursive          copy directories recursively
+      --reflink[=WHEN]         control clone/CoW copies. See below
+      --remove-destination     remove each existing destination file before
+                                 attempting to open it (contrast with --force)
+      --sparse=WHEN            control creation of sparse files. See below
+      --strip-trailing-slashes  remove any trailing slashes from each SOURCE
+                                 argument
+  -s, --symbolic-link          make symbolic links instead of copying
+  -S, --suffix=SUFFIX          override the usual backup suffix
+  -t, --target-directory=DIRECTORY  copy all SOURCE arguments into DIRECTORY
+  -T, --no-target-directory    treat DEST as a normal file
+  -u, --update                 copy only when the SOURCE file is newer
+                                 than the destination file or when the
+                                 destination file is missing
+  -v, --verbose                explain what is being done
+  -x, --one-file-system        stay on this file system
+  -Z                           set SELinux security context of destination
+                                 file to default type
+      --context[=CTX]          like -Z, or if CTX is specified then set the
+                                 SELinux or SMACK security context to CTX
+      --help     display this help and exit
+      --version  output version information and exit
+
+By default, sparse SOURCE files are detected by a crude heuristic and the
+corresponding DEST file is made sparse as well.  That is the behaviour
+selected by --sparse=auto.  Specify --sparse=always to create a sparse DEST
+file whenever the SOURCE file contains a long enough sequence of zero bytes.
+Use --sparse=never to inhibit creation of sparse files.
+
+When --reflink[=always] is specified, perform a lightweight copy, where the
+data blocks are copied only when modified.  If this is not possible the copy
+fails, or if --reflink=auto is specified, fall back to a standard copy.
+Use --reflink=never to ensure a standard copy is performed.
+
+The backup suffix is '~', unless set with --suffix or SIMPLE_BACKUP_SUFFIX.
+The version control method may be selected via the --backup option or through
+the VERSION_CONTROL environment variable.  Here are the values:
+
+  none, off       never make backups (even if --backup is given)
+  numbered, t     make numbered backups
+  existing, nil   numbered if numbered backups exist, simple otherwise
+  simple, never   always make simple backups
+
+As a special case, cp makes a backup of SOURCE when the force and backup
+options are given and SOURCE and DEST are the same name for an existing,
+regular file.
+
+GNU coreutils online help: <https://www.gnu.org/software/coreutils/>
+Full documentation at: <https://www.gnu.org/software/coreutils/cp>
+or available locally via: info '(coreutils) cp invocation'
+mspacek@Godel:~/SciPyCourse2022/notes$ cp -r tmp tmp2
+mspacek@Godel:~/SciPyCourse2022/notes$ ls
+00_intro            03_collections  06_fileio_mpl    09_pandas      12_organizing  homework3  old_notes  tmp2
+01_Python_basics    04_numpy        07_mpl_matrices  10_stats       homework1      homework4  README.md
+02_Python_basics_2  05_numpy_dtype  08_images        11_clustering  homework2      homework5  tmp
+mspacek@Godel:~/SciPyCourse2022/notes$ ls -l
+total 88
+drwxrwxr-x 3 mspacek mspacek 4096 May 10 13:04 00_intro
+drwxrwxr-x 2 mspacek mspacek 4096 May  6 07:21 01_Python_basics
+drwxrwxr-x 2 mspacek mspacek 4096 May  4 07:51 02_Python_basics_2
+drwxrwxr-x 2 mspacek mspacek 4096 May  4 07:51 03_collections
+drwxrwxr-x 2 mspacek mspacek 4096 May  4 07:51 04_numpy
+drwxrwxr-x 2 mspacek mspacek 4096 May  4 07:51 05_numpy_dtype
+drwxrwxr-x 2 mspacek mspacek 4096 May  4 07:51 06_fileio_mpl
+drwxrwxr-x 2 mspacek mspacek 4096 May  4 07:51 07_mpl_matrices
+drwxrwxr-x 2 mspacek mspacek 4096 May  4 07:51 08_images
+drwxrwxr-x 2 mspacek mspacek 4096 May  4 07:51 09_pandas
+drwxrwxr-x 2 mspacek mspacek 4096 May  4 07:51 10_stats
+drwxrwxr-x 2 mspacek mspacek 4096 May  4 07:51 11_clustering
+drwxrwxr-x 3 mspacek mspacek 4096 May  4 07:51 12_organizing
+drwxrwxr-x 3 mspacek mspacek 4096 May  4 07:51 homework1
+drwxrwxr-x 3 mspacek mspacek 4096 May  4 07:51 homework2
+drwxrwxr-x 3 mspacek mspacek 4096 May  4 07:51 homework3
+drwxrwxr-x 3 mspacek mspacek 4096 May  4 07:51 homework4
+drwxrwxr-x 3 mspacek mspacek 4096 May  4 07:57 homework5
+drwxrwxr-x 4 mspacek mspacek 4096 May  4 07:51 old_notes
+-rw-rw-r-- 1 mspacek mspacek   20 Mar 28  2017 README.md
+drwxrwxr-x 2 mspacek mspacek 4096 May 10 13:28 tmp
+drwxrwxr-x 2 mspacek mspacek 4096 May 10 13:31 tmp2
+mspacek@Godel:~/SciPyCourse2022/notes$ cd tmp2
+mspacek@Godel:~/SciPyCourse2022/notes/tmp2$ ls
+empty.txt  test3.txt  tmp_list.txt
+mspacek@Godel:~/SciPyCourse2022/notes/tmp2$ ls -al
+total 16
+drwxrwxr-x  2 mspacek mspacek 4096 May 10 13:31 .
+drwxrwxr-x 24 mspacek mspacek 4096 May 10 13:31 ..
+-rw-rw-r--  1 mspacek mspacek    0 May 10 13:31 empty.txt
+-rw-rw-r--  1 mspacek mspacek   12 May 10 13:31 test3.txt
+-rw-rw-r--  1 mspacek mspacek  176 May 10 13:31 tmp_list.txt
+mspacek@Godel:~/SciPyCourse2022/notes/tmp2$ ls ../tmp
+empty.txt  test3.txt  tmp_list.txt
+mspacek@Godel:~/SciPyCourse2022/notes/tmp2$ ls -l ../tmp
+total 8
+-rw-rw-r-- 1 mspacek mspacek   0 May 10 13:19 empty.txt
+-rw-rw-r-- 1 mspacek mspacek  12 May 10 13:24 test3.txt
+-rw-rw-r-- 1 mspacek mspacek 176 May 10 13:28 tmp_list.txt
+mspacek@Godel:~/SciPyCourse2022/notes/tmp2$ cd ..
+mspacek@Godel:~/SciPyCourse2022/notes$ rm tmp
+rm: cannot remove 'tmp': Is a directory
+mspacek@Godel:~/SciPyCourse2022/notes$ mkdir emptyfolder
+mspacek@Godel:~/SciPyCourse2022/notes$ rm emptyfolder
+rm: cannot remove 'emptyfolder': Is a directory
+mspacek@Godel:~/SciPyCourse2022/notes$ rm -r emptyfolder
+mspacek@Godel:~/SciPyCourse2022/notes$ rm -r tmp
+mspacek@Godel:~/SciPyCourse2022/notes$ rm --help
+Usage: rm [OPTION]... [FILE]...
+Remove (unlink) the FILE(s).
+
+  -f, --force           ignore nonexistent files and arguments, never prompt
+  -i                    prompt before every removal
+  -I                    prompt once before removing more than three files, or
+                          when removing recursively; less intrusive than -i,
+                          while still giving protection against most mistakes
+      --interactive[=WHEN]  prompt according to WHEN: never, once (-I), or
+                          always (-i); without WHEN, prompt always
+      --one-file-system  when removing a hierarchy recursively, skip any
+                          directory that is on a file system different from
+                          that of the corresponding command line argument
+      --no-preserve-root  do not treat '/' specially
+      --preserve-root[=all]  do not remove '/' (default);
+                              with 'all', reject any command line argument
+                              on a separate device from its parent
+  -r, -R, --recursive   remove directories and their contents recursively
+  -d, --dir             remove empty directories
+  -v, --verbose         explain what is being done
+      --help     display this help and exit
+      --version  output version information and exit
+
+By default, rm does not remove directories.  Use the --recursive (-r or -R)
+option to remove each listed directory, too, along with all of its contents.
+
+To remove a file whose name starts with a '-', for example '-foo',
+use one of these commands:
+  rm -- -foo
+
+  rm ./-foo
+
+Note that if you use rm to remove a file, it might be possible to recover
+some of its contents, given sufficient expertise and/or time.  For greater
+assurance that the contents are truly unrecoverable, consider using shred.
+
+GNU coreutils online help: <https://www.gnu.org/software/coreutils/>
+Full documentation at: <https://www.gnu.org/software/coreutils/rm>
+or available locally via: info '(coreutils) rm invocation'
+mspacek@Godel:~/SciPyCourse2022/notes$ rm -rv tmp2
+removed 'tmp2/test3.txt'
+removed 'tmp2/tmp_list.txt'
+removed 'tmp2/empty.txt'
+removed directory 'tmp2'
+mspacek@Godel:~/SciPyCourse2022/notes$ python
+Python 2.7.18 (default, Mar  8 2021, 13:02:45)
+[GCC 9.3.0] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> exit()
+mspacek@Godel:~/SciPyCourse2022/notes$ python3
+Python 3.8.10 (default, Mar 15 2022, 12:22:08)
+[GCC 9.4.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> 1 + 1
+2
+>>> 2 * 2
+4
+>>> 5 - 2
+3
+>>> 4 / 2
+2.0
+>>> exit()
+mspacek@Godel:~/SciPyCourse2022/notes$ python3
+Python 3.8.10 (default, Mar 15 2022, 12:22:08)
+[GCC 9.4.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>>
+mspacek@Godel:~/SciPyCourse2022/notes$ python3
+Python 3.8.10 (default, Mar 15 2022, 12:22:08)
+[GCC 9.4.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> abs(-5)
+5
+>>> abs(3)
+3
+>>> print('hello world!')
+hello world!
+>>> print("hello world!")
+hello world!
+>>> print("Martin's world!")
+Martin's world!
+>>> print('Martin's world!')
+  File "<stdin>", line 1
+    print('Martin's world!')
+                  ^
+SyntaxError: invalid syntax
+>>>
+mspacek@Godel:~/SciPyCourse2022/notes$ cd 00_intro/
+mspacek@Godel:~/SciPyCourse2022/notes/00_intro$ ls
+ 00_intro.md    file_list.txt              shopping_list.txt
+ 00_intro.pdf   LFP_analysis_example.py    test
+ Figure_1.png   LFP_example_data.npy      'The Incredible Growth of Python _ Stack Overflow.pdf'
+ Figure_2.png   LFP_example_power_dB.npy
+mspacek@Godel:~/SciPyCourse2022/notes/00_intro$ cd ..
+mspacek@Godel:~/SciPyCourse2022/notes$ cd 01_Python_basics/
+mspacek@Godel:~/SciPyCourse2022/notes/01_Python_basics$ ls
+01_Python_basics.md  01_Python_basics.pdf  basics.py  hello.py
+mspacek@Godel:~/SciPyCourse2022/notes/01_Python_basics$ python3 hello.py
+hello world!
+mspacek@Godel:~/SciPyCourse2022/notes/01_Python_basics$ python3
+Python 3.8.10 (default, Mar 15 2022, 12:22:08)
+[GCC 9.4.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>>
+mspacek@Godel:~/SciPyCourse2022/notes/01_Python_basics$ python3 hello.py
+hello world!
+mspacek@Godel:~/SciPyCourse2022/notes/01_Python_basics$ python3
+Python 3.8.10 (default, Mar 15 2022, 12:22:08)
+[GCC 9.4.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> 1 + 1
+2
+>>> a = 1
+>>> a
+1
+>>> a = 1 + 1
+>>> a
+2
+>>> x = 10
+>>> a = x + 2
+>>> a
+12
+>>> a, b = 1, 2
+>>> a
+1
+>>> b
+2
+>>> a, b, c = 1, 2, 3
+>>> c
+3
+>>> a = 10
+>>> a
+10
+>>> a += 1
+>>> a
+11
+>>> a += 1
+>>> a
+12
+>>> a += 1
+>>> a
+13
+>>> a += 2
+>>> a
+15
+>>> a
+15
+>>> del a
+>>> a
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'a' is not defined
+>>> a = 10
+>>> a += 2
+>>> a
+12
+>>> a -= 5
+>>> a
+7
+>>> a = 10
+>>> a *= 2
+>>> a
+20
+>>> a /= 2
+>>> a
+10.0
+>>> A
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'A' is not defined
+>>> A = 100
+>>> A
+100
+>>> a
+10.0
+>>> a = 10
+>>> a
+10
+>>> a345 = 22
+>>> a345
+22
+>>> 3a45 = 22
+  File "<stdin>", line 1
+    3a45 = 22
+     ^
+SyntaxError: invalid syntax
+>>> my_variable = 52
+>>> my_variable
+52
+>>> my_variable=52
+>>> import math
+>>> dir(math)
+['__doc__', '__loader__', '__name__', '__package__', '__spec__', 'acos', 'acosh', 'asin', 'asinh', 'atan', 'atan2', 'atanh', 'ceil', 'comb', 'copysign', 'cos', 'cosh', 'degrees', 'dist', 'e', 'erf', 'erfc', 'exp', 'expm1', 'fabs', 'factorial', 'floor', 'fmod', 'frexp', 'fsum', 'gamma', 'gcd', 'hypot', 'inf', 'isclose', 'isfinite', 'isinf', 'isnan', 'isqrt', 'ldexp', 'lgamma', 'log', 'log10', 'log1p', 'log2', 'modf', 'nan', 'perm', 'pi', 'pow', 'prod', 'radians', 'remainder', 'sin', 'sinh', 'sqrt', 'tan', 'tanh', 'tau', 'trunc']
+>>> math
+<module 'math' (built-in)>
+>>>
+mspacek@Godel:~/SciPyCourse2022/notes/01_Python_basics$ python3
+Python 3.8.10 (default, Mar 15 2022, 12:22:08)
+[GCC 9.4.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> math
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'math' is not defined
+>>> import math
+>>> math.sqrt(4)
+2.0
+>>> math.log10(100)
+2.0
+>>> help(print)
+
+>>> help(print)
+
+>>> help(print)
+
+>>> help(math.sqrt)
+
+>>> int
+<class 'int'>
+>>> 1
+1
+>>> 2
+2
+>>> 3
+3
+>>> type(3)
+<class 'int'>
+>>> type(3.0)
+<class 'float'>
+>>> 4 / 2
+2.0
+>>> 5 / 2
+2.5
+>>> print('hello world!')
+hello world!
+>>> type('hello world!')
+<class 'str'>
+>>> '234'
+'234'
+>>> type('234')
+<class 'str'>
+>>> 2
+2
+>>> 2.0
+2.0
+>>> '2'
+'2'
+>>> True
+True
+>>> False
+False
+>>> type(True)
+<class 'bool'>
+>>> a
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'a' is not defined
+>>> a = 1
+>>> a == 1
+True
+>>> a == 2
+False
+>>> 1, 1.0, '1', True
+(1, 1.0, '1', True)
+>>> None
+>>> print(None)
+None
+>>> z = None
+>>> z
+>>> 4 % 2
+0
+>>> 5 % 2
+1
+>>> a = 1
+>>> if a == 1:
+... print('a is 1')
+  File "<stdin>", line 2
+    print('a is 1')
+    ^
+IndentationError: expected an indented block
+>>> if a == 1:
+...     print('a is 1')
+... elif a == 2:
+...     print('a is 2')
+... else:
+...     print('a is something else')
+...
+a is 1
+>>> a = 2
+>>> if a == 1:
+...     print('a is 1')
+... elif a == 2:
+...     print('a is 2')
+... else:
+...     print('a is something else')
+...
+a is 2
+>>> for i in range(5):
+...     print('hello')
+...     print('goodbye')
+...
+hello
+goodbye
+hello
+goodbye
+hello
+goodbye
+hello
+goodbye
+hello
+goodbye
+>>> range(5)
+range(0, 5)
+>>> list(range(5))
+[0, 1, 2, 3, 4]
+>>> for i in range(5):
+...     print(i)
+...
+0
+1
+2
+3
+4
+>>> for i in range(5):
+...     print(2*i)
+...
+0
+2
+4
+6
+8
+>>> help(range)
+
+>>> list(range(5))
+[0, 1, 2, 3, 4]
+>>> list(range(10))
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+>>> list(range(1, 10))
+[1, 2, 3, 4, 5, 6, 7, 8, 9]
+>>> list(range(3, 30, 2))
+[3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29]
+>>> list(range(10, 1, -1))
+[10, 9, 8, 7, 6, 5, 4, 3, 2]
+>>> for i in range(10, 1, -1):
+...     print(i)
+...
+10
+9
+8
+7
+6
+5
+4
+3
+2
+>>> a = 0
+>>> while a < 5:
+...     print('hello')
+...
+...
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+hello
+^CTraceback (most recent call last):
+  File "<stdin>", line 2, in <module>
+KeyboardInterrupt
+hello
+>>> while a < 5:
+...     print('hello')
+...     a = a + 1
+...
+hello
+hello
+hello
+hello
+hello
+>>>
