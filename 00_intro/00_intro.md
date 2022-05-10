@@ -73,7 +73,7 @@ control](https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control) w
 
 - attendance: 25%, all or nothing
     - can miss up to 3 out of 12 classes, any more and no credit for course
-- homework: 25%, 4 homework assignments, short, similar to in-class exercises
+- homework: 25%, 5 homework assignments, short, similar to in-class exercises
     - graded by attempt, not outcome
     - we'll go over solutions the following week
     - programming is a skill, like any other language, need practice listening/speaking/reading/writing
