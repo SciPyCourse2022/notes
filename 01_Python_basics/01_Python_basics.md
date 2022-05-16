@@ -156,7 +156,7 @@
 
 #### Exercises
 
-1. Launch `python`. Do some math. Calulate `2 + 2` and save it to a variable called `genius`. Now print out the result in `genius`.
+1. Launch `python`. Do some math. Calculate `2 + 2` and save it to a variable called `genius`. Now print out the result in `genius`.
 2. Use a `for` loop to print out integers 0 to 9.
 3. Exit `python`. Use a text editor to save your code in 2. to a script called `basics.py`. Run it by typing `python basics.py` at the command line. Does it work?
 4. Modify the script to print out the square of those integers. Test it!
