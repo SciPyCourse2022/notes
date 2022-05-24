@@ -157,7 +157,7 @@
         - `list(d)` or `list(d.keys())` returns a list of d's keys
         - `list(d.values())` returns a list of d's values
         - `list(d.items())` returns a list of tuples of d's `(key, value)` pairs
-        - `d[key].pop()` returns the value of `d[key]` and also removes the key and its
+        - `d.pop('a')` returns the value of `d[key]` and also removes the key and its
         val from d
     - iterating over dicts
         - `for key in d:` or `for key in d.keys():`
