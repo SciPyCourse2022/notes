@@ -190,6 +190,7 @@
     - `a` and `b` point (refer) to the same object in memory, the list `[1, 2, 3]`
 2. `a = [1, 2, 3]; b = a.copy()`
     - `a` and `b` have the same value, but point to different objects in memory that happen to have the same value
+- can use `id()` to check the unique memory address of an object
 - if we set `b[2] = 666`, what's the value of `a` in the above two cases?
 - `is` and `is not` operators vs. `==` and `!=`
     - `a = [1, 2, 3]; b = a.copy()`
