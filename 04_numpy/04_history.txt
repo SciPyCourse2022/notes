@@ -1,0 +1,1455 @@
+mspacek@Godel:~/SciPyCourse2022/notes$ ipython
+Python 3.8.10 (default, Mar 15 2022, 12:22:08)
+Type 'copyright', 'credits' or 'license' for more information
+IPython 8.1.1 -- An enhanced Interactive Python. Type '?' for help.
+
+In [1]: def norm(vals):
+   ...:     """Return values normalized by the sum of the values""
+   ...: "
+   ...:     s = sum(vals)
+   ...:     return [ val/s for val in vals ]
+   ...:
+
+In [2]: norm([1, 6, 0, 3])
+Out[2]: [0.1, 0.6, 0.0, 0.3]
+
+In [3]: data = [[9.1, 2.1, 0.9, 1.5, 1.1],
+   ...:         [4.4, 2.2, 3.3, 5.5, 6.6],
+   ...:         [0.1, 0.2, 0.3, 0.4, 0.5]]
+
+In [4]: data
+Out[4]:
+[[9.1, 2.1, 0.9, 1.5, 1.1],
+ [4.4, 2.2, 3.3, 5.5, 6.6],
+ [0.1, 0.2, 0.3, 0.4, 0.5]]
+
+In [5]: type(data)
+Out[5]: list
+
+In [6]: data[0]
+Out[6]: [9.1, 2.1, 0.9, 1.5, 1.1]
+
+In [7]: type(data[0])
+Out[7]: list
+
+In [8]: normdata = []
+   ...: for row in data:
+   ...:     normdata.append(norm(row))
+   ...:
+
+In [9]: normdata
+Out[9]:
+[[0.6190476190476191,
+  0.14285714285714288,
+  0.06122448979591837,
+  0.10204081632653061,
+  0.07482993197278913],
+ [0.2, 0.1, 0.15, 0.25, 0.3],
+ [0.06666666666666667,
+  0.13333333333333333,
+  0.19999999999999998,
+  0.26666666666666666,
+  0.3333333333333333]]
+
+In [10]: normdata
+Out[10]:
+[[0.6190476190476191,
+  0.14285714285714288,
+  0.06122448979591837,
+  0.10204081632653061,
+  0.07482993197278913],
+ [0.2, 0.1, 0.15, 0.25, 0.3],
+ [0.06666666666666667,
+  0.13333333333333333,
+  0.19999999999999998,
+  0.26666666666666666,
+  0.3333333333333333]]
+
+In [11]: for row in normdata:
+    ...:     print(sum(row))
+    ...:
+1.0
+1.0
+1.0
+
+In [12]: [ sum(row) for row in normdata ]
+Out[12]: [1.0, 1.0, 1.0]
+
+In [13]: x = [2, 3, 4, 5, 0, 0, 0, 2, 2, 0]
+    ...: y = [0, 4, 2, 4, 5, 1, 0, 5, 3, 5]
+
+In [14]: def vectorsum(x, y):
+    ...:     """Returns vector sum of x and y"""
+    ...:     z = [ a+b for a, b in zip(x, y) ]
+    ...:     return z
+    ...:
+
+In [15]: vectorsum(x, y)
+Out[15]: [2, 7, 6, 9, 5, 1, 0, 7, 5, 5]
+
+In [16]: def vectorsum(x, y):
+    ...:     """Returns vector sum of x and y"""
+    ...:     z = [ a+b for (a, b) in zip(x, y) ]
+    ...:     return z
+    ...:
+
+In [17]:
+
+In [17]: vectorsum(x, y)
+Out[17]: [2, 7, 6, 9, 5, 1, 0, 7, 5, 5]
+
+In [18]: def vectorsum(x, y):
+    ...:     """Returns vector sum of x and y"""
+    ...:     return [ a+b for (a, b) in zip(x, y) ]
+    ...:
+
+In [19]: vectorsum(x, y)
+Out[19]: [2, 7, 6, 9, 5, 1, 0, 7, 5, 5]
+
+In [20]: def normd(dd):
+    ...:     """Normalize a dictionary"""
+    ...:     ddv = list(dd.values())
+    ...:     s = sum(ddv)
+    ...:     return { key:value/s for key, value in dd.items() }
+    ...:
+
+In [21]: normd({'a':1, 'b':6, 'c':0, 'd':3})
+Out[21]: {'a': 0.1, 'b': 0.6, 'c': 0.0, 'd': 0.3}
+
+In [22]: d = {'a':1, 'b':2, 'c':3}
+
+In [23]: d.values()
+Out[23]: dict_values([1, 2, 3])
+
+In [24]: type(d.values())
+Out[24]: dict_values
+
+In [25]: sum(type(d.values()))
+------------------------------------------------------------------
+TypeError                        Traceback (most recent call last)
+Input In [25], in <cell line: 1>()
+----> 1 sum(type(d.values()))
+
+TypeError: 'type' object is not iterable
+> <ipython-input-25-4b3147b3ab0f>(1)<cell line: 1>()
+----> 1 sum(type(d.values()))
+
+ipdb> c
+
+In [26]: sum(d.values())
+Out[26]: 6
+
+In [27]: sum(list(d.values()))
+Out[27]: 6
+
+In [28]: def norm(x):
+    ...:     """Returns a list with its normalised values"""
+    ...:     normalised_list = []
+    ...:     for i in x:
+    ...:         ii = i /sum(x)
+    ...:         normalised_list.append(ii)
+    ...:         return normalised_list
+    ...:
+
+In [29]: norm([1, 6, 0, 3])
+Out[29]: [0.1]
+
+In [30]: a = [1, 2, 3]
+
+In [31]: b = a
+
+In [32]: a
+Out[32]: [1, 2, 3]
+
+In [33]: b
+Out[33]: [1, 2, 3]
+
+In [34]: b = a.copy()
+
+In [35]: b = a
+
+In [36]: a = [1, 2, 3]
+
+In [37]: b = a
+
+In [38]: id?
+Signature: id(obj, /)
+Docstring:
+Return the identity of an object.
+
+This is guaranteed to be unique among simultaneously existing objects.
+(CPython uses the object's memory address.)
+Type:      builtin_function_or_method
+
+In [39]: id(a)
+Out[39]: 140333226510080
+
+In [40]: a
+Out[40]: [1, 2, 3]
+
+In [41]: id(b)
+Out[41]: 140333226510080
+
+In [42]: b = a.copy()
+
+In [43]: id(b)
+Out[43]: 140333225549120
+
+In [44]: b = a
+
+In [45]: b[2] = 666
+
+In [46]: b
+Out[46]: [1, 2, 666]
+
+In [47]: a
+Out[47]: [1, 2, 666]
+
+In [48]: b = a.copy()
+
+In [49]: b[2] = 666
+
+In [50]: b
+Out[50]: [1, 2, 666]
+
+In [51]: a
+Out[51]: [1, 2, 666]
+
+In [52]: a = [1, 2, 3]
+
+In [53]: b = a.copy()
+
+In [54]: b[2] = 666
+
+In [55]: b
+Out[55]: [1, 2, 666]
+
+In [56]: a
+Out[56]: [1, 2, 3]
+
+In [57]: b = a
+
+In [58]: a == [1, 2, 3]
+Out[58]: True
+
+In [59]: a
+Out[59]: [1, 2, 3]
+
+In [60]: b = [1, 2, 3]
+
+In [61]: b == [1, 2, 3]
+Out[61]: True
+
+In [62]: b = a
+
+In [63]: a is b
+Out[63]: True
+
+In [64]: b = a.copy()
+
+In [65]: a is b
+Out[65]: False
+
+In [66]: a == b
+Out[66]: True
+
+In [67]: a is b
+Out[67]: False
+
+In [68]: a != b
+Out[68]: False
+
+In [69]: a is not b
+Out[69]: True
+
+In [70]: import numpy as np
+
+In [71]: np.array([])
+Out[71]: array([], dtype=float64)
+
+In [72]: [1, 2, 3]
+Out[72]: [1, 2, 3]
+
+In [73]: np.array([1, 2, 3])
+Out[73]: array([1, 2, 3])
+
+In [74]: a = np.array([1, 2, 3])
+
+In [75]: a
+Out[75]: array([1, 2, 3])
+
+In [76]: type(a)
+Out[76]: numpy.ndarray
+
+In [77]: type([1, 2, 3])
+Out[77]: list
+
+In [78]: a = np.array((1, 2, 3))
+
+In [79]: a
+Out[79]: array([1, 2, 3])
+
+In [80]: list(range(10))
+Out[80]: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+In [81]: np.arange(10)
+Out[81]: array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+
+In [82]: np.arange(10.0)
+Out[82]: array([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+
+In [83]: np.zeros(10)
+Out[83]: array([0., 0., 0., 0., 0., 0., 0., 0., 0., 0.])
+
+In [84]: np.zeros(1000000)
+Out[84]: array([0., 0., 0., ..., 0., 0., 0.])
+
+In [85]: a = np.zeros(1000000)
+
+In [86]: np.ones(10)
+Out[86]: array([1., 1., 1., 1., 1., 1., 1., 1., 1., 1.])
+
+In [87]: np.random.random(10)
+Out[87]:
+array([0.39950661, 0.75098745, 0.27635445, 0.57134357, 0.99665182,
+       0.15422609, 0.05090585, 0.93039244, 0.03417784, 0.41133195])
+
+In [88]: np.random.random(10)
+Out[88]:
+array([0.84601015, 0.03810186, 0.85123019, 0.13452056, 0.18592525,
+       0.96117246, 0.3694253 , 0.59983264, 0.00448889, 0.32488275])
+
+In [89]: np.tile?
+
+In [90]: np.tile(5, 10)
+Out[90]: array([5, 5, 5, 5, 5, 5, 5, 5, 5, 5])
+
+In [91]: np.tile([5, 6], 10)
+Out[91]: array([5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6])
+
+In [92]: a = np.zeros(10)
+
+In [93]: a
+Out[93]: array([0., 0., 0., 0., 0., 0., 0., 0., 0., 0.])
+
+In [94]: type(a)
+Out[94]: numpy.ndarray
+
+In [95]: a.fill?
+Docstring:
+a.fill(value)
+
+Fill the array with a scalar value.
+
+Parameters
+----------
+value : scalar
+    All elements of `a` will be assigned this value.
+
+Examples
+--------
+>>> a = np.array([1, 2])
+>>> a.fill(0)
+>>> a
+array([0, 0])
+>>> a = np.empty(2)
+>>> a.fill(1)
+>>> a
+array([1.,  1.])
+Type:      builtin_function_or_method
+
+In [96]: a
+Out[96]: array([0., 0., 0., 0., 0., 0., 0., 0., 0., 0.])
+
+In [97]: a.fill(7)
+
+In [98]: a
+Out[98]: array([7., 7., 7., 7., 7., 7., 7., 7., 7., 7.])
+
+In [99]: np.array(('s', 'b', 'c'))
+Out[99]: array(['s', 'b', 'c'], dtype='<U1')
+
+In [100]: np.array([None, True, 3.14])
+Out[100]: array([None, True, 3.14], dtype=object)
+
+In [101]: np.zeros(10)
+Out[101]: array([0., 0., 0., 0., 0., 0., 0., 0., 0., 0.])
+
+In [102]: a
+Out[102]: array([7., 7., 7., 7., 7., 7., 7., 7., 7., 7.])
+
+In [103]: a.
+  Input In [103]
+    a.
+      ^
+SyntaxError: invalid syntax
+
+
+In [104]: a.fill(6)
+
+In [105]: a
+Out[105]: array([6., 6., 6., 6., 6., 6., 6., 6., 6., 6.])
+
+In [106]: a
+Out[106]: array([6., 6., 6., 6., 6., 6., 6., 6., 6., 6.])
+
+In [107]: b = a.copy()
+
+In [108]: b
+Out[108]: array([6., 6., 6., 6., 6., 6., 6., 6., 6., 6.])
+
+In [109]: b = np.copy(a)
+
+In [110]: b
+Out[110]: array([6., 6., 6., 6., 6., 6., 6., 6., 6., 6.])
+
+In [111]: a = np.random.random(10)
+
+In [112]: a
+Out[112]:
+array([0.22787323, 0.29490051, 0.22305588, 0.93918452, 0.12520742,
+       0.02402882, 0.9228679 , 0.25125823, 0.76483386, 0.09396871])
+
+In [113]: b = a.copy()
+
+In [114]: a
+Out[114]:
+array([0.22787323, 0.29490051, 0.22305588, 0.93918452, 0.12520742,
+       0.02402882, 0.9228679 , 0.25125823, 0.76483386, 0.09396871])
+
+In [115]: b
+Out[115]:
+array([0.22787323, 0.29490051, 0.22305588, 0.93918452, 0.12520742,
+       0.02402882, 0.9228679 , 0.25125823, 0.76483386, 0.09396871])
+
+In [116]: c = np.copy(b)
+
+In [117]: a
+Out[117]:
+array([0.22787323, 0.29490051, 0.22305588, 0.93918452, 0.12520742,
+       0.02402882, 0.9228679 , 0.25125823, 0.76483386, 0.09396871])
+
+In [118]: b
+Out[118]:
+array([0.22787323, 0.29490051, 0.22305588, 0.93918452, 0.12520742,
+       0.02402882, 0.9228679 , 0.25125823, 0.76483386, 0.09396871])
+
+In [119]: c
+Out[119]:
+array([0.22787323, 0.29490051, 0.22305588, 0.93918452, 0.12520742,
+       0.02402882, 0.9228679 , 0.25125823, 0.76483386, 0.09396871])
+
+In [120]: a == b
+Out[120]:
+array([ True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True])
+
+In [121]: b == c
+Out[121]:
+array([ True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True])
+
+In [122]: a is b
+Out[122]: False
+
+In [123]: b is c
+Out[123]: False
+
+In [124]: d = a
+
+In [125]: d.sort()
+
+In [126]: d
+Out[126]:
+array([0.02402882, 0.09396871, 0.12520742, 0.22305588, 0.22787323,
+       0.25125823, 0.29490051, 0.76483386, 0.9228679 , 0.93918452])
+
+In [127]: a is d
+Out[127]: True
+
+In [128]: a
+Out[128]:
+array([0.02402882, 0.09396871, 0.12520742, 0.22305588, 0.22787323,
+       0.25125823, 0.29490051, 0.76483386, 0.9228679 , 0.93918452])
+
+In [129]: a == b
+Out[129]:
+array([False, False, False, False, False, False, False, False, False,
+       False])
+
+In [130]: b
+Out[130]:
+array([0.22787323, 0.29490051, 0.22305588, 0.93918452, 0.12520742,
+       0.02402882, 0.9228679 , 0.25125823, 0.76483386, 0.09396871])
+
+In [131]: e = np.sort(b)
+
+In [132]: e
+Out[132]:
+array([0.02402882, 0.09396871, 0.12520742, 0.22305588, 0.22787323,
+       0.25125823, 0.29490051, 0.76483386, 0.9228679 , 0.93918452])
+
+In [133]: b
+Out[133]:
+array([0.22787323, 0.29490051, 0.22305588, 0.93918452, 0.12520742,
+       0.02402882, 0.9228679 , 0.25125823, 0.76483386, 0.09396871])
+
+In [134]: np.sort(b)
+Out[134]:
+array([0.02402882, 0.09396871, 0.12520742, 0.22305588, 0.22787323,
+       0.25125823, 0.29490051, 0.76483386, 0.9228679 , 0.93918452])
+
+In [135]: b
+Out[135]:
+array([0.22787323, 0.29490051, 0.22305588, 0.93918452, 0.12520742,
+       0.02402882, 0.9228679 , 0.25125823, 0.76483386, 0.09396871])
+
+In [136]: a
+Out[136]:
+array([0.02402882, 0.09396871, 0.12520742, 0.22305588, 0.22787323,
+       0.25125823, 0.29490051, 0.76483386, 0.9228679 , 0.93918452])
+
+In [137]: e
+Out[137]:
+array([0.02402882, 0.09396871, 0.12520742, 0.22305588, 0.22787323,
+       0.25125823, 0.29490051, 0.76483386, 0.9228679 , 0.93918452])
+
+In [138]: e
+Out[138]:
+array([0.02402882, 0.09396871, 0.12520742, 0.22305588, 0.22787323,
+       0.25125823, 0.29490051, 0.76483386, 0.9228679 , 0.93918452])
+
+In [139]: e = np.sort(b)
+
+In [140]: b is e
+Out[140]: False
+
+In [141]: b.sort?
+
+In [142]: e = b.sort()
+
+In [143]: e
+
+In [144]: print(e)
+None
+
+In [145]: b
+Out[145]:
+array([0.02402882, 0.09396871, 0.12520742, 0.22305588, 0.22787323,
+       0.25125823, 0.29490051, 0.76483386, 0.9228679 , 0.93918452])
+
+In [146]: b.sort()
+
+In [147]: b
+Out[147]:
+array([0.02402882, 0.09396871, 0.12520742, 0.22305588, 0.22787323,
+       0.25125823, 0.29490051, 0.76483386, 0.9228679 , 0.93918452])
+
+In [148]: a = np.random.random(10)
+
+In [149]: a
+Out[149]:
+array([0.16671733, 0.55938173, 0.69058144, 0.15865196, 0.97075772,
+       0.85507055, 0.41977138, 0.43731295, 0.82880273, 0.32109018])
+
+In [150]: len(a)
+Out[150]: 10
+
+In [151]: a.shape
+Out[151]: (10,)
+
+In [152]: a.shape[0]
+Out[152]: 10
+
+In [153]: a.ndim
+Out[153]: 1
+
+In [154]: len(a.shape)
+Out[154]: 1
+
+In [155]: a.shape
+Out[155]: (10,)
+
+In [156]: [np.array([1,2,3]), np.array([4,5,6])]
+Out[156]: [array([1, 2, 3]), array([4, 5, 6])]
+
+In [157]: np.array([1,2,3], [4,5,6])
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+Input In [157], in <cell line: 1>()
+----> 1 np.array([1,2,3], [4,5,6])
+
+TypeError: Field elements must be 2- or 3-tuples, got '4'
+> <ipython-input-157-b421bd1299a2>(1)<cell line: 1>()
+----> 1 np.array([1,2,3], [4,5,6])
+
+ipdb> c
+
+In [158]: np.array([[1,2,3], [4,5,6]])
+Out[158]:
+array([[1, 2, 3],
+       [4, 5, 6]])
+
+In [159]: np.array([[1,2,3], [4,5,6]]).ndim
+Out[159]: 2
+
+In [160]: np.array([[1,2,3], [4,5,6]]).shape
+Out[160]: (2, 3)
+
+In [161]: np.array([[1,2,3], [4,5,6,7]])
+<ipython-input-161-ae1e6c4618bc>:1: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray.
+  np.array([[1,2,3], [4,5,6,7]])
+Out[161]: array([list([1, 2, 3]), list([4, 5, 6, 7])], dtype=object)
+
+In [162]: a
+Out[162]:
+array([0.16671733, 0.55938173, 0.69058144, 0.15865196, 0.97075772,
+       0.85507055, 0.41977138, 0.43731295, 0.82880273, 0.32109018])
+
+In [163]: a.shape
+Out[163]: (10,)
+
+In [164]: l = [1,2,3]
+
+In [165]: l.append('blah')
+
+In [166]: l
+Out[166]: [1, 2, 3, 'blah']
+
+In [167]: l[2]
+Out[167]: 3
+
+In [168]: a[2]
+Out[168]: 0.6905814368082009
+
+In [169]: a
+Out[169]:
+array([0.16671733, 0.55938173, 0.69058144, 0.15865196, 0.97075772,
+       0.85507055, 0.41977138, 0.43731295, 0.82880273, 0.32109018])
+
+In [170]: a[0]
+Out[170]: 0.16671732847634513
+
+In [171]: a[1]
+Out[171]: 0.5593817348405709
+
+In [172]: a[-1]
+Out[172]: 0.3210901842886098
+
+In [173]: a[-2]
+Out[173]: 0.828802730166859
+
+In [174]: a[0]
+Out[174]: 0.16671732847634513
+
+In [175]: a[0] = 7
+
+In [176]: a
+Out[176]:
+array([7.        , 0.55938173, 0.69058144, 0.15865196, 0.97075772,
+       0.85507055, 0.41977138, 0.43731295, 0.82880273, 0.32109018])
+
+In [177]: a[-1] = 7
+
+In [178]: a
+Out[178]:
+array([7.        , 0.55938173, 0.69058144, 0.15865196, 0.97075772,
+       0.85507055, 0.41977138, 0.43731295, 0.82880273, 7.        ])
+
+In [179]: l
+Out[179]: [1, 2, 3, 'blah']
+
+In [180]: l = list(range(10))
+
+In [181]: l
+Out[181]: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+In [182]: l[:5]
+Out[182]: [0, 1, 2, 3, 4]
+
+In [183]: a
+Out[183]:
+array([7.        , 0.55938173, 0.69058144, 0.15865196, 0.97075772,
+       0.85507055, 0.41977138, 0.43731295, 0.82880273, 7.        ])
+
+In [184]: a[:5]
+Out[184]: array([7.        , 0.55938173, 0.69058144, 0.15865196, 0.97075772])
+
+In [185]: a[0:5]
+Out[185]: array([7.        , 0.55938173, 0.69058144, 0.15865196, 0.97075772])
+
+In [186]: a[0:5:1]
+Out[186]: array([7.        , 0.55938173, 0.69058144, 0.15865196, 0.97075772])
+
+In [187]: a[::2]
+Out[187]: array([7.        , 0.69058144, 0.97075772, 0.41977138, 0.82880273])
+
+In [188]: a
+Out[188]:
+array([7.        , 0.55938173, 0.69058144, 0.15865196, 0.97075772,
+       0.85507055, 0.41977138, 0.43731295, 0.82880273, 7.        ])
+
+In [189]: l
+Out[189]: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+In [190]: l[:5] = 99
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+Input In [190], in <cell line: 1>()
+----> 1 l[:5] = 99
+
+TypeError: can only assign an iterable
+> <ipython-input-190-90a4aa1d11e2>(1)<cell line: 1>()
+----> 1 l[:5] = 99
+
+ipdb> c
+
+In [191]: l[:5] = [1,2,3,4,5]
+
+In [192]: l
+Out[192]: [1, 2, 3, 4, 5, 5, 6, 7, 8, 9]
+
+In [193]: l = list(range(10))
+
+In [194]: l[:5] = [10,20,30,40,50]
+
+In [195]: l
+Out[195]: [10, 20, 30, 40, 50, 5, 6, 7, 8, 9]
+
+In [196]: l[:5] = 99
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+Input In [196], in <cell line: 1>()
+----> 1 l[:5] = 99
+
+TypeError: can only assign an iterable
+> <ipython-input-196-90a4aa1d11e2>(1)<cell line: 1>()
+----> 1 l[:5] = 99
+
+ipdb> c
+
+In [197]: a
+Out[197]:
+array([7.        , 0.55938173, 0.69058144, 0.15865196, 0.97075772,
+       0.85507055, 0.41977138, 0.43731295, 0.82880273, 7.        ])
+
+In [198]: a[:5] = 99
+
+In [199]: a
+Out[199]:
+array([99.        , 99.        , 99.        , 99.        , 99.        ,
+        0.85507055,  0.41977138,  0.43731295,  0.82880273,  7.        ])
+
+In [200]: a[:] = 6
+
+In [201]: a
+Out[201]: array([6., 6., 6., 6., 6., 6., 6., 6., 6., 6.])
+
+In [202]: a = np.random.random(10)
+
+In [203]: a
+Out[203]:
+array([0.87000948, 0.33093111, 0.10850512, 0.9496372 , 0.90563945,
+       0.93474079, 0.22699114, 0.91574842, 0.81668404, 0.9481805 ])
+
+In [204]: a[:] = 6
+
+In [205]: a
+Out[205]: array([6., 6., 6., 6., 6., 6., 6., 6., 6., 6.])
+
+In [206]: a[:] = 6
+
+In [207]: a = np.random.random(10)
+
+In [208]: a
+Out[208]:
+array([0.91533371, 0.24752999, 0.80726517, 0.49367112, 0.56606014,
+       0.50124915, 0.1166349 , 0.37387689, 0.46811949, 0.68017218])
+
+In [209]: a = 6
+
+In [210]: a
+Out[210]: 6
+
+In [211]: a = np.random.random(10)
+
+In [212]: b = a
+
+In [213]: a = 6
+
+In [214]: b
+Out[214]:
+array([0.55134722, 0.34767723, 0.17976131, 0.41043301, 0.58937915,
+       0.05117508, 0.50450553, 0.11935259, 0.43609617, 0.09363941])
+
+In [215]: a
+Out[215]: 6
+
+In [216]: a
+Out[216]: 6
+
+In [217]: a = np.random.random(10)
+
+In [218]: a[0]
+Out[218]: 0.0523501144296078
+
+In [219]: a[0] = 7
+
+In [220]: a = np.random.random(10)
+
+In [221]: a
+Out[221]:
+array([0.14783656, 0.74661698, 0.30803729, 0.8828696 , 0.90653118,
+       0.40400015, 0.89438218, 0.68305433, 0.67020574, 0.59609781])
+
+In [222]: i = [3, 7, 5, 2, 7]
+
+In [223]: a[i]
+Out[223]: array([0.8828696 , 0.68305433, 0.40400015, 0.30803729, 0.68305433])
+
+In [224]: l
+Out[224]: [10, 20, 30, 40, 50, 5, 6, 7, 8, 9]
+
+In [225]: l = list(range(10))
+
+In [226]: l[i]
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+Input In [226], in <cell line: 1>()
+----> 1 l[i]
+
+TypeError: list indices must be integers or slices, not list
+> <ipython-input-226-021c72463b38>(1)<cell line: 1>()
+----> 1 l[i]
+
+ipdb> c
+
+In [227]: l[0]
+Out[227]: 0
+
+In [228]: l[7]
+Out[228]: 7
+
+In [229]: a[i]
+Out[229]: array([0.8828696 , 0.68305433, 0.40400015, 0.30803729, 0.68305433])
+
+In [230]: a[i] = -1
+
+In [231]: a
+Out[231]:
+array([ 0.14783656,  0.74661698, -1.        , -1.        ,  0.90653118,
+       -1.        ,  0.89438218, -1.        ,  0.67020574,  0.59609781])
+
+In [232]: a = np.random.random(10)
+
+In [233]: a
+Out[233]:
+array([0.82179541, 0.32642583, 0.64936613, 0.02191895, 0.72595312,
+       0.30021215, 0.80984857, 0.11514343, 0.71129967, 0.47335169])
+
+In [234]: a > 0.5
+Out[234]:
+array([ True, False,  True, False,  True, False,  True, False,  True,
+       False])
+
+In [235]: i = a > 0.5
+
+In [236]: i
+Out[236]:
+array([ True, False,  True, False,  True, False,  True, False,  True,
+       False])
+
+In [237]: type(i)
+Out[237]: numpy.ndarray
+
+In [238]: i.dtype
+Out[238]: dtype('bool')
+
+In [239]: a[i]
+Out[239]: array([0.82179541, 0.64936613, 0.72595312, 0.80984857, 0.71129967])
+
+In [240]: a[a > 0.5]
+Out[240]: array([0.82179541, 0.64936613, 0.72595312, 0.80984857, 0.71129967])
+
+In [241]: a[a < 0.5]
+Out[241]: array([0.32642583, 0.02191895, 0.30021215, 0.11514343, 0.47335169])
+
+In [242]: i = [3, 7, 5, 2, 7]
+
+In [243]: a[[3, 7, 5, 2, 7]]
+Out[243]: array([0.02191895, 0.11514343, 0.30021215, 0.64936613, 0.11514343])
+
+In [244]: a[a > 0.5]
+Out[244]: array([0.82179541, 0.64936613, 0.72595312, 0.80984857, 0.71129967])
+
+In [245]: i
+Out[245]: [3, 7, 5, 2, 7]
+
+In [246]: i = a > 0.5
+
+In [247]: i
+Out[247]:
+array([ True, False,  True, False,  True, False,  True, False,  True,
+       False])
+
+In [248]: i == False
+Out[248]:
+array([False,  True, False,  True, False,  True, False,  True, False,
+        True])
+
+In [249]: a[i == False]
+Out[249]: array([0.32642583, 0.02191895, 0.30021215, 0.11514343, 0.47335169])
+
+In [250]: i != True
+Out[250]:
+array([False,  True, False,  True, False,  True, False,  True, False,
+        True])
+
+In [251]: a[i == False]
+Out[251]: array([0.32642583, 0.02191895, 0.30021215, 0.11514343, 0.47335169])
+
+In [252]: a[a <= 0.5]
+Out[252]: array([0.32642583, 0.02191895, 0.30021215, 0.11514343, 0.47335169])
+
+In [253]: a[a > 0.5]
+Out[253]: array([0.82179541, 0.64936613, 0.72595312, 0.80984857, 0.71129967])
+
+In [254]: a[a <= 0.5]
+Out[254]: array([0.32642583, 0.02191895, 0.30021215, 0.11514343, 0.47335169])
+
+In [255]: i = a > 0.5
+
+In [256]: i
+Out[256]:
+array([ True, False,  True, False,  True, False,  True, False,  True,
+       False])
+
+In [257]: l
+Out[257]: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+In [258]: l[i]
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+Input In [258], in <cell line: 1>()
+----> 1 l[i]
+
+TypeError: only integer scalar arrays can be converted to a scalar index
+> <ipython-input-258-021c72463b38>(1)<cell line: 1>()
+----> 1 l[i]
+
+ipdb> c
+
+In [259]: a[a > 0.5] = 100
+
+In [260]: a
+Out[260]:
+array([1.00000000e+02, 3.26425828e-01, 1.00000000e+02, 2.19189539e-02,
+       1.00000000e+02, 3.00212153e-01, 1.00000000e+02, 1.15143435e-01,
+       1.00000000e+02, 4.73351695e-01])
+
+In [261]: a = np.random.random(10)
+
+In [262]: a
+Out[262]:
+array([0.10086802, 0.11487632, 0.25393959, 0.6941318 , 0.52928303,
+       0.14464426, 0.03323448, 0.53935755, 0.28303772, 0.81515632])
+
+In [263]: a[a > 0.5] = 0
+
+In [264]: a
+Out[264]:
+array([0.10086802, 0.11487632, 0.25393959, 0.        , 0.        ,
+       0.14464426, 0.03323448, 0.        , 0.28303772, 0.        ])
+
+In [265]: a
+Out[265]:
+array([0.10086802, 0.11487632, 0.25393959, 0.        , 0.        ,
+       0.14464426, 0.03323448, 0.        , 0.28303772, 0.        ])
+
+In [266]: a = np.random.random(10)
+
+In [267]: a
+Out[267]:
+array([0.49263749, 0.22339737, 0.913753  , 0.14568203, 0.58865118,
+       0.52601887, 0.50687295, 0.64429366, 0.74853399, 0.74985741])
+
+In [268]: a + 1
+Out[268]:
+array([1.49263749, 1.22339737, 1.913753  , 1.14568203, 1.58865118,
+       1.52601887, 1.50687295, 1.64429366, 1.74853399, 1.74985741])
+
+In [269]: a - 1
+Out[269]:
+array([-0.50736251, -0.77660263, -0.086247  , -0.85431797, -0.41134882,
+       -0.47398113, -0.49312705, -0.35570634, -0.25146601, -0.25014259])
+
+In [270]: a * 2
+Out[270]:
+array([0.98527498, 0.44679474, 1.827506  , 0.29136407, 1.17730235,
+       1.05203775, 1.0137459 , 1.28858731, 1.49706797, 1.49971482])
+
+In [271]: a ** 2
+Out[271]:
+array([0.2426917 , 0.04990639, 0.83494454, 0.02122325, 0.34651021,
+       0.27669586, 0.25692019, 0.41511432, 0.56030313, 0.56228613])
+
+In [272]: a > 0.5
+Out[272]:
+array([False, False,  True, False,  True,  True,  True,  True,  True,
+        True])
+
+In [273]: a == 0.5
+Out[273]:
+array([False, False, False, False, False, False, False, False, False,
+       False])
+
+In [274]: a != 0.5
+Out[274]:
+array([ True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True])
+
+In [275]: b = 1
+
+In [276]: b += 1
+
+In [277]: b
+Out[277]: 2
+
+In [278]: a
+Out[278]:
+array([0.49263749, 0.22339737, 0.913753  , 0.14568203, 0.58865118,
+       0.52601887, 0.50687295, 0.64429366, 0.74853399, 0.74985741])
+
+In [279]: a += 1
+
+In [280]: a
+Out[280]:
+array([1.49263749, 1.22339737, 1.913753  , 1.14568203, 1.58865118,
+       1.52601887, 1.50687295, 1.64429366, 1.74853399, 1.74985741])
+
+In [281]: a -= 2
+
+In [282]: a *= 5
+
+In [283]: a
+Out[283]:
+array([-2.53681255, -3.88301314, -0.43123501, -4.27158984, -2.05674412,
+       -2.36990563, -2.46563525, -1.77853171, -1.25733007, -1.25071295])
+
+In [284]: l = list(range(10))
+
+In [285]: l
+Out[285]: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+In [286]: l + 1
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+Input In [286], in <cell line: 1>()
+----> 1 l + 1
+
+TypeError: can only concatenate list (not "int") to list
+> <ipython-input-286-154280c4c1f4>(1)<cell line: 1>()
+----> 1 l + 1
+
+ipdb> c
+
+In [287]: l + [10, 20, 30]
+Out[287]: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 30]
+
+In [288]: a = np.random.random(10)
+
+In [289]: b = np.random.random(10)
+
+In [290]: a
+Out[290]:
+array([0.52916926, 0.19037836, 0.02136476, 0.80707903, 0.05350122,
+       0.45977209, 0.26784563, 0.0799343 , 0.08481539, 0.30524865])
+
+In [291]: b
+Out[291]:
+array([1.29383174e-01, 6.32357387e-01, 7.78631499e-02, 2.15099937e-01,
+       8.30511093e-01, 5.60518969e-02, 8.14253037e-02, 4.91727475e-01,
+       7.07424774e-05, 7.28212893e-01])
+
+In [292]: a + b
+Out[292]:
+array([0.65855243, 0.82273575, 0.09922791, 1.02217896, 0.88401231,
+       0.51582398, 0.34927093, 0.57166178, 0.08488614, 1.03346154])
+
+In [293]: a = np.arange(10)
+
+In [294]: b = a + 100
+
+In [295]: a
+Out[295]: array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+
+In [296]: b
+Out[296]: array([100, 101, 102, 103, 104, 105, 106, 107, 108, 109])
+
+In [297]: a + b
+Out[297]: array([100, 102, 104, 106, 108, 110, 112, 114, 116, 118])
+
+In [298]: [1,2,3] + [4, 5, 6]
+Out[298]: [1, 2, 3, 4, 5, 6]
+
+In [299]: '123' + '456'
+Out[299]: '123456'
+
+In [300]: a + 1
+Out[300]: array([ 1,  2,  3,  4,  5,  6,  7,  8,  9, 10])
+
+In [301]: a + b
+Out[301]: array([100, 102, 104, 106, 108, 110, 112, 114, 116, 118])
+
+In [302]: a - b
+Out[302]: array([-100, -100, -100, -100, -100, -100, -100, -100, -100, -100])
+
+In [303]: a * b
+Out[303]: array([  0, 101, 204, 309, 416, 525, 636, 749, 864, 981])
+
+In [304]: b = np.random.random(11)
+
+In [305]: a
+Out[305]: array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+
+In [306]: len(a)
+Out[306]: 10
+
+In [307]: len(b)
+Out[307]: 11
+
+In [308]: a + b
+---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+Input In [308], in <cell line: 1>()
+----> 1 a + b
+
+ValueError: operands could not be broadcast together with shapes (10,) (11,)
+> <ipython-input-308-bd58363a63fc>(1)<cell line: 1>()
+----> 1 a + b
+
+ipdb> c
+
+In [309]: np.concatenate?
+
+In [310]: np.concatenate((a, b))
+Out[310]:
+array([0.        , 1.        , 2.        , 3.        , 4.        ,
+       5.        , 6.        , 7.        , 8.        , 9.        ,
+       0.62924136, 0.46046622, 0.67731941, 0.34926038, 0.73671674,
+       0.29284523, 0.8206215 , 0.78118015, 0.20052993, 0.13867981,
+       0.362785  ])
+
+In [311]: a
+Out[311]: array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+
+In [312]: b
+Out[312]:
+array([0.62924136, 0.46046622, 0.67731941, 0.34926038, 0.73671674,
+       0.29284523, 0.8206215 , 0.78118015, 0.20052993, 0.13867981,
+       0.362785  ])
+
+In [313]: len(np.concatenate((a, b)))
+Out[313]: 21
+
+In [314]: len(a)
+Out[314]: 10
+
+In [315]: len(b)
+Out[315]: 11
+
+In [316]: np.concatenate([a, b]))
+  Input In [316]
+    np.concatenate([a, b]))
+                          ^
+SyntaxError: unmatched ')'
+
+
+In [317]: np.concatenate([a, b])
+Out[317]:
+array([0.        , 1.        , 2.        , 3.        , 4.        ,
+       5.        , 6.        , 7.        , 8.        , 9.        ,
+       0.62924136, 0.46046622, 0.67731941, 0.34926038, 0.73671674,
+       0.29284523, 0.8206215 , 0.78118015, 0.20052993, 0.13867981,
+       0.362785  ])
+
+In [318]: c = np.array([10, 20, 30])
+
+In [319]: np.concatenate((a, b, c))
+Out[319]:
+array([ 0.        ,  1.        ,  2.        ,  3.        ,  4.        ,
+        5.        ,  6.        ,  7.        ,  8.        ,  9.        ,
+        0.62924136,  0.46046622,  0.67731941,  0.34926038,  0.73671674,
+        0.29284523,  0.8206215 ,  0.78118015,  0.20052993,  0.13867981,
+        0.362785  , 10.        , 20.        , 30.        ])
+
+In [320]: np.concatenate(a, b, c)
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+Input In [320], in <cell line: 1>()
+----> 1 np.concatenate(a, b, c)
+
+File <__array_function__ internals>:5, in concatenate(*args, **kwargs)
+
+TypeError: only integer scalar arrays can be converted to a scalar index
+> <__array_function__ internals>(5)concatenate()
+
+ipdb> c
+
+In [321]: np.concatenate((a, b, 1))
+---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+Input In [321], in <cell line: 1>()
+----> 1 np.concatenate((a, b, 1))
+
+File <__array_function__ internals>:5, in concatenate(*args, **kwargs)
+
+ValueError: all the input arrays must have same number of dimensions, but the array at index 0 has 1 dimension(s) and the array at index 2 has 0 dimension(s)
+> <__array_function__ internals>(5)concatenate()
+
+ipdb> c
+
+In [322]: l = []
+
+In [323]: for i in range(3):
+     ...:     l.append(np.zeros(5))
+     ...:
+
+In [324]: l
+Out[324]:
+[array([0., 0., 0., 0., 0.]),
+ array([0., 0., 0., 0., 0.]),
+ array([0., 0., 0., 0., 0.])]
+
+In [325]: np.zeros?
+
+In [326]: np.zeros(10, dtype=int)
+Out[326]: array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+
+In [327]: [ np.zeros(5) for i in range(3) ]
+Out[327]:
+[array([0., 0., 0., 0., 0.]),
+ array([0., 0., 0., 0., 0.]),
+ array([0., 0., 0., 0., 0.])]
+
+In [328]: l = [ np.zeros(5) for i in range(3) ]
+
+In [329]: l
+Out[329]:
+[array([0., 0., 0., 0., 0.]),
+ array([0., 0., 0., 0., 0.]),
+ array([0., 0., 0., 0., 0.])]
+
+In [330]: a = np.array([10, 20, 30, 40, 50])
+     ...: b = np.array([5, 12, 18, 31, 45])
+
+In [331]: a - b
+Out[331]: array([ 5,  8, 12,  9,  5])
+
+In [332]: b - a
+Out[332]: array([ -5,  -8, -12,  -9,  -5])
+
+In [333]: d = a - b
+
+In [334]: d
+Out[334]: array([ 5,  8, 12,  9,  5])
+
+In [335]: d.mean()
+Out[335]: 7.8
+
+In [336]: np.mean(d)
+Out[336]: 7.8
+
+In [337]: np.array(np.mean(d))
+Out[337]: array(7.8)
+
+In [338]: np.array(np.mean(d))
+Out[338]: array(7.8)
+
+In [339]: np.array([np.mean(d)])
+Out[339]: array([7.8])
+
+In [340]: np.array([np.mean(d)]).shape
+Out[340]: (1,)
+
+In [341]: np.median
+Out[341]: <function numpy.median(a, axis=None, out=None, overwrite_input=False, keepdims=False)>
+
+In [342]: np.std
+Out[342]: <function numpy.std(a, axis=None, dtype=None, out=None, ddof=0, keepdims=<no value>, *, where=<no value>)>
+
+In [343]: np.std?
+
+In [344]: d.std()
+Out[344]: 2.6381811916545836
+
+In [345]: d.median()
+--------------------------------------------------------------------
+AttributeError                     Traceback (most recent call last)
+Input In [345], in <cell line: 1>()
+----> 1 d.median()
+
+AttributeError: 'numpy.ndarray' object has no attribute 'median'
+> <ipython-input-345-8adbc4253e0c>(1)<cell line: 1>()
+----> 1 d.median()
+
+ipdb> c
+
+In [346]: def rms(x):
+     ...:     """Return root mean square of x"""
+     ...:     return np.sqrt(np.mean(x**2))
+     ...:
+
+In [347]: def rms(x):
+     ...:     """Return root mean square of x"""
+     ...:     return np.sqrt((x**2).mean())
+     ...:
+     ...:
+
+In [348]: def rms(x):
+     ...:     """Return root mean square of x"""
+     ...:     return np.sqrt(np.mean(x**2))
+     ...:
+
+In [349]: rms(d)
+Out[349]: 8.23407554009556
+
+In [350]: d
+Out[350]: array([ 5,  8, 12,  9,  5])
+
+In [351]: np.mean(d)
+Out[351]: 7.8
+
+In [352]: c = np.concatenate((a, b))
+
+In [353]: c
+Out[353]: array([10, 20, 30, 40, 50,  5, 12, 18, 31, 45])
+
+In [354]: c.sort()
+
+In [355]: c
+Out[355]: array([ 5, 10, 12, 18, 20, 30, 31, 40, 45, 50])
+
+In [356]: c = np.concatenate((a, b))
+
+In [357]: np.sort(c)
+Out[357]: array([ 5, 10, 12, 18, 20, 30, 31, 40, 45, 50])
+
+In [358]: c
+Out[358]: array([10, 20, 30, 40, 50,  5, 12, 18, 31, 45])
+
+In [359]: c = np.sort(c)
+
+In [360]: c.sort()
+
+In [361]: c
+Out[361]: array([ 5, 10, 12, 18, 20, 30, 31, 40, 45, 50])
+
+In [362]: c
+Out[362]: array([ 5, 10, 12, 18, 20, 30, 31, 40, 45, 50])
+
+In [363]: c >= 10
+Out[363]:
+array([False,  True,  True,  True,  True,  True,  True,  True,  True,
+        True])
+
+In [364]: (c >= 10) & (c <= 20)
+Out[364]:
+array([False,  True,  True,  True,  True, False, False, False, False,
+       False])
+
+In [365]: (c >= 10) and (c <= 20)
+---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+Input In [365], in <cell line: 1>()
+----> 1 (c >= 10) and (c <= 20)
+
+ValueError: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()
+> <ipython-input-365-5bc5887e0840>(1)<cell line: 1>()
+----> 1 (c >= 10) and (c <= 20)
+
+ipdb> c
+
+In [366]: c >= 10
+Out[366]:
+array([False,  True,  True,  True,  True,  True,  True,  True,  True,
+        True])
+
+In [367]: c <= 20
+Out[367]:
+array([ True,  True,  True,  True,  True, False, False, False, False,
+       False])
+
+In [368]: (c >= 10) & (c <= 20)
+Out[368]:
+array([False,  True,  True,  True,  True, False, False, False, False,
+       False])
+
+In [369]: (c >= 10) * (c <= 20)
+Out[369]:
+array([False,  True,  True,  True,  True, False, False, False, False,
+       False])
+
+In [370]: i = (c >= 10) & (c <= 20)
+
+In [371]: i
+Out[371]:
+array([False,  True,  True,  True,  True, False, False, False, False,
+       False])
+
+In [372]: c[i]
+Out[372]: array([10, 12, 18, 20])
+
+In [373]: c[(c >= 10) & (c <= 20)]
+Out[373]: array([10, 12, 18, 20])
+
+In [374]: c[0]
+Out[374]: 5
+
+In [375]: c[[0, 2, 3]]
+Out[375]: array([ 5, 12, 18])
+
+In [376]: c
+Out[376]: array([ 5, 10, 12, 18, 20, 30, 31, 40, 45, 50])
+
+In [377]: c[[True, False, False, False, False, False, False, False, False, True]]
+Out[377]: array([ 5, 50])
+
+In [378]: np.array([True, False, False, False, False, False, False, False, False, True]]
+     ...: )
+  Input In [378]
+    np.array([True, False, False, False, False, False, False, False, False, True]])
+                                                                                 ^
+SyntaxError: closing parenthesis ']' does not match opening parenthesis '('
+
+
+In [379]: np.array([True, False, False, False, False, False, False, False, False, True])
+     ...:
+Out[379]:
+array([ True, False, False, False, False, False, False, False, False,
+        True])
+
+In [380]: np.zeros(10, dtype=bool)
+Out[380]:
+array([False, False, False, False, False, False, False, False, False,
+       False])
+
+In [381]: i = np.zeros(10, dtype=bool)
+
+In [382]: i[[0, -1]]
+Out[382]: array([False, False])
+
+In [383]: i[[0, -1]] = True
+
+In [384]: i
+Out[384]:
+array([ True, False, False, False, False, False, False, False, False,
+        True])
+
+In [385]: c[i]
+Out[385]: array([ 5, 50])
+
+In [386]: c[[0, -1]]
+Out[386]: array([ 5, 50])
+
+In [387]:
