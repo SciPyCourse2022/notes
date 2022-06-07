@@ -173,6 +173,7 @@
     - `np.int64(a)` converts `a` to int64 dtype, but it truncates!
         - very similar to basic Python: `int(val)`
         - use `np.int64(np.round(a))` to round to the nearest integer instead
+    - instead of explicitly specifying the float and int dtypes you want to convert to, you can use `np.float_()` and `np.int_()` to convert to the default float and int dtype on your system
 
 - usually only need to worry about int vs. float dtype, stick to the defaults `int64` and `float64`, which support astronomical numbers and high precision
     - only consider going down to smaller dtypes if you have lots of data and not enough memory on your machine
