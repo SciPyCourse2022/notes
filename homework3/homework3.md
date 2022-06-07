@@ -23,9 +23,9 @@ t = [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9,
 
 2. Write a `for` loop to calculate the product of `x1` and `x2` at each timepoint. Store the results in a list called `y`. When you're done, convert `y` to an array and print it out. What is the data type of `y`?
 
-3. Now convert `x1`, `x2` and `t` to arrays. Redo question 2 in a single line using vector math.
+3. Now convert `x1`, `x2` and `t` to arrays. Redo the calculation of `y` in a single line using vector math.
 
-4. What `dtype` do the arrays `x1`, `x2` and `t` have? Give their lengths and `dtype`, how many bytes do you expect each array to use? Check the `.nbytes` attribute of each array to ensure you got it right.
+4. Given the `dtype` of arrays `x1` and `x2`, what `dtype` do you expect array `y` to have? Given their lengths and `dtype`, calculate the expected number of bytes of each array. Check the `.nbytes` attribute of each array to ensure you got it right.
 
 5. It turns out that both sensors have some invalid readings, represented by `np.nan` in `x1` and `-1` in `x2`. Use boolean array operations and boolean fancy indexing to filter out those invalid values from both sensors, along with their timepoints in `t`. Make sure your filtered `x1`, `x2` and `t` have the same length (i.e., are "aligned"). How many timepoints are left?
 
