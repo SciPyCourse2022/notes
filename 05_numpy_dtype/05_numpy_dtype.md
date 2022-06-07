@@ -18,7 +18,8 @@
     - fancy indexing: integer and boolean
     ```python
     a = np.arange(10)
-    b = a > 5 # boolean indices
+    a[[3, 7, 1]] # integer fancy indexing
+    a[a > 5] # boolean fancy indexing
     ````
     - use `np.where()` to get integer indices from boolean indices
     - `i = np.where(a > 5)` returns tuple of integer indices, one per dimension
@@ -28,33 +29,33 @@
     - `b = np.array([True, True, False])`
     - normal boolean logic operators (`and`, `or`, `not`) don't work as vectorized operators on arrays
         - e.g., `a and b` gives an error
-        - instead us vectorized boolean operators `&`, `|`, `~`
+        - instead use vectorized boolean operators `&`, `|`, `~`
         - e.g. `a & b` and `a | b` and `~a` and `~b` work as you would expect
     - are all values in `a` True? `a.all()` or `np.all(a)`, returns a single bool as answer
     - are any values in `a` True? `a.any()` or `np.any(a)`, returns a single bool as answer
 - common array math methods: `a.max()`, `a.min()`, `a.ptp()`, `a.sum()`, `a.mean()`, `a.std()`
-- how can we modify all values in an array to have zero mean and a standard deviation of 1?
+- common task: how can we modify all values in an array to have zero mean and a standard deviation of 1?
     ```python
     a = np.random.random(10)
     a -= a.mean() # now mean is very close to 0
     a /= a.std() # now std is also very close to 1
     ````
 - `a.sort()` sorts in place, `b = np.sort(a)` creates a sorted copy of `a`
-- `a.argsort()` returns fancy integer indices that *would* sort `a` if you used them to index into `a`
-    - e.g. `sortis = a.argsort()`, and then `b = a[sortis]` gives you sorted values in b, while also saving the indices that you could use to sort another array of the same length in the same way
+- `a.argsort()` returns integer fancy indices that *would* sort `a` if you used them to index into `a`
+    - e.g. `sortis = a.argsort()`, and then `b = a[sortis]` gives you sorted values in b, while also preserving the indices that you could use to sort another array of the same length in the same way
 - `np.diff()` finds the difference between consecutive values in `a`
     - e.g., `np.diff([1, 4, 2, -3])` gives `np.array([3, -2, -5])`
 
-#### more array exercises:
+#### more array exercises (one line of code each):
 
-1. Create an array `a` of 10 random numbers that range from 0 to 10 at most (one line of code!)
-2. Create an array `b` that has only the 2nd, 5th and 8th entries in `a` (one line of code!)
+1. Create an array `a` of 10 random numbers that range from 0 to 10 at most
+2. Create an array `b` that has only the 2nd, 5th and 8th entries in `a`
 3. Create an array `c` that has only the values in `a` greater than 5
 4. Use `np.where()` to get the integer indices of where `a` is greater than 5.
-5. Check that all the values in `c` really are > 5 (one line of code!)
+5. Check that all the values in `c` really are greater than 5
 6. Create an array `d` of 10 random numbers that range from -1 to 1 at most
 7. Create an array `e` that only has the values in `d` that fall between -0.5 and 0.5
-8. Check that all the values in `e` really are between -0.5 and 0.5 (one line of code!)
+8. Check that all the values in `e` really are between -0.5 and 0.5
 9. Create an array `f` that has all the values of both `a` and `d`. How long do you expect it to be? Check its length.
 10. Sort the values in `f` in-place. Use `np.diff()` in one line of code to check that `f` really is sorted.
 
@@ -78,13 +79,13 @@
 #### memory
 
 - system memory (RAM) == computer's working memory (random access memory)
-- what's a byte? 8 bits
 - what's a bit?
     - a BInary digIT, numeric symbol for counting in base 2, can be 0 or 1
     - decimal digit: numeric symbol for counting in base 10, ranges 0 to 9
 - different numeric values are expressed using different combinations of bits
-    - 1 byte, 8 bits allow for 2**8 = 256 different numeric values to be expressed
+    - 8 bits allow for 2**8 = 256 different numeric values to be expressed
     - `00000000, 00000001, 00000010, 00000011 ... == 0, 1, 2, 3, ...`
+- 1 byte == 8 bits
 - how much memory does an array use, in bytes?
     - `a.nbytes`
     - memory use depends on the number of elements in the array, times the size of each element
@@ -119,8 +120,8 @@
         - `a = np.zeros(5, dtype=np.uint8)`
         - `a += 255` is fine, but then another `a += 1` isn't
     - when doing normal (not in-place) int math, numpy gives the result in the next biggest dtype if it won't fit in the existing dtypes
-        - `a[0] = 200`, `b[0] = 100`, `a + b` gives result as `int16` dtype
-    - when to use signed or unsigned? depends on your data, if in doubt, use signed!
+        - `a[0] = 200`, `b[0] = 100`, `a + b` gives result as `int16` dtype, so does e.g. `a + 300`
+    - when to use signed or unsigned? depends on your data, but if in doubt, use signed!
     - how much memory (in bytes) would `a = np.zeros(100000000000, dtype=np.uint8)` use? what would happen if I tried this on my 16 GB laptop? `MemoryError`
 
 - **floats**: always signed, and made of `mantissa * 10^exponent`, e.g. `1.23456789e02`
@@ -138,6 +139,7 @@
             - `np.float16(1.23456789e4)` gives `12344.0`
             - `np.float16(1.23456789)` gives `1.234`
             - `np.finfo(np.float16).tiny` gives `6.104e-05`, the smallest representable value for float16 data type
+            - trying to assign e.g. `a[0] = 1e-8` results in a floating point "underflow" down to zero
     - special values:
         - `np.inf` and `np.nan`, i.e. "infinity" and "not a number"
             - `np.inf` is used to represent *out of range* float values
@@ -160,7 +162,7 @@
     - uses one byte per entry, just like int8 and uint8
     - `b = np.array([True, False, False])`
     - `b.dtype`, `b.nbytes`
-    - could this be more efficient? yes, bool arrays could use single bits instead of a full byte for each value, but normal computers allocate memory no finer than a single byte
+    - theoretically, this could be more efficient: bool arrays could use single bits instead of a full byte for each value, but normal computers allocate memory no finer than a single byte
 
 - **typecasting**: convert from one dtype to another
     - using the dtype as a function
@@ -190,8 +192,8 @@
     1. How much memory would your data take up if you used the default integer dtype in numpy?
     2. Should you use an int or float dtype? Signed or unsigned?
     3. What would be the optimal dtype to minimize the amount of memory used by your dataset? Will it fit into your 4 GB of RAM?
-3. Repeat question 2. for integer values that span 0 to 10000.
-4. Repeat question 2. for integer values that span -1 to 50000.
-5. Repeat question 2. for float values that span -60000 to 60000.
+3. Repeat question 2 for integer values that span 0 to 10000.
+4. Repeat question 2 for integer values that span -1 to 50000.
+5. Repeat question 2 for float values that span -60000 to 60000.
 
 #### Homework 3! Due before next class (class 6) on June 14

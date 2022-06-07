@@ -27,7 +27,7 @@ t = [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9,
 
 4. Given the `dtype` of arrays `x1` and `x2`, what `dtype` do you expect array `y` to have? Given their lengths and `dtype`, calculate the expected number of bytes of each array. Check the `.nbytes` attribute of each array to ensure you got it right.
 
-5. It turns out that both sensors have some invalid readings, represented by `np.nan` in `x1` and `-1` in `x2`. Use boolean array operations and boolean fancy indexing to filter out those invalid values from both sensors, along with their timepoints in `t`. Make sure your filtered `x1`, `x2` and `t` have the same length (i.e., are "aligned"). How many timepoints are left?
+5. It turns out that both sensors have some invalid readings, represented by `np.nan` in `x1` and `-1` in `x2`. Use boolean array operations and boolean fancy indexing to filter out (remove) those invalid values from both sensors, along with their timepoints in `t`. Make sure your filtered `x1`, `x2` and `t` have the same length (i.e., are "aligned"). How many timepoints are left?
 
 6. Recalculate `y` and print it out. Is it aligned with `t`?
 
