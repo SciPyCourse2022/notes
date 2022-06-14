@@ -1,5 +1,7 @@
 ### numpy file input/output, matplotlib
 
+#### go over solutions to homework 3
+
 #### numpy file input/output
 
 - so far we've been generating values in code to fill arrays
@@ -31,7 +33,7 @@
     - text files are really just a subset of binary files
 
 - **text files**: loading/saving arrays
-    - this involves loading the entire file into a big string, splitting the string up into lots of substrings (based on separators and line endings), then converting each substring into a numeric value
+    - this involves loading the entire text file into a big string, splitting the string up into lots of substrings (based on separators and line endings), then converting each substring into a numeric value
     - `np.loadtxt(fname)` - load from a text file, interpret as an array
         - use the `delimiter=','` keyword argument (kwarg) to handle e.g. comma separated values, see `test_1D.csv`
         - `test1D = np.loadtxt('test1D.csv', delimiter=',')` - interprets text file as comma separated values
@@ -43,6 +45,8 @@
         - use the `delimiter=','` kwarg to create comma separated values between columns
         - `np.savetxt('test1D_out.txt', test1D)` - yucky formatting
         - `np.savetxt('test1D_out.txt', test1D, fmt='%d')` - better, but the row became a column
+        - `np.savetxt('test1D_out.txt', (test1D,), fmt='%d')` - provide 2D-like object (1D array inside a tuple) - almost right, but missing commas
+        - `np.savetxt('test1D_out.txt', (test1D,), fmt='%d', delimiter=',')` - perfect!
         - `np.savetxt('test2D_out.txt', test2D)` - yucky formatting
         - `np.savetxt('test2D_out.txt', test2D, fmt='%d', delimiter=',')` - perfect round-trip
         - file name extension is irrelevant, but is useful to humans to indicate contents
@@ -93,7 +97,7 @@
 #### plotting with matplotlib (MPL)
 
 - main plotting library for Python, others exist, but often based on MPL
-- can plot just about anything, see MPL [sample plots](https://matplotlib.org/stable/tutorials/introductory/sample_plots.html)
+- can plot just about anything, see MPL [sample plots](https://matplotlib.org/stable/gallery/index.html)
 
 - typical usage: `import matplotlib.pyplot as plt`
     - now all the common plotting functions are available as `plt.something`
@@ -107,10 +111,10 @@
         ````
         - compare `np.linspace(start, stop, npoints)` with `np.arange(start, stop, step)`
             - `np.linspace()`
-                - lets you specify the number of points you want to get out
+                - lets you specify the number of points you want to get out instead of step size
                 - defaults to end-*inclusive* (`stop` value is included in the output)
             - `np.arange()`
-                - lets you specify the step size between points
+                - lets you specify the step size between points instead of the number of points
                 - is end-*exclusive* (`stop` value is excluded in the output)
         - `np.logspace()` is the logarithmic equivalent of `np.linspace()`, generates points equally spaced on a logarithmic scale instead of linear scale
 
@@ -120,10 +124,10 @@
             - left button drag: pan horizontally and vertically
             - right button drag: zoom horizontally and vertically
             - back and forward buttons skip between recent views
-            - home button returns to default view
-            - magnifying glass: zoom to rectangle
-                - left button drag to zoom to rectangle
-                - right button drag to zoom out the view to fit rectangle
+        - home button returns to default view, forward and back buttons switch between recent views
+        - magnifying glass: zoom to rectangle
+            - left button drag to zoom to rectangle
+            - right button drag to zoom out the view to fit rectangle
         - configure subplots: change borders, spacing between subplots (if any)
             - tight layout button minimizes borders and maximizes data, good for saving to file
         - edit plot params: titles, labels, limits, scales, line and marker formatting
@@ -214,7 +218,7 @@
 2. Plot both `s` and `c` vs. `t` in the same figure, using `plt.plot()`
 3. Give the figure a title, and label the x axis `Time (s)` and the y axis `Position`, and save it to disk as either a PNG or a PDF. If you're missing the save button on the toolbar, try the  `plt.savefig()` function
 4. Create a new figure with `plt.figure()` and repeat 2., but now give each line a label by specifying the `label` kwarg when calling `plt.plot()`. Then call `plt.legend()` to add a legend to the figure. Now give it a title, label the axes, and save it as in 3.
-5. Put all of your plot commands for 4. in a script named `plot_exercise.py` so you don't have to keep re-typing them. Make sure it runs when you type `run plot_exercises.py` in IPython.
+5. Put all of your plot commands for 4. in a script named `plot_exercise.py` so you don't have to keep re-typing them. Make sure it runs when you type `run plot_exercises.py` in IPython or Jupyter.
 6. By default, your above plots (might) have markers (dots) at each data point. Repeat 4 (use your script) but now turn off/on the markers by specifying the `marker` kwarg (hint: give it an empty string to turn them off).
 7. Initialize a second figure in your script with `plt.figure()` after your code for the first figure.
 8. Plot a histogram of `s` with 20 bins, and give it a label during the `plt.hist()` call. Now do the same for `c`. Label the x and y axes and add a legend.
