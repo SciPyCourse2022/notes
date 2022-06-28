@@ -132,11 +132,11 @@
 
     - images covered in class 8
     - `scipy.ndimage` and `skimage` allow for all kinds of image manipulation
-        - loading different image types as arrays
-        - change contrast of an image
+        - loading different image formats as numpy arrays
+        - change contrast/brightness
         - manipulate colours
-        - image denoising/smoothing
-        - image thresholding/masking/segmentation
+        - denoising/smoothing
+        - thresholding/masking/segmentation
         - see local Python talk by Joe Donovan for lots of examples:
             - https://github.com/superpythontalks/image_analysis/blob/master/image%20processing.ipynb
 
