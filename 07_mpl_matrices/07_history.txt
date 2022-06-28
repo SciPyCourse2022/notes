@@ -1,0 +1,1942 @@
+
+mspacek@Godel:~/SciPyCourse2022/notes/06_fileio_mpl$ ipython
+Python 3.8.10 (default, Mar 15 2022, 12:22:08)
+Type 'copyright', 'credits' or 'license' for more information
+IPython 8.1.1 -- An enhanced Interactive Python. Type '?' for help.
+
+In [1]: plf.figure()
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+Input In [1], in <cell line: 1>()
+----> 1 plf.figure()
+
+NameError: name 'plf' is not defined
+> <ipython-input-1-ef56bda9ea1e>(1)<cell line: 1>()
+----> 1 plf.figure()
+
+ipdb> c
+
+In [2]: plt.figure()
+Out[2]: <Figure size 700x700 with 0 Axes>
+
+In [3]: t = np.arange(0, 4*np.pi+0.1, 0.1)
+
+In [4]: t
+Out[4]:
+array([ 0. ,  0.1,  0.2,  0.3,  0.4,  0.5,  0.6,  0.7,  0.8,  0.9,  1. ,
+        1.1,  1.2,  1.3,  1.4,  1.5,  1.6,  1.7,  1.8,  1.9,  2. ,  2.1,
+        2.2,  2.3,  2.4,  2.5,  2.6,  2.7,  2.8,  2.9,  3. ,  3.1,  3.2,
+        3.3,  3.4,  3.5,  3.6,  3.7,  3.8,  3.9,  4. ,  4.1,  4.2,  4.3,
+        4.4,  4.5,  4.6,  4.7,  4.8,  4.9,  5. ,  5.1,  5.2,  5.3,  5.4,
+        5.5,  5.6,  5.7,  5.8,  5.9,  6. ,  6.1,  6.2,  6.3,  6.4,  6.5,
+        6.6,  6.7,  6.8,  6.9,  7. ,  7.1,  7.2,  7.3,  7.4,  7.5,  7.6,
+        7.7,  7.8,  7.9,  8. ,  8.1,  8.2,  8.3,  8.4,  8.5,  8.6,  8.7,
+        8.8,  8.9,  9. ,  9.1,  9.2,  9.3,  9.4,  9.5,  9.6,  9.7,  9.8,
+        9.9, 10. , 10.1, 10.2, 10.3, 10.4, 10.5, 10.6, 10.7, 10.8, 10.9,
+       11. , 11.1, 11.2, 11.3, 11.4, 11.5, 11.6, 11.7, 11.8, 11.9, 12. ,
+       12.1, 12.2, 12.3, 12.4, 12.5, 12.6])
+
+In [5]: 4*np.pi
+Out[5]: 12.566370614359172
+
+In [6]: t[-1]
+Out[6]: 12.600000000000001
+
+In [7]: t = np.arange(0, 4*np.pi+0.1, 0.1)
+   ...: s = 2*np.sin(t)
+   ...: c = np.cos(t) + 2
+   ...:
+   ...: # plot the data as lines:
+   ...: plt.figure()
+   ...: plt.plot(t, s, label='sin', marker='')
+   ...: plt.plot(t, c, label='cos', marker='')
+   ...: plt.title('sin(t) and cos(t)')
+   ...: plt.xlabel('Time (s)')
+   ...: plt.ylabel('Position')
+   ...: plt.legend(loc='upper right')
+   ...: plt.show()
+
+In [8]: t = np.arange(0, 4*np.pi+0.1, 0.1)
+   ...: s = 2*np.sin(t)
+   ...: c = np.cos(t) + 2
+   ...:
+   ...: # plot the data as lines:
+   ...: plt.figure()
+   ...: plt.plot(t, s, label='sin', marker='')
+   ...: plt.plot(t, c, label='cos', marker='')
+   ...: plt.title('sin(t) and cos(t)')
+   ...: plt.xlabel('Time (s)')
+   ...: plt.ylabel('Position')
+   ...: plt.legend(loc='upper right')
+   ...: plt.show()
+
+In [9]: ls
+06_fileio_mpl.md            example_figure.png    t.npy
+06_fileio_mpl.pdf           matplotlibrc          V.npy
+06_history.txt              plot_exercise.py      Vt.mat
+anatomy.pdf                 sin_and_cos_vs_t.png  Vt.npz
+ASCII-Conversion-Chart.pdf  test1D.csv
+distribution.png            test2D.csv
+
+In [10]: plt.savefig('sin_and_cos_vs_t.png')
+
+In [11]: plt.figure()
+    ...: plt.hist(s, bins=20, label='sin')
+    ...: plt.hist(c, bins=20, label='cos')
+    ...: plt.xlabel('Position')
+    ...: plt.ylabel('Count')
+    ...: plt.legend()
+    ...: plt.show()
+    ...: plt.savefig('distribution.png')
+
+In [12]: plt.close()
+
+In [13]: plt.close('all')
+
+In [14]: plt.figure()
+Out[14]: <Figure size 700x700 with 0 Axes>
+
+In [15]: plt.gcf()
+Out[15]: <Figure size 700x700 with 0 Axes>
+
+In [16]: f = plt.gcf()
+
+In [17]: a = plt.gca()
+
+In [18]: f, ax = plt.subplots()
+
+In [19]: f2, ax2 = plt.subplots()
+
+In [20]: ax.plot(t, c)
+Out[20]: [<matplotlib.lines.Line2D at 0x7f724c58e370>]
+
+In [21]: ax.plot(t, s)
+Out[21]: [<matplotlib.lines.Line2D at 0x7f724d6e3370>]
+
+In [22]: ax2.plot(t, c)
+Out[22]: [<matplotlib.lines.Line2D at 0x7f724d75dd90>]
+
+In [23]: ax.plot(t, s+5)
+Out[23]: [<matplotlib.lines.Line2D at 0x7f724c523610>]
+
+In [24]: f2.canvas.set_window_title('hello')
+<ipython-input-24-75e68a2304ba>:1: MatplotlibDeprecationWarning:
+The set_window_title function was deprecated in Matplotlib 3.4 and will be removed two minor releases later. Use manager.set_window_title or GUI-specific methods instead.
+  f2.canvas.set_window_title('hello')
+
+In [25]: f2.manager.set_window_title('hello')
+------------------------------------------------------------------------
+AttributeError                         Traceback (most recent call last)
+Input In [25], in <cell line: 1>()
+----> 1 f2.manager.set_window_title('hello')
+
+AttributeError: 'Figure' object has no attribute 'manager'
+> <ipython-input-25-4c0823522d88>(1)<cell line: 1>()
+----> 1 f2.manager.set_window_title('hello')
+
+ipdb> c
+
+In [26]: f2.canvas.set_window_title('hello')
+<ipython-input-26-75e68a2304ba>:1: MatplotlibDeprecationWarning:
+The set_window_title function was deprecated in Matplotlib 3.4 and will be removed two minor releases later. Use manager.set_window_title or GUI-specific methods instead.
+  f2.canvas.set_window_title('hello')
+
+In [27]: f.legend?
+
+In [28]: ax.hist?
+
+In [29]: plt.xlabel('new x label')
+Out[29]: Text(0.5, 13.94444444444443, 'new x label')
+
+In [30]: ax2.xlabel
+------------------------------------------------------------------------
+AttributeError                         Traceback (most recent call last)
+Input In [30], in <cell line: 1>()
+----> 1 ax2.xlabel
+
+AttributeError: 'AxesSubplot' object has no attribute 'xlabel'
+> <ipython-input-30-ede876d2cab8>(1)<cell line: 1>()
+----> 1 ax2.xlabel
+
+ipdb> c
+
+In [31]: ax2.set_xlabel('sldkjfslj')
+Out[31]: Text(0.5, 37.50000000000002, 'sldkjfslj')
+
+In [32]: ax2.set_ylabel('sldkjfslj')
+Out[32]: Text(13.944444444444445, 0.5, 'sldkjfslj')
+
+In [33]: ax2.set_ylim(0, 1)
+Out[33]: (0.0, 1.0)
+
+In [34]: ax2.set_title('hello')
+Out[34]: Text(0.5, 1.0, 'hello')
+
+In [35]: ax.clear()
+
+In [36]: plt.close('all')
+
+In [37]: f, axs = plt.subplots(nrows=2, ncols=2)
+
+In [38]: axs[0, 0].plot(np.arange(10))
+Out[38]: [<matplotlib.lines.Line2D at 0x7f72315dfe20>]
+
+In [39]: axs[0, 1].plot(np.arange(10))
+Out[39]: [<matplotlib.lines.Line2D at 0x7f7229cb4b50>]
+
+In [40]: axs[1, 0].plot(np.arange(10))
+Out[40]: [<matplotlib.lines.Line2D at 0x7f7228ff2fa0>]
+
+In [41]: axs[1, 1].plot(np.arange(10))
+Out[41]: [<matplotlib.lines.Line2D at 0x7f7231808a60>]
+
+In [42]: plt.close('all')
+
+In [43]: f, axs = plt.subplots(nrows=2, ncols=1, sharex=True)
+
+In [44]: axs
+Out[44]: array([<AxesSubplot:>, <AxesSubplot:>], dtype=object)
+
+In [45]: type(axs)
+Out[45]: numpy.ndarray
+
+In [46]: len(axs)
+Out[46]: 2
+
+In [47]: axs.shape
+Out[47]: (2,)
+
+In [48]: axs.ndim
+Out[48]: 1
+
+In [49]: axs[0]
+Out[49]: <AxesSubplot:>
+
+In [50]: axs[0].plot(t, s)
+Out[50]: [<matplotlib.lines.Line2D at 0x7f723094c0d0>]
+
+In [51]: axs[1].plot(t, c, color='r')
+Out[51]: [<matplotlib.lines.Line2D at 0x7f722b341580>]
+
+In [52]: plt.close('all')
+
+In [53]: f, ax = plt.subplots()
+
+In [54]: x, y, c = np.random.random(100), np.random.random(100), np.rand
+    ...: om.random(100)
+
+In [55]: ax.scatter?
+
+In [56]: ax.scatter(x, y, c=c)
+Out[56]: <matplotlib.collections.PathCollection at 0x7f7229b4e3a0>
+
+In [57]: f, ax = plt.subplots()
+
+In [58]: ax.errorbar?
+
+In [59]: ax.errorbar(x, y, yerr=0.1, xerr=0.2, linestyle='')
+Out[59]: <ErrorbarContainer object of 3 artists>
+
+In [60]: f, ax = plt.subplots()
+
+In [61]: ax.errorbar(x, y, yerr=c, xerr=c, linestyle='')
+Out[61]: <ErrorbarContainer object of 3 artists>
+
+In [62]: f, ax = plt.subplots()
+
+In [63]: ax.errorbar(x, y, yerr=c/10, xerr=c/10, linestyle='')
+Out[63]: <ErrorbarContainer object of 3 artists>
+
+In [64]: len(x)
+Out[64]: 100
+
+In [65]: len(y)
+Out[65]: 100
+
+In [66]: len(c)
+Out[66]: 100
+
+In [67]: c/10
+Out[67]:
+array([0.05433003, 0.07989902, 0.09688987, 0.05376676, 0.02226968,
+       0.0936743 , 0.02200569, 0.07287851, 0.07762552, 0.06445093,
+       0.09310963, 0.02049861, 0.006371  , 0.05718549, 0.02433859,
+       0.0170419 , 0.02216255, 0.0587412 , 0.02378448, 0.02549432,
+       0.09090317, 0.09604821, 0.01836116, 0.07491148, 0.03974709,
+       0.09210878, 0.03082461, 0.01154827, 0.02523915, 0.06860285,
+       0.06822973, 0.03347578, 0.06724948, 0.07181141, 0.04280658,
+       0.08196709, 0.02379337, 0.06358342, 0.06851798, 0.01443235,
+       0.02817961, 0.03636073, 0.04012507, 0.02213875, 0.08601216,
+       0.06932445, 0.06547198, 0.06098174, 0.07009836, 0.09152715,
+       0.09864736, 0.07579684, 0.0471419 , 0.09216694, 0.09380906,
+       0.03853967, 0.04709094, 0.00390894, 0.06845885, 0.03232378,
+       0.07808081, 0.0457641 , 0.0152751 , 0.06577271, 0.02958821,
+       0.01854963, 0.02470354, 0.03023687, 0.06056142, 0.09837421,
+       0.05042198, 0.01276072, 0.03131873, 0.01814906, 0.06901917,
+       0.09907206, 0.06270864, 0.0792333 , 0.03377504, 0.00806337,
+       0.08732012, 0.05482151, 0.04465236, 0.09809556, 0.0201515 ,
+       0.04509048, 0.04123391, 0.00460658, 0.09009623, 0.03640088,
+       0.03247152, 0.03475682, 0.08454443, 0.05773012, 0.07263395,
+       0.0788709 , 0.03511628, 0.08170436, 0.00213627, 0.08596814])
+
+In [68]: len(c/10)
+Out[68]: 100
+
+In [69]: plt.close('all')
+
+In [70]: x, y = [1, 2, 3], [4, 5, 6]
+
+In [71]: f, ax = plt.subplots()
+
+In [72]: ax.bar(x, height=y)
+Out[72]: <BarContainer object of 3 artists>
+
+In [73]: f, ax = plt.subplots()
+
+In [74]: ax.barh(y, width=x)
+Out[74]: <BarContainer object of 3 artists>
+
+In [75]: f, ax = plt.subplots()
+
+In [76]: ax.plot(t, s)
+Out[76]: [<matplotlib.lines.Line2D at 0x7f722974d790>]
+
+In [77]: ax.legend()
+No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.
+Out[77]: <matplotlib.legend.Legend at 0x7f722b59c8e0>
+
+In [78]: a = np.array([[1, 2, 3], [4, 5, 6]])
+
+In [79]: a
+Out[79]:
+array([[1, 2, 3],
+       [4, 5, 6]])
+
+In [80]: a.shape
+Out[80]: (2, 3)
+
+In [81]: a.ndim
+Out[81]: 2
+
+In [82]: np.arange(10)
+Out[82]: array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+
+In [83]: np.arange(16)
+Out[83]: array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15])
+
+In [84]: np.arange(16).reshape((8, 2))
+Out[84]:
+array([[ 0,  1],
+       [ 2,  3],
+       [ 4,  5],
+       [ 6,  7],
+       [ 8,  9],
+       [10, 11],
+       [12, 13],
+       [14, 15]])
+
+In [85]: np.arange(16).reshape((8, 3))
+---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+Input In [85], in <cell line: 1>()
+----> 1 np.arange(16).reshape((8, 3))
+
+ValueError: cannot reshape array of size 16 into shape (8,3)
+> <ipython-input-85-a6667f62339f>(1)<cell line: 1>()
+----> 1 np.arange(16).reshape((8, 3))
+
+ipdb> c
+
+In [86]: np.arange(16).reshape((4, 4))
+Out[86]:
+array([[ 0,  1,  2,  3],
+       [ 4,  5,  6,  7],
+       [ 8,  9, 10, 11],
+       [12, 13, 14, 15]])
+
+In [87]: np.arange(16).reshape((4, 4)).size
+Out[87]: 16
+
+In [88]: np.arange(16).reshape((4, 4)).shape
+Out[88]: (4, 4)
+
+In [89]: np.arange(16).reshape((4, 4)).size
+Out[89]: 16
+
+In [90]: a = np.arange(16)
+
+In [91]: a
+Out[91]: array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15])
+
+In [92]: a.shape
+Out[92]: (16,)
+
+In [93]: a.shape = 8, 2
+
+In [94]: a
+Out[94]:
+array([[ 0,  1],
+       [ 2,  3],
+       [ 4,  5],
+       [ 6,  7],
+       [ 8,  9],
+       [10, 11],
+       [12, 13],
+       [14, 15]])
+
+In [95]: a.shape = 8, 3
+---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+Input In [95], in <cell line: 1>()
+----> 1 a.shape = 8, 3
+
+ValueError: cannot reshape array of size 16 into shape (8,3)
+> <ipython-input-95-703cde40bb19>(1)<cell line: 1>()
+----> 1 a.shape = 8, 3
+
+ipdb> c
+
+In [96]: a.shape = 4, 4
+
+In [97]: a
+Out[97]:
+array([[ 0,  1,  2,  3],
+       [ 4,  5,  6,  7],
+       [ 8,  9, 10, 11],
+       [12, 13, 14, 15]])
+
+In [98]: a.reshape((4, 4))
+Out[98]:
+array([[ 0,  1,  2,  3],
+       [ 4,  5,  6,  7],
+       [ 8,  9, 10, 11],
+       [12, 13, 14, 15]])
+
+In [99]: np.arange?
+
+In [100]: np.zeros(10)
+Out[100]: array([0., 0., 0., 0., 0., 0., 0., 0., 0., 0.])
+
+In [101]: np.zeros?
+
+In [102]: np.zeros((8, 2))
+Out[102]:
+array([[0., 0.],
+       [0., 0.],
+       [0., 0.],
+       [0., 0.],
+       [0., 0.],
+       [0., 0.],
+       [0., 0.],
+       [0., 0.]])
+
+In [103]: np.zeros(16).reshape((8, 2))
+Out[103]:
+array([[0., 0.],
+       [0., 0.],
+       [0., 0.],
+       [0., 0.],
+       [0., 0.],
+       [0., 0.],
+       [0., 0.],
+       [0., 0.]])
+
+In [104]: np.ones((8, 2))
+Out[104]:
+array([[1., 1.],
+       [1., 1.],
+       [1., 1.],
+       [1., 1.],
+       [1., 1.],
+       [1., 1.],
+       [1., 1.],
+       [1., 1.]])
+
+In [105]: np.random.random((8, 2))
+Out[105]:
+array([[0.80998638, 0.13684306],
+       [0.19879412, 0.93031009],
+       [0.83419496, 0.56679203],
+       [0.06683045, 0.86403412],
+       [0.91396246, 0.06650204],
+       [0.21574692, 0.4723339 ],
+       [0.22526072, 0.79697192],
+       [0.30861304, 0.94394395]])
+
+In [106]: np.tile?
+
+In [107]: np.tile([1, 2], [8, 1])
+Out[107]:
+array([[1, 2],
+       [1, 2],
+       [1, 2],
+       [1, 2],
+       [1, 2],
+       [1, 2],
+       [1, 2],
+       [1, 2]])
+
+In [108]: np.tile([1, 2], [8, 2])
+Out[108]:
+array([[1, 2, 1, 2],
+       [1, 2, 1, 2],
+       [1, 2, 1, 2],
+       [1, 2, 1, 2],
+       [1, 2, 1, 2],
+       [1, 2, 1, 2],
+       [1, 2, 1, 2],
+       [1, 2, 1, 2]])
+
+In [109]: a
+Out[109]:
+array([[ 0,  1,  2,  3],
+       [ 4,  5,  6,  7],
+       [ 8,  9, 10, 11],
+       [12, 13, 14, 15]])
+
+In [110]: a.fill(7)
+
+In [111]: a
+Out[111]:
+array([[7, 7, 7, 7],
+       [7, 7, 7, 7],
+       [7, 7, 7, 7],
+       [7, 7, 7, 7]])
+
+In [112]: np.eye?
+
+In [113]: np.eye(5)
+Out[113]:
+array([[1., 0., 0., 0., 0.],
+       [0., 1., 0., 0., 0.],
+       [0., 0., 1., 0., 0.],
+       [0., 0., 0., 1., 0.],
+       [0., 0., 0., 0., 1.]])
+
+In [114]: np.eye(5, dtype=int)
+Out[114]:
+array([[1, 0, 0, 0, 0],
+       [0, 1, 0, 0, 0],
+       [0, 0, 1, 0, 0],
+       [0, 0, 0, 1, 0],
+       [0, 0, 0, 0, 1]])
+
+In [115]: np.eye(5, dtype=int).shape
+Out[115]: (5, 5)
+
+In [116]: np.eye?
+
+In [117]: np.eye?
+
+In [118]: np.eye(5, k=-1)
+Out[118]:
+array([[0., 0., 0., 0., 0.],
+       [1., 0., 0., 0., 0.],
+       [0., 1., 0., 0., 0.],
+       [0., 0., 1., 0., 0.],
+       [0., 0., 0., 1., 0.]])
+
+In [119]: np.eye(5, k=1)
+Out[119]:
+array([[0., 1., 0., 0., 0.],
+       [0., 0., 1., 0., 0.],
+       [0., 0., 0., 1., 0.],
+       [0., 0., 0., 0., 1.],
+       [0., 0., 0., 0., 0.]])
+
+In [120]: np.eye?
+
+In [121]: np.fliplr(np.eye(5))
+Out[121]:
+array([[0., 0., 0., 0., 1.],
+       [0., 0., 0., 1., 0.],
+       [0., 0., 1., 0., 0.],
+       [0., 1., 0., 0., 0.],
+       [1., 0., 0., 0., 0.]])
+
+In [122]: a
+Out[122]:
+array([[7, 7, 7, 7],
+       [7, 7, 7, 7],
+       [7, 7, 7, 7],
+       [7, 7, 7, 7]])
+
+In [123]: a.shape
+Out[123]: (4, 4)
+
+In [124]: a.shape[0]
+Out[124]: 4
+
+In [125]: a.shape[1]
+Out[125]: 4
+
+In [126]: len(np.arange(16))
+Out[126]: 16
+
+In [127]: a
+Out[127]:
+array([[7, 7, 7, 7],
+       [7, 7, 7, 7],
+       [7, 7, 7, 7],
+       [7, 7, 7, 7]])
+
+In [128]: a = np.arange(16).reshap
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+Input In [128], in <cell line: 1>()
+----> 1 a = np.arange(16).reshap
+
+AttributeError: 'numpy.ndarray' object has no attribute 'reshap'
+> <ipython-input-128-b89cfb58cc06>(1)<cell line: 1>()
+----> 1 a = np.arange(16).reshap
+
+ipdb> c
+
+In [129]: a = np.arange(16).reshape((8, 2))
+
+In [130]: a
+Out[130]:
+array([[ 0,  1],
+       [ 2,  3],
+       [ 4,  5],
+       [ 6,  7],
+       [ 8,  9],
+       [10, 11],
+       [12, 13],
+       [14, 15]])
+
+In [131]: a.shape
+Out[131]: (8, 2)
+
+In [132]: a.size
+Out[132]: 16
+
+In [133]: len(a)
+Out[133]: 8
+
+In [134]: len(a)
+Out[134]: 8
+
+In [135]: a.shape[0]
+Out[135]: 8
+
+In [136]: a
+Out[136]:
+array([[ 0,  1],
+       [ 2,  3],
+       [ 4,  5],
+       [ 6,  7],
+       [ 8,  9],
+       [10, 11],
+       [12, 13],
+       [14, 15]])
+
+In [137]: a.ravel()
+Out[137]: array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15])
+
+In [138]: np.arange(16)
+Out[138]: array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15])
+
+In [139]: plt.imshow?
+
+In [140]: f, ax = plt.subplots(figsize=(3, 3))
+
+In [141]: a = np.random.random((8, 2))
+
+In [142]: a
+Out[142]:
+array([[0.84114626, 0.11348901],
+       [0.14700333, 0.63149126],
+       [0.36036046, 0.22120264],
+       [0.52274707, 0.92819822],
+       [0.54423585, 0.92231857],
+       [0.72068093, 0.43251597],
+       [0.68694722, 0.23284848],
+       [0.54166879, 0.69121659]])
+
+In [143]: plt.subplots?
+
+In [144]: plt.figure?
+
+In [145]: im = ax.imshow(a)
+
+In [146]: ax.set_xticks([])
+Out[146]: []
+
+In [147]: ax.set_yticks([])
+Out[147]: []
+
+In [148]: f.colorbar(im)
+Out[148]: <matplotlib.colorbar.Colorbar at 0x7f72311f1850>
+
+In [149]: ax.imshow?
+
+In [150]: ax.imshow(a, vmin=0, vmax=1)
+Out[150]: <matplotlib.image.AxesImage at 0x7f72328c6d60>
+
+In [151]: im = ax.imshow(a, vmin=0, vmax=1)
+
+In [152]: f.colorbar(im)
+Out[152]: <matplotlib.colorbar.Colorbar at 0x7f7228b42760>
+
+In [153]: f, ax = plt.subplots(figsize=(3, 3))
+
+In [154]: im = ax.imshow(a, vmin=0, vmax=1)
+
+In [155]: ax.show()
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+Input In [155], in <cell line: 1>()
+----> 1 ax.show()
+
+AttributeError: 'AxesSubplot' object has no attribute 'show'
+> <ipython-input-155-ece30bd5e827>(1)<cell line: 1>()
+----> 1 ax.show()
+
+ipdb> c
+
+In [156]: plt.show()
+
+In [157]: f.colorbar(im)
+Out[157]: <matplotlib.colorbar.Colorbar at 0x7f7228527520>
+
+In [158]: f, ax = plt.subplots(figsize=(3, 3))
+
+In [159]: im = ax.imshow(a, cmap='jet')
+
+In [160]: f.colorbar(im)
+Out[160]: <matplotlib.colorbar.Colorbar at 0x7f7203fe72b0>
+
+In [161]: im.set_cmap('viridis')
+
+In [162]: im.set_cmap('jet')
+
+In [163]: a = np.arange(16).reshape((8, 2))
+
+In [164]: a
+Out[164]:
+array([[ 0,  1],
+       [ 2,  3],
+       [ 4,  5],
+       [ 6,  7],
+       [ 8,  9],
+       [10, 11],
+       [12, 13],
+       [14, 15]])
+
+In [165]: a[0, 0]
+Out[165]: 0
+
+In [166]: a[0, 1]
+Out[166]: 1
+
+In [167]: a[1, 0]
+Out[167]: 2
+
+In [168]: a[7, 1]
+Out[168]: 15
+
+In [169]: a[-1, -1]
+Out[169]: 15
+
+In [170]: a[8, 1]
+---------------------------------------------------------------------------
+IndexError                                Traceback (most recent call last)
+Input In [170], in <cell line: 1>()
+----> 1 a[8, 1]
+
+IndexError: index 8 is out of bounds for axis 0 with size 8
+> <ipython-input-170-8caa431e553d>(1)<cell line: 1>()
+----> 1 a[8, 1]
+
+ipdb> c
+
+In [171]: a[7, 1]
+Out[171]: 15
+
+In [172]: a[7, 2]
+---------------------------------------------------------------------------
+IndexError                                Traceback (most recent call last)
+Input In [172], in <cell line: 1>()
+----> 1 a[7, 2]
+
+IndexError: index 2 is out of bounds for axis 1 with size 2
+> <ipython-input-172-552e5948e625>(1)<cell line: 1>()
+----> 1 a[7, 2]
+
+ipdb> a.shape
+ipdb> c
+
+In [173]: a.shape
+Out[173]: (8, 2)
+
+In [174]: a
+Out[174]:
+array([[ 0,  1],
+       [ 2,  3],
+       [ 4,  5],
+       [ 6,  7],
+       [ 8,  9],
+       [10, 11],
+       [12, 13],
+       [14, 15]])
+
+In [175]: a[0, :]
+Out[175]: array([0, 1])
+
+In [176]: a[0, :].ndim
+Out[176]: 1
+
+In [177]: a[0, :].shape
+Out[177]: (2,)
+
+In [178]: a[0]
+Out[178]: array([0, 1])
+
+In [179]: a[3]
+Out[179]: array([6, 7])
+
+In [180]: a[3, :]
+Out[180]: array([6, 7])
+
+In [181]: a[:, 0]
+Out[181]: array([ 0,  2,  4,  6,  8, 10, 12, 14])
+
+In [182]: a[:, 0].ndim
+Out[182]: 1
+
+In [183]: a[0]
+Out[183]: array([0, 1])
+
+In [184]: a[:, 1]
+Out[184]: array([ 1,  3,  5,  7,  9, 11, 13, 15])
+
+In [185]: a[:3, :]
+Out[185]:
+array([[0, 1],
+       [2, 3],
+       [4, 5]])
+
+In [186]: a[:, 0:2]
+Out[186]:
+array([[ 0,  1],
+       [ 2,  3],
+       [ 4,  5],
+       [ 6,  7],
+       [ 8,  9],
+       [10, 11],
+       [12, 13],
+       [14, 15]])
+
+In [187]: a[::2]
+Out[187]:
+array([[ 0,  1],
+       [ 4,  5],
+       [ 8,  9],
+       [12, 13]])
+
+In [188]: a
+Out[188]:
+array([[ 0,  1],
+       [ 2,  3],
+       [ 4,  5],
+       [ 6,  7],
+       [ 8,  9],
+       [10, 11],
+       [12, 13],
+       [14, 15]])
+
+In [189]: a[::2, :]
+Out[189]:
+array([[ 0,  1],
+       [ 4,  5],
+       [ 8,  9],
+       [12, 13]])
+
+In [190]: a[::2, :]
+Out[190]:
+array([[ 0,  1],
+       [ 4,  5],
+       [ 8,  9],
+       [12, 13]])
+
+In [191]: np.transpose(a)
+Out[191]:
+array([[ 0,  2,  4,  6,  8, 10, 12, 14],
+       [ 1,  3,  5,  7,  9, 11, 13, 15]])
+
+In [192]: a
+Out[192]:
+array([[ 0,  1],
+       [ 2,  3],
+       [ 4,  5],
+       [ 6,  7],
+       [ 8,  9],
+       [10, 11],
+       [12, 13],
+       [14, 15]])
+
+In [193]: np.transpose(a)
+Out[193]:
+array([[ 0,  2,  4,  6,  8, 10, 12, 14],
+       [ 1,  3,  5,  7,  9, 11, 13, 15]])
+
+In [194]: b = np.transpose(a)
+
+In [195]: b
+Out[195]:
+array([[ 0,  2,  4,  6,  8, 10, 12, 14],
+       [ 1,  3,  5,  7,  9, 11, 13, 15]])
+
+In [196]: b[:, ::2]
+Out[196]:
+array([[ 0,  4,  8, 12],
+       [ 1,  5,  9, 13]])
+
+In [197]: x =
+  Input In [197]
+    x =
+        ^
+SyntaxError: invalid syntax
+
+
+In [198]: a = np.arange(10)
+
+In [199]: a
+Out[199]: array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+
+In [200]: a[::-1]
+Out[200]: array([9, 8, 7, 6, 5, 4, 3, 2, 1, 0])
+
+In [201]: a = np.random.random((8, 2))
+
+In [202]: a
+Out[202]:
+array([[0.78599368, 0.20052856],
+       [0.02778811, 0.56881854],
+       [0.93080148, 0.80175255],
+       [0.10007693, 0.93113559],
+       [0.03469633, 0.14094864],
+       [0.56165099, 0.94744379],
+       [0.61403535, 0.97108971],
+       [0.28117375, 0.59160275]])
+
+In [203]: a = np.arange(16).reshape((8, 2))
+
+In [204]: a
+Out[204]:
+array([[ 0,  1],
+       [ 2,  3],
+       [ 4,  5],
+       [ 6,  7],
+       [ 8,  9],
+       [10, 11],
+       [12, 13],
+       [14, 15]])
+
+In [205]: a[:, ::-1]
+Out[205]:
+array([[ 1,  0],
+       [ 3,  2],
+       [ 5,  4],
+       [ 7,  6],
+       [ 9,  8],
+       [11, 10],
+       [13, 12],
+       [15, 14]])
+
+In [206]: a[::-1, :]
+Out[206]:
+array([[14, 15],
+       [12, 13],
+       [10, 11],
+       [ 8,  9],
+       [ 6,  7],
+       [ 4,  5],
+       [ 2,  3],
+       [ 0,  1]])
+
+In [207]: a[::-1]
+Out[207]:
+array([[14, 15],
+       [12, 13],
+       [10, 11],
+       [ 8,  9],
+       [ 6,  7],
+       [ 4,  5],
+       [ 2,  3],
+       [ 0,  1]])
+
+In [208]: np.flipud(a)
+Out[208]:
+array([[14, 15],
+       [12, 13],
+       [10, 11],
+       [ 8,  9],
+       [ 6,  7],
+       [ 4,  5],
+       [ 2,  3],
+       [ 0,  1]])
+
+In [209]: np.fliplr(a)
+Out[209]:
+array([[ 1,  0],
+       [ 3,  2],
+       [ 5,  4],
+       [ 7,  6],
+       [ 9,  8],
+       [11, 10],
+       [13, 12],
+       [15, 14]])
+
+In [210]: a
+Out[210]:
+array([[ 0,  1],
+       [ 2,  3],
+       [ 4,  5],
+       [ 6,  7],
+       [ 8,  9],
+       [10, 11],
+       [12, 13],
+       [14, 15]])
+
+In [211]: a.shape
+Out[211]: (8, 2)
+
+In [212]: np.rot90(a)
+Out[212]:
+array([[ 1,  3,  5,  7,  9, 11, 13, 15],
+       [ 0,  2,  4,  6,  8, 10, 12, 14]])
+
+In [213]: np.rot90(a, -1)
+Out[213]:
+array([[14, 12, 10,  8,  6,  4,  2,  0],
+       [15, 13, 11,  9,  7,  5,  3,  1]])
+
+In [214]: np.rot90(a, -2)
+Out[214]:
+array([[15, 14],
+       [13, 12],
+       [11, 10],
+       [ 9,  8],
+       [ 7,  6],
+       [ 5,  4],
+       [ 3,  2],
+       [ 1,  0]])
+
+In [215]: a
+Out[215]:
+array([[ 0,  1],
+       [ 2,  3],
+       [ 4,  5],
+       [ 6,  7],
+       [ 8,  9],
+       [10, 11],
+       [12, 13],
+       [14, 15]])
+
+In [216]: a + 2
+Out[216]:
+array([[ 2,  3],
+       [ 4,  5],
+       [ 6,  7],
+       [ 8,  9],
+       [10, 11],
+       [12, 13],
+       [14, 15],
+       [16, 17]])
+
+In [217]: a - 2
+Out[217]:
+array([[-2, -1],
+       [ 0,  1],
+       [ 2,  3],
+       [ 4,  5],
+       [ 6,  7],
+       [ 8,  9],
+       [10, 11],
+       [12, 13]])
+
+In [218]: a * 2
+Out[218]:
+array([[ 0,  2],
+       [ 4,  6],
+       [ 8, 10],
+       [12, 14],
+       [16, 18],
+       [20, 22],
+       [24, 26],
+       [28, 30]])
+
+In [219]: b = np.random.random(16).reshape((8, 2))
+
+In [220]: b
+Out[220]:
+array([[0.51556634, 0.34863063],
+       [0.1081443 , 0.03491267],
+       [0.21919397, 0.75587168],
+       [0.34998544, 0.47121983],
+       [0.46834116, 0.66454658],
+       [0.18616433, 0.82855586],
+       [0.83212461, 0.97795808],
+       [0.66236323, 0.71727154]])
+
+In [221]: a
+Out[221]:
+array([[ 0,  1],
+       [ 2,  3],
+       [ 4,  5],
+       [ 6,  7],
+       [ 8,  9],
+       [10, 11],
+       [12, 13],
+       [14, 15]])
+
+In [222]: b
+Out[222]:
+array([[0.51556634, 0.34863063],
+       [0.1081443 , 0.03491267],
+       [0.21919397, 0.75587168],
+       [0.34998544, 0.47121983],
+       [0.46834116, 0.66454658],
+       [0.18616433, 0.82855586],
+       [0.83212461, 0.97795808],
+       [0.66236323, 0.71727154]])
+
+In [223]: a.shape
+Out[223]: (8, 2)
+
+In [224]: b.shape
+Out[224]: (8, 2)
+
+In [225]: a + b
+Out[225]:
+array([[ 0.51556634,  1.34863063],
+       [ 2.1081443 ,  3.03491267],
+       [ 4.21919397,  5.75587168],
+       [ 6.34998544,  7.47121983],
+       [ 8.46834116,  9.66454658],
+       [10.18616433, 11.82855586],
+       [12.83212461, 13.97795808],
+       [14.66236323, 15.71727154]])
+
+In [226]: a - b
+Out[226]:
+array([[-0.51556634,  0.65136937],
+       [ 1.8918557 ,  2.96508733],
+       [ 3.78080603,  4.24412832],
+       [ 5.65001456,  6.52878017],
+       [ 7.53165884,  8.33545342],
+       [ 9.81383567, 10.17144414],
+       [11.16787539, 12.02204192],
+       [13.33763677, 14.28272846]])
+
+In [227]: a * 2
+Out[227]:
+array([[ 0,  2],
+       [ 4,  6],
+       [ 8, 10],
+       [12, 14],
+       [16, 18],
+       [20, 22],
+       [24, 26],
+       [28, 30]])
+
+In [228]: a * b
+Out[228]:
+array([[ 0.        ,  0.34863063],
+       [ 0.2162886 ,  0.10473801],
+       [ 0.87677586,  3.77935842],
+       [ 2.09991263,  3.29853879],
+       [ 3.74672926,  5.98091921],
+       [ 1.86164335,  9.11411441],
+       [ 9.98549531, 12.71345508],
+       [ 9.2730852 , 10.75907317]])
+
+In [229]: a / b
+Out[229]:
+array([[ 0.        ,  2.8683653 ],
+       [18.493809  , 85.92868701],
+       [18.24867758,  6.61487935],
+       [17.14357042, 14.85506252],
+       [17.08156516, 13.54306873],
+       [53.71598175, 13.2761116 ],
+       [14.42091709, 13.29300328],
+       [21.13643903, 20.91258202]])
+
+In [230]: a
+Out[230]:
+array([[ 0,  1],
+       [ 2,  3],
+       [ 4,  5],
+       [ 6,  7],
+       [ 8,  9],
+       [10, 11],
+       [12, 13],
+       [14, 15]])
+
+In [231]: b
+Out[231]:
+array([[0.51556634, 0.34863063],
+       [0.1081443 , 0.03491267],
+       [0.21919397, 0.75587168],
+       [0.34998544, 0.47121983],
+       [0.46834116, 0.66454658],
+       [0.18616433, 0.82855586],
+       [0.83212461, 0.97795808],
+       [0.66236323, 0.71727154]])
+
+In [232]: b / a
+<ipython-input-232-86f14ff2de04>:1: RuntimeWarning: divide by zero encountered in true_divide
+  b / a
+Out[232]:
+array([[       inf, 0.34863063],
+       [0.05407215, 0.01163756],
+       [0.05479849, 0.15117434],
+       [0.05833091, 0.06731712],
+       [0.05854264, 0.07383851],
+       [0.01861643, 0.07532326],
+       [0.06934372, 0.07522754],
+       [0.04731166, 0.0478181 ]])
+
+In [233]: a
+Out[233]:
+array([[ 0,  1],
+       [ 2,  3],
+       [ 4,  5],
+       [ 6,  7],
+       [ 8,  9],
+       [10, 11],
+       [12, 13],
+       [14, 15]])
+
+In [234]: x = np.arange(8)
+
+In [235]: x
+Out[235]: array([0, 1, 2, 3, 4, 5, 6, 7])
+
+In [236]: a * x
+---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+Input In [236], in <cell line: 1>()
+----> 1 a * x
+
+ValueError: operands could not be broadcast together with shapes (8,2) (8,)
+> <ipython-input-236-6ac118169318>(1)<cell line: 1>()
+----> 1 a * x
+
+ipdb> c
+
+In [237]: a
+Out[237]:
+array([[ 0,  1],
+       [ 2,  3],
+       [ 4,  5],
+       [ 6,  7],
+       [ 8,  9],
+       [10, 11],
+       [12, 13],
+       [14, 15]])
+
+In [238]: x
+Out[238]: array([0, 1, 2, 3, 4, 5, 6, 7])
+
+In [239]: a.shape
+Out[239]: (8, 2)
+
+In [240]: x.shape
+Out[240]: (8,)
+
+In [241]: a.T
+Out[241]:
+array([[ 0,  2,  4,  6,  8, 10, 12, 14],
+       [ 1,  3,  5,  7,  9, 11, 13, 15]])
+
+In [242]: a.T.shape
+Out[242]: (2, 8)
+
+In [243]: np.transpose(a)
+Out[243]:
+array([[ 0,  2,  4,  6,  8, 10, 12, 14],
+       [ 1,  3,  5,  7,  9, 11, 13, 15]])
+
+In [244]: a.T
+Out[244]:
+array([[ 0,  2,  4,  6,  8, 10, 12, 14],
+       [ 1,  3,  5,  7,  9, 11, 13, 15]])
+
+In [245]: a.T.shape
+Out[245]: (2, 8)
+
+In [246]: x.shape
+Out[246]: (8,)
+
+In [247]: a.T * x
+Out[247]:
+array([[  0,   2,   8,  18,  32,  50,  72,  98],
+       [  0,   3,  10,  21,  36,  55,  78, 105]])
+
+In [248]: a
+Out[248]:
+array([[ 0,  1],
+       [ 2,  3],
+       [ 4,  5],
+       [ 6,  7],
+       [ 8,  9],
+       [10, 11],
+       [12, 13],
+       [14, 15]])
+
+In [249]: (a.T * x).T
+Out[249]:
+array([[  0,   0],
+       [  2,   3],
+       [  8,  10],
+       [ 18,  21],
+       [ 32,  36],
+       [ 50,  55],
+       [ 72,  78],
+       [ 98, 105]])
+
+In [250]: x
+Out[250]: array([0, 1, 2, 3, 4, 5, 6, 7])
+
+In [251]: x.shape = 8, 1
+
+In [252]: x
+Out[252]:
+array([[0],
+       [1],
+       [2],
+       [3],
+       [4],
+       [5],
+       [6],
+       [7]])
+
+In [253]: a.shape
+Out[253]: (8, 2)
+
+In [254]: x * a
+Out[254]:
+array([[  0,   0],
+       [  2,   3],
+       [  8,  10],
+       [ 18,  21],
+       [ 32,  36],
+       [ 50,  55],
+       [ 72,  78],
+       [ 98, 105]])
+
+In [255]: a
+Out[255]:
+array([[ 0,  1],
+       [ 2,  3],
+       [ 4,  5],
+       [ 6,  7],
+       [ 8,  9],
+       [10, 11],
+       [12, 13],
+       [14, 15]])
+
+In [256]: x
+Out[256]:
+array([[0],
+       [1],
+       [2],
+       [3],
+       [4],
+       [5],
+       [6],
+       [7]])
+
+In [257]: a * x
+Out[257]:
+array([[  0,   0],
+       [  2,   3],
+       [  8,  10],
+       [ 18,  21],
+       [ 32,  36],
+       [ 50,  55],
+       [ 72,  78],
+       [ 98, 105]])
+
+In [258]: a
+Out[258]:
+array([[ 0,  1],
+       [ 2,  3],
+       [ 4,  5],
+       [ 6,  7],
+       [ 8,  9],
+       [10, 11],
+       [12, 13],
+       [14, 15]])
+
+In [259]: x
+Out[259]:
+array([[0],
+       [1],
+       [2],
+       [3],
+       [4],
+       [5],
+       [6],
+       [7]])
+
+In [260]: x.shape
+Out[260]: (8, 1)
+
+In [261]: x
+Out[261]:
+array([[0],
+       [1],
+       [2],
+       [3],
+       [4],
+       [5],
+       [6],
+       [7]])
+
+In [262]: x = np.arange(8)
+
+In [263]: x
+Out[263]: array([0, 1, 2, 3, 4, 5, 6, 7])
+
+In [264]: x = x.reshape((8, 1))
+
+In [265]: x
+Out[265]:
+array([[0],
+       [1],
+       [2],
+       [3],
+       [4],
+       [5],
+       [6],
+       [7]])
+
+In [266]: a
+Out[266]:
+array([[ 0,  1],
+       [ 2,  3],
+       [ 4,  5],
+       [ 6,  7],
+       [ 8,  9],
+       [10, 11],
+       [12, 13],
+       [14, 15]])
+
+In [267]: a.max()
+Out[267]: 15
+
+In [268]: a
+Out[268]:
+array([[ 0,  1],
+       [ 2,  3],
+       [ 4,  5],
+       [ 6,  7],
+       [ 8,  9],
+       [10, 11],
+       [12, 13],
+       [14, 15]])
+
+In [269]: a.max(axis=0)
+Out[269]: array([14, 15])
+
+In [270]: a.max(axis=1)
+Out[270]: array([ 1,  3,  5,  7,  9, 11, 13, 15])
+
+In [271]: a.max()
+Out[271]: 15
+
+In [272]: a.max?
+Docstring:
+a.max(axis=None, out=None, keepdims=False, initial=<no value>, where=True)
+
+Return the maximum along a given axis.
+
+Refer to `numpy.amax` for full documentation.
+
+See Also
+--------
+numpy.amax : equivalent function
+Type:      builtin_function_or_method
+
+In [273]: a.min()
+Out[273]: 0
+
+In [274]: a.min(axis=0)
+Out[274]: array([0, 1])
+
+In [275]: a.mean(axis=0)
+Out[275]: array([7., 8.])
+
+In [276]: a.std(axis=0)
+Out[276]: array([4.58257569, 4.58257569])
+
+In [277]: a
+Out[277]:
+array([[ 0,  1],
+       [ 2,  3],
+       [ 4,  5],
+       [ 6,  7],
+       [ 8,  9],
+       [10, 11],
+       [12, 13],
+       [14, 15]])
+
+In [278]: a.T
+Out[278]:
+array([[ 0,  2,  4,  6,  8, 10, 12, 14],
+       [ 1,  3,  5,  7,  9, 11, 13, 15]])
+
+In [279]: a.transpose()
+Out[279]:
+array([[ 0,  2,  4,  6,  8, 10, 12, 14],
+       [ 1,  3,  5,  7,  9, 11, 13, 15]])
+
+In [280]: np.transpose(a)
+Out[280]:
+array([[ 0,  2,  4,  6,  8, 10, 12, 14],
+       [ 1,  3,  5,  7,  9, 11, 13, 15]])
+
+In [281]: a.diagonal()
+Out[281]: array([0, 3])
+
+In [282]: np.eye(5)
+Out[282]:
+array([[1., 0., 0., 0., 0.],
+       [0., 1., 0., 0., 0.],
+       [0., 0., 1., 0., 0.],
+       [0., 0., 0., 1., 0.],
+       [0., 0., 0., 0., 1.]])
+
+In [283]: np.eye(5).diagonal()
+Out[283]: array([1., 1., 1., 1., 1.])
+
+In [284]: (np.eye(5)*2).diagonal()
+Out[284]: array([2., 2., 2., 2., 2.])
+
+In [285]: (np.eye(5)*2)
+Out[285]:
+array([[2., 0., 0., 0., 0.],
+       [0., 2., 0., 0., 0.],
+       [0., 0., 2., 0., 0.],
+       [0., 0., 0., 2., 0.],
+       [0., 0., 0., 0., 2.]])
+
+In [286]: a
+Out[286]:
+array([[ 0,  1],
+       [ 2,  3],
+       [ 4,  5],
+       [ 6,  7],
+       [ 8,  9],
+       [10, 11],
+       [12, 13],
+       [14, 15]])
+
+In [287]: a
+Out[287]:
+array([[ 0,  1],
+       [ 2,  3],
+       [ 4,  5],
+       [ 6,  7],
+       [ 8,  9],
+       [10, 11],
+       [12, 13],
+       [14, 15]])
+
+In [288]: b
+Out[288]:
+array([[0.51556634, 0.34863063],
+       [0.1081443 , 0.03491267],
+       [0.21919397, 0.75587168],
+       [0.34998544, 0.47121983],
+       [0.46834116, 0.66454658],
+       [0.18616433, 0.82855586],
+       [0.83212461, 0.97795808],
+       [0.66236323, 0.71727154]])
+
+In [289]: a @ b
+---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+Input In [289], in <cell line: 1>()
+----> 1 a @ b
+
+ValueError: matmul: Input operand 1 has a mismatch in its core dimension 0, with gufunc signature (n?,k),(k,m?)->(n?,m?) (size 8 is different from 2)
+> <ipython-input-289-88de868f0fd7>(1)<cell line: 1>()
+----> 1 a @ b
+
+ipdb> c
+
+In [290]: a @ b.T
+Out[290]:
+array([[ 0.34863063,  0.03491267,  0.75587168,  0.47121983,  0.66454658,
+         0.82855586,  0.97795808,  0.71727154],
+       [ 2.07702456,  0.32102661,  2.70600298,  2.11363036,  2.93032205,
+         2.85799623,  4.59812347,  3.47654109],
+       [ 3.80541849,  0.60714055,  4.65613429,  3.75604089,  5.19609753,
+         4.88743661,  8.21828885,  6.23581064],
+       [ 5.53381242,  0.89325449,  6.60626559,  5.39845142,  7.461873  ,
+         6.91687699, 11.83845423,  8.99508018],
+       [ 7.26220635,  1.17936843,  8.55639689,  7.04086195,  9.72764847,
+         8.94631737, 15.45861962, 11.75434973],
+       [ 8.99060028,  1.46548237, 10.50652819,  8.68327248, 11.99342395,
+        10.97575775, 19.078785  , 14.51361928],
+       [10.71899421,  1.75159631, 12.45665949, 10.32568301, 14.25919942,
+        13.00519813, 22.69895039, 17.27288882],
+       [12.44738814,  2.03771025, 14.40679079, 11.96809354, 16.5249749 ,
+        15.03463851, 26.31911577, 20.03215837]])
+
+In [291]: x = np.arange(10)
+
+In [292]: x
+Out[292]: array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+
+In [293]: y = x.copy()
+
+In [294]: x
+Out[294]: array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+
+In [295]: y
+Out[295]: array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+
+In [296]: np.outer(x, y)
+Out[296]:
+array([[ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0],
+       [ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9],
+       [ 0,  2,  4,  6,  8, 10, 12, 14, 16, 18],
+       [ 0,  3,  6,  9, 12, 15, 18, 21, 24, 27],
+       [ 0,  4,  8, 12, 16, 20, 24, 28, 32, 36],
+       [ 0,  5, 10, 15, 20, 25, 30, 35, 40, 45],
+       [ 0,  6, 12, 18, 24, 30, 36, 42, 48, 54],
+       [ 0,  7, 14, 21, 28, 35, 42, 49, 56, 63],
+       [ 0,  8, 16, 24, 32, 40, 48, 56, 64, 72],
+       [ 0,  9, 18, 27, 36, 45, 54, 63, 72, 81]])
+
+In [297]: np.concatenate([[1, 2, 3], [4, 5, 6]])
+Out[297]: array([1, 2, 3, 4, 5, 6])
+
+In [298]: np.concatenate([[1, 2, 3], [4, 5, 6]], axis=0)
+Out[298]: array([1, 2, 3, 4, 5, 6])
+
+In [299]: np.concatenate([[1, 2, 3]], [[4, 5, 6]], axis=0)
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+Input In [299], in <cell line: 1>()
+----> 1 np.concatenate([[1, 2, 3]], [[4, 5, 6]], axis=0)
+
+File <__array_function__ internals>:4, in concatenate(*args, **kwargs)
+
+TypeError: concatenate() got multiple values for argument 'axis'
+> <__array_function__ internals>(4)concatenate()
+
+ipdb> c
+
+In [300]: np.concatenate([[[1, 2, 3]], [[4, 5, 6]]], axis=0)
+Out[300]:
+array([[1, 2, 3],
+       [4, 5, 6]])
+
+In [301]: a = np.arange(16).reshape((8, 2))
+
+In [302]: a
+Out[302]:
+array([[ 0,  1],
+       [ 2,  3],
+       [ 4,  5],
+       [ 6,  7],
+       [ 8,  9],
+       [10, 11],
+       [12, 13],
+       [14, 15]])
+
+In [303]: np.concatenate([a, a], axis=0)
+Out[303]:
+array([[ 0,  1],
+       [ 2,  3],
+       [ 4,  5],
+       [ 6,  7],
+       [ 8,  9],
+       [10, 11],
+       [12, 13],
+       [14, 15],
+       [ 0,  1],
+       [ 2,  3],
+       [ 4,  5],
+       [ 6,  7],
+       [ 8,  9],
+       [10, 11],
+       [12, 13],
+       [14, 15]])
+
+In [304]: np.concatenate([a, a], axis=1)
+Out[304]:
+array([[ 0,  1,  0,  1],
+       [ 2,  3,  2,  3],
+       [ 4,  5,  4,  5],
+       [ 6,  7,  6,  7],
+       [ 8,  9,  8,  9],
+       [10, 11, 10, 11],
+       [12, 13, 12, 13],
+       [14, 15, 14, 15]])
+
+In [305]: np.vstack([a, a])
+Out[305]:
+array([[ 0,  1],
+       [ 2,  3],
+       [ 4,  5],
+       [ 6,  7],
+       [ 8,  9],
+       [10, 11],
+       [12, 13],
+       [14, 15],
+       [ 0,  1],
+       [ 2,  3],
+       [ 4,  5],
+       [ 6,  7],
+       [ 8,  9],
+       [10, 11],
+       [12, 13],
+       [14, 15]])
+
+In [306]: np.hstack([a, a])
+Out[306]:
+array([[ 0,  1,  0,  1],
+       [ 2,  3,  2,  3],
+       [ 4,  5,  4,  5],
+       [ 6,  7,  6,  7],
+       [ 8,  9,  8,  9],
+       [10, 11, 10, 11],
+       [12, 13, 12, 13],
+       [14, 15, 14, 15]])
+
+In [307]: b = a.copy()
+
+In [308]: a
+Out[308]:
+array([[ 0,  1],
+       [ 2,  3],
+       [ 4,  5],
+       [ 6,  7],
+       [ 8,  9],
+       [10, 11],
+       [12, 13],
+       [14, 15]])
+
+In [309]: b
+Out[309]:
+array([[ 0,  1],
+       [ 2,  3],
+       [ 4,  5],
+       [ 6,  7],
+       [ 8,  9],
+       [10, 11],
+       [12, 13],
+       [14, 15]])
+
+In [310]: b = a + 100
+
+In [311]: a
+Out[311]:
+array([[ 0,  1],
+       [ 2,  3],
+       [ 4,  5],
+       [ 6,  7],
+       [ 8,  9],
+       [10, 11],
+       [12, 13],
+       [14, 15]])
+
+In [312]: b
+Out[312]:
+array([[100, 101],
+       [102, 103],
+       [104, 105],
+       [106, 107],
+       [108, 109],
+       [110, 111],
+       [112, 113],
+       [114, 115]])
+
+In [313]: np.stack([a, b])
+Out[313]:
+array([[[  0,   1],
+        [  2,   3],
+        [  4,   5],
+        [  6,   7],
+        [  8,   9],
+        [ 10,  11],
+        [ 12,  13],
+        [ 14,  15]],
+
+       [[100, 101],
+        [102, 103],
+        [104, 105],
+        [106, 107],
+        [108, 109],
+        [110, 111],
+        [112, 113],
+        [114, 115]]])
+
+In [314]: m = np.stack([a, b])
+
+In [315]: m.shape
+Out[315]: (2, 8, 2)
+
+In [316]: len(m)
+Out[316]: 2
+
+In [317]: m.ndim
+Out[317]: 3
+
+In [318]:     movie = np.random.random(80).reshape((5, 4, 4)) # 5 frames, each 4 x 4 pixels
+     ...:     for framei, image in enumerate(movie):
+     ...:         f, ax = plt.subplots()
+     ...:         ax.imshow(image, cmap='jet')
+     ...:         f.canvas.set_window_title('frame %d' % framei)
+     ...:
+<ipython-input-318-ffe78c0392b9>:5: MatplotlibDeprecationWarning:
+The set_window_title function was deprecated in Matplotlib 3.4 and will be removed two minor releases later. Use manager.set_window_title or GUI-specific methods instead.
+  f.canvas.set_window_title('frame %d' % framei)
+
+In [319]: plt.close('all')
+
+In [320]: pwd
+Out[320]: '/home/mspacek/SciPyCourse2022/notes/06_fileio_mpl'
+
+In [321]: cd ..
+/home/mspacek/SciPyCourse2022/notes
+
+In [322]: cd 07_mpl_matrices/
+/home/mspacek/SciPyCourse2022/notes/07_mpl_matrices
+
+In [323]: ls
+07_history.txt  07_mpl_matrices.md  07_mpl_matrices.pdf  surprise.npy  surprise.png
+
+In [324]: d = np.load('surprise.npy')
+
+In [325]: d
+Out[325]:
+array([[0, 0, 0, ..., 0, 0, 0],
+       [0, 0, 0, ..., 0, 0, 0],
+       [0, 0, 0, ..., 0, 0, 0],
+       ...,
+       [0, 0, 0, ..., 0, 0, 0],
+       [0, 0, 0, ..., 0, 0, 0],
+       [0, 0, 0, ..., 0, 0, 0]], dtype=uint8)
+
+In [326]: d.shape
+Out[326]: (1024, 1024)
+
+In [327]: d.max()
+Out[327]: 182
+
+In [328]: d.min()
+Out[328]: 0
+
+In [329]: d.ndim
+Out[329]: 2
+
+In [330]: d[::80, ::80]
+Out[330]:
+array([[  0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0],
+       [  0,   0,   0,   0,   0,   0, 182, 182,   0,   0,   0,   0,   0],
+       [  0,   0,   0, 182, 182, 182, 182, 182, 182, 182,   0,   0,   0],
+       [  0,   0, 182, 182, 182, 182, 182, 182, 182, 182, 182,   0,   0],
+       [  0,   0, 182, 182,  99, 160, 182, 182, 182, 182, 182, 182,   0],
+       [  0, 182, 182, 182,  99,  99, 182, 182,  99,  99, 182, 182, 182],
+       [  0, 182, 182, 182,  99, 182, 182, 182, 182, 182, 182, 182, 182],
+       [  0, 182, 182, 182, 182, 182, 182, 162, 162, 162, 182, 182, 182],
+       [  0, 182, 182, 162, 162, 162, 162, 162, 162, 162, 162, 182, 182],
+       [  0, 182, 182, 162, 162, 162, 162, 162, 162, 162, 162, 182, 182],
+       [  0, 182, 182, 182, 182, 182, 182, 182, 162, 162, 182, 182, 182],
+       [  0,   0, 182, 182, 182, 182, 182, 182, 182, 182, 182, 182,   0],
+       [  0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0]],
+      dtype=uint8)
+
+In [331]: f, ax = plt.subplots()
+
+In [332]: im = ax.imshow(a)
+
+In [333]: f, ax = plt.subplots()
+
+In [334]: im = ax.imshow(d)
+
+In [335]: d
+Out[335]:
+array([[0, 0, 0, ..., 0, 0, 0],
+       [0, 0, 0, ..., 0, 0, 0],
+       [0, 0, 0, ..., 0, 0, 0],
+       ...,
+       [0, 0, 0, ..., 0, 0, 0],
+       [0, 0, 0, ..., 0, 0, 0],
+       [0, 0, 0, ..., 0, 0, 0]], dtype=uint8)
+
+In [336]: d[100, 100]
+Out[336]: 0
+
+In [337]: d[200, 200]
+Out[337]: 182
+
+In [338]: im.set_cmap('gray')
+
+In [339]: im.set_cmap('jet')
+
+In [340]: im.set_cmap('spring')
+
+In [341]: im.set_cmap('cool')
+
+In [342]: f.colorbar(im)
+Out[342]: <matplotlib.colorbar.Colorbar at 0x7f7203af3370>
+
+In [343]: im.set_cmap('gray')
+
+In [344]: f, axs = plt.subplots(nrows=1, ncols=4)
+
+In [345]: axs[0]
+Out[345]: <AxesSubplot:>
+
+In [346]: axs[0].imshow(d)
+Out[346]: <matplotlib.image.AxesImage at 0x7f72038dd2b0>
+
+In [347]: axs[1].imshow(np.rot90(d, -1))
+Out[347]: <matplotlib.image.AxesImage at 0x7f7203c91520>
+
+In [348]: axs[2].imshow(np.rot90(d, -2))
+Out[348]: <matplotlib.image.AxesImage at 0x7f7230c95c70>
+
+In [349]: axs[3].imshow(np.rot90(d, -3))
+Out[349]: <matplotlib.image.AxesImage at 0x7f7203b10d30>
+
+In [350]: f, ax = plt.subplots()
+
+In [351]: ax.imshow(d.T)
+Out[351]: <matplotlib.image.AxesImage at 0x7f72036330d0>
+
+In [352]: np.tile?
+
+In [353]: np.tile(d, (2, 2))
+Out[353]:
+array([[0, 0, 0, ..., 0, 0, 0],
+       [0, 0, 0, ..., 0, 0, 0],
+       [0, 0, 0, ..., 0, 0, 0],
+       ...,
+       [0, 0, 0, ..., 0, 0, 0],
+       [0, 0, 0, ..., 0, 0, 0],
+       [0, 0, 0, ..., 0, 0, 0]], dtype=uint8)
+
+In [354]: np.tile(d, (2, 2)).shape
+Out[354]: (2048, 2048)
+
+In [355]: dd = np.tile(d, (2, 2))
+
+In [356]: f, ax = plt.subplots()
+
+In [357]: ax.imshow(dd)
+Out[357]: <matplotlib.image.AxesImage at 0x7f7203352df0>
+
+In [358]: plt.show()
+
+In [359]:
