@@ -10,6 +10,7 @@ c = np.cos(t) + 2
 plt.figure()
 plt.plot(t, s, label='sin', marker='')
 plt.plot(t, c, label='cos', marker='')
+plt.title('sin(t) and cos(t)')
 plt.xlabel('Time (s)')
 plt.ylabel('Position')
 plt.legend(loc='upper right')

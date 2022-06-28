@@ -1,5 +1,7 @@
 ### more matplotlib, numpy matrices
 
+#### go over matplotlib exercises from last class
+
 #### more matplotlib
 
 - MATLAB style vs. OOP style:
@@ -180,8 +182,8 @@
             - both of the above reduce dimensionality by 1, i.e. from 2D down to 1D
 
 - matrix operations:
-    - `a.transpose()` or its shortcut property `a.T` returns the transpose, i.e. swaps rows and columns
-    - `a.diagonal()` returns the values along the diagonal
+    - `a.transpose()` or its shortcut property `a.T` returns the transpose of a matrix, i.e. swaps rows and columns
+    - `a.diagonal()` returns the values along the diagonal as a 1D array
     - `a.trace()` returns sum along the diagonal
     - inner product, results in new matrix, whose entry at (i, j) is sum of elementwise product of row i of `a` and column j of `b`
         - `np.dot(a, b)` raises error, ncols of `a` must equal nrows of `b`
