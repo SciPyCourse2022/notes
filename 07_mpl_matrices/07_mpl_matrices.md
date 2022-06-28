@@ -223,4 +223,4 @@
 7. Create a new array that is a 2 x 2 version of the original, i.e. two copies in both x and y, like a "tiled" pattern. Plot it in yet another figure.
 
 
-#### Homework 4! Due before next class (class 8) on June 8
+#### Homework 4! Due before next class (class 8) on July 5
