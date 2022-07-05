@@ -104,6 +104,9 @@ f, ax = plt.subplots(1, 2)
 ax[0].imshow(moon, cmap='gray', vmin=0, vmax=255) # manual scaling w/ vmin/vmax
 ax[1].hist(moon.ravel(), bins=np.arange(256+1)) # +1 adds right bin edge
 ````
+- can "zoom in" on the gray pixel values, say from 75 to 150, to increase the contrast for those pixels
+    - `ax[0].imshow(moon, cmap='gray', vmin=75, vmax=150)`
+    - but again, this is just for display, doesn't modify the array
 
 - how to change image brightness?
     - increase the average pixel value by adding a constant
@@ -114,7 +117,7 @@ ax[1].hist(moon.ravel(), bins=np.arange(256+1)) # +1 adds right bin edge
     - do this by reducing the minimum value to 0 via subtraction, then dividing by the dynamic range (max-min) and multiplying by 255
     - general equation: `output = (input - min) / (max - min) * 255`
     - if we set `moon[moon < 75] = 75` and `moon[moon > 150] = 150` the new max and min values are 150 and 75, and the image is rather washed out. To restore full contrast from 0 to 255:
-        - `moon = (np.float64(data.moon()) - 75) / (150-75) * 255`
+        - `moon2 = (np.float64(moon) - 75) / (150-75) * 255`
         - we've effectively "zoomed" in on the pixel intensity differences between 75 and 150, which is what most of the pixel values were in the original image
     - watch out for excessive saturation, or integer overflow!
     - more sophisticated methods: `skimage.exposure` module
@@ -218,11 +221,11 @@ ax.imshow(facergb)
 ohki = io.imread('ohki2005.png')
 f, ax = plt.subplots()
 ax.imshow(ohki, cmap='gray')
-f, ax = plt.subplots()
-ax.hist(ohki.ravel(), bins=np.arange(256))
+f2, ax2 = plt.subplots()
+ax2.hist(ohki.ravel(), bins=np.arange(256))
 edges = filters.sobel(ohki)
-f, ax = plt.subplots()
-ax.imshow(edges, cmap='gray')
+f3, ax3 = plt.subplots()
+ax3.imshow(edges, cmap='gray')
 ````
 
 - edge-based segmentation:
@@ -231,8 +234,8 @@ from skimage.feature import canny
 edges = canny(ohki, sigma=1.5)
 from scipy import ndimage
 mask = ndimage.binary_fill_holes(edges)
-f, ax = plt.subplots()
-ax.imshow(mask, cmap='gray')
+f4, ax4 = plt.subplots()
+ax4.imshow(mask, cmap='gray')
 ````
 
 - watershed-based segmentation:
