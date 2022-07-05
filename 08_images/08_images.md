@@ -47,7 +47,7 @@ f.colorbar(im)
 ````
 
 - how can we flip an image vertically or horizontally? use array slicing:
-    - since the image is horizontally symmetric, make a big black mark on one side of it before trying to flip it horizontally:
+    - since the image is horizontally symmetric, paint a big black 100x100 pixel square in the top left corner before trying to flip it horizontally:
     - `faceg[:100, :100] = 0`
     - flip horizontally: `faceg[:, ::-1]` - reverse order of columns
     - flip vertically: `faceg[::-1]` - reverse order of rows
@@ -111,9 +111,11 @@ ax[1].hist(moon.ravel(), bins=np.arange(256+1)) # +1 adds right bin edge
 
 - how to change image contrast?
     - scale pixel values to span the full possible range of 0 to 255
-    - do this by reducing the minimum via subtraction, then multiplying by a constant to get full range
+    - do this by reducing the minimum value to 0 via subtraction, then dividing by the dynamic range (max-min) and multiplying by 255
     - general equation: `output = (input - min) / (max - min) * 255`
-    - `moon = (np.float64(data.moon()) - 75) / (150-75) * 255`
+    - if we set `moon[moon < 75] = 75` and `moon[moon > 150] = 150` the new max and min values are 150 and 75, and the image is rather washed out. To restore full contrast from 0 to 255:
+        - `moon = (np.float64(data.moon()) - 75) / (150-75) * 255`
+        - we've effectively "zoomed" in on the pixel intensity differences between 75 and 150, which is what most of the pixel values were in the original image
     - watch out for excessive saturation, or integer overflow!
     - more sophisticated methods: `skimage.exposure` module
 
@@ -186,7 +188,7 @@ ax.imshow(immun)
     immung.shape # now it's only 2D
     ax.imshow(immung, cmap='gray')
     ````
-- images can also have a 4th channel: alpha, aka transparency. The alpha channel is a transparency mask for the image. 0 is fully transparent, 255 is fully opaque. So pixels you don't want painted should have their alpha set to 0:
+- images can also have a 4th channel: alpha, aka transparency. The alpha channel is a transparency mask for the image. 0 is fully transparent (washed out), 255 is fully opaque (saturated). So pixels you don't want painted should have their alpha set to 0:
 ```python
 facea = io.imread('face_alpha.png')
 facea.shape # gives (782, 782, 4), i.e. RGBA
