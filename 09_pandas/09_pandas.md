@@ -178,7 +178,7 @@
     - sort a DataFrame by values according to a column: `exps.sort_values('start_time')`
 
 - can also load directly from .xlsx files
-    - pandas relies on another library for this called `xlrd`, which comes with Anaconda
+    - pandas relies on another library for this called `openpyxl`, which comes with Anaconda
     - can handle multiple sheets:
     - `exp1 = pd.read_excel('exp.xlsx', sheet_name='exp1')`
     - `exp2 = pd.read_excel('exp.xlsx', sheet_name='exp2')`
