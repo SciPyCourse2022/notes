@@ -1,0 +1,3318 @@
+mspacek@Godel:~$ cd SciPyCourse2022
+mspacek@Godel:~/SciPyCourse2022$ cd notes
+mspacek@Godel:~/SciPyCourse2022/notes$ cd 09_pandas/
+mspacek@Godel:~/SciPyCourse2022/notes/09_pandas$ ipython
+Python 3.8.10 (default, Mar 15 2022, 12:22:08)
+Type 'copyright', 'credits' or 'license' for more information
+IPython 8.1.1 -- An enhanced Interactive Python. Type '?' for help.
+
+In [1]: (1, 2, 3)
+Out[1]: (1, 2, 3)
+
+In [2]: [1, 2, 3]
+Out[2]: [1, 2, 3]
+
+In [3]: {'a':1, 'b':1}
+Out[3]: {'a': 1, 'b': 1}
+
+In [4]: np.array([1, 2, 3])
+Out[4]: array([1, 2, 3])
+
+In [5]: a = np.array([1, 2, 3])
+
+In [6]: a[0]
+Out[6]: 1
+
+In [7]: a['a']
+---------------------------------------------------------------------------
+IndexError                                Traceback (most recent call last)
+Input In [7], in <cell line: 1>()
+----> 1 a['a']
+
+IndexError: only integers, slices (`:`), ellipsis (`...`), numpy.newaxis (`None`) and integer or boolean arrays are valid indices
+> <ipython-input-7-8c8059950d02>(1)<cell line: 1>()
+----> 1 a['a']
+
+ipdb> c
+
+In [8]: a[0]
+Out[8]: 1
+
+In [9]: a = np.array([1, 2, 3],)
+
+In [10]: a = np.array([[1, 2, 3],
+    ...:               [4, 5,  ]])
+<ipython-input-10-6cb9cfbee01f>:1: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray.
+  a = np.array([[1, 2, 3],
+
+In [11]: a = np.array([[1, 2, 3],
+    ...:               [4, 5, np.nan ]])
+
+In [12]: a.dtype
+Out[12]: dtype('float64')
+
+In [13]: a
+Out[13]:
+array([[ 1.,  2.,  3.],
+       [ 4.,  5., nan]])
+
+In [14]: a
+Out[14]:
+array([[ 1.,  2.,  3.],
+       [ 4.,  5., nan]])
+
+In [15]: f, ax = plt.subplots()
+
+In [16]: import pandas as pd
+
+In [17]: np.array()
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+Input In [17], in <cell line: 1>()
+----> 1 np.array()
+
+TypeError: array() missing required argument 'object' (pos 0)
+> <ipython-input-17-e4f3b47dc252>(1)<cell line: 1>()
+----> 1 np.array()
+
+ipdb> c
+
+In [18]: np.array([])
+Out[18]: array([], dtype=float64)
+
+In [19]: type(np.array([]))
+Out[19]: numpy.ndarray
+
+In [20]: fl = np.random.random(20)
+
+In [21]: fl
+Out[21]:
+array([0.70467259, 0.17266007, 0.31050596, 0.92075188, 0.57092484,
+       0.20630611, 0.42947006, 0.91802282, 0.37297556, 0.98017851,
+       0.05142249, 0.46813528, 0.21515737, 0.9415043 , 0.02592641,
+       0.77613013, 0.1069272 , 0.44626856, 0.83842081, 0.17273816])
+
+In [22]: t = np.arange(0, 400, 20)
+
+In [23]: len(fl)
+Out[23]: 20
+
+In [24]: len(t)
+Out[24]: 20
+
+In [25]: fl
+Out[25]:
+array([0.70467259, 0.17266007, 0.31050596, 0.92075188, 0.57092484,
+       0.20630611, 0.42947006, 0.91802282, 0.37297556, 0.98017851,
+       0.05142249, 0.46813528, 0.21515737, 0.9415043 , 0.02592641,
+       0.77613013, 0.1069272 , 0.44626856, 0.83842081, 0.17273816])
+
+In [26]: t
+Out[26]:
+array([  0,  20,  40,  60,  80, 100, 120, 140, 160, 180, 200, 220, 240,
+       260, 280, 300, 320, 340, 360, 380])
+
+In [27]: fl[0:5]
+Out[27]: array([0.70467259, 0.17266007, 0.31050596, 0.92075188, 0.57092484])
+
+In [28]: fl[:5]
+Out[28]: array([0.70467259, 0.17266007, 0.31050596, 0.92075188, 0.57092484])
+
+In [29]: t[:5]
+Out[29]: array([ 0, 20, 40, 60, 80])
+
+In [30]: t == 60
+Out[30]:
+array([False, False, False,  True, False, False, False, False, False,
+       False, False, False, False, False, False, False, False, False,
+       False, False])
+
+In [31]: fl[t == 60]
+Out[31]: array([0.92075188])
+
+In [32]: fl[t == 60][0]
+Out[32]: 0.9207518818011903
+
+In [33]: s = pd.Series(data=fl, index=t)
+
+In [34]: type(s)
+Out[34]: pandas.core.series.Series
+
+In [35]: s
+Out[35]:
+0      0.704673
+20     0.172660
+40     0.310506
+60     0.920752
+80     0.570925
+100    0.206306
+120    0.429470
+140    0.918023
+160    0.372976
+180    0.980179
+200    0.051422
+220    0.468135
+240    0.215157
+260    0.941504
+280    0.025926
+300    0.776130
+320    0.106927
+340    0.446269
+360    0.838421
+380    0.172738
+dtype: float64
+
+In [36]: len(s)
+Out[36]: 20
+
+In [37]: s.iloc[4]
+Out[37]: 0.5709248431123111
+
+In [38]: s.iloc[4]
+Out[38]: 0.5709248431123111
+
+In [39]: fl[4]
+Out[39]: 0.5709248431123111
+
+In [40]: s.loc[60]
+Out[40]: 0.9207518818011903
+
+In [41]: s.iloc[:5]
+Out[41]:
+0     0.704673
+20    0.172660
+40    0.310506
+60    0.920752
+80    0.570925
+dtype: float64
+
+In [42]: s.head()
+Out[42]:
+0     0.704673
+20    0.172660
+40    0.310506
+60    0.920752
+80    0.570925
+dtype: float64
+
+In [43]: s.head(10)
+Out[43]:
+0      0.704673
+20     0.172660
+40     0.310506
+60     0.920752
+80     0.570925
+100    0.206306
+120    0.429470
+140    0.918023
+160    0.372976
+180    0.980179
+dtype: float64
+
+In [44]: s.tail()
+Out[44]:
+300    0.776130
+320    0.106927
+340    0.446269
+360    0.838421
+380    0.172738
+dtype: float64
+
+In [45]: s.tail()
+Out[45]:
+300    0.776130
+320    0.106927
+340    0.446269
+360    0.838421
+380    0.172738
+dtype: float64
+
+In [46]: s.iloc[-5:]
+Out[46]:
+300    0.776130
+320    0.106927
+340    0.446269
+360    0.838421
+380    0.172738
+dtype: float64
+
+In [47]: s.iloc[-6:]
+Out[47]:
+280    0.025926
+300    0.776130
+320    0.106927
+340    0.446269
+360    0.838421
+380    0.172738
+dtype: float64
+
+In [48]: s
+Out[48]:
+0      0.704673
+20     0.172660
+40     0.310506
+60     0.920752
+80     0.570925
+100    0.206306
+120    0.429470
+140    0.918023
+160    0.372976
+180    0.980179
+200    0.051422
+220    0.468135
+240    0.215157
+260    0.941504
+280    0.025926
+300    0.776130
+320    0.106927
+340    0.446269
+360    0.838421
+380    0.172738
+dtype: float64
+
+In [49]: s.iloc[3:7]
+Out[49]:
+60     0.920752
+80     0.570925
+100    0.206306
+120    0.429470
+dtype: float64
+
+In [50]: s.loc[60]
+Out[50]: 0.9207518818011903
+
+In [51]: s
+Out[51]:
+0      0.704673
+20     0.172660
+40     0.310506
+60     0.920752
+80     0.570925
+100    0.206306
+120    0.429470
+140    0.918023
+160    0.372976
+180    0.980179
+200    0.051422
+220    0.468135
+240    0.215157
+260    0.941504
+280    0.025926
+300    0.776130
+320    0.106927
+340    0.446269
+360    0.838421
+380    0.172738
+dtype: float64
+
+In [52]: s.loc[60]
+Out[52]: 0.9207518818011903
+
+In [53]: s.iloc[5]
+Out[53]: 0.20630610970451713
+
+In [54]: s.iloc[:5]
+Out[54]:
+0     0.704673
+20    0.172660
+40    0.310506
+60    0.920752
+80    0.570925
+dtype: float64
+
+In [55]: s.iloc[5]
+Out[55]: 0.20630610970451713
+
+In [56]: s.loc[:60]
+Out[56]:
+0     0.704673
+20    0.172660
+40    0.310506
+60    0.920752
+dtype: float64
+
+In [57]: s.loc[:70]
+Out[57]:
+0     0.704673
+20    0.172660
+40    0.310506
+60    0.920752
+dtype: float64
+
+In [58]: s.loc[30:70]
+Out[58]:
+40    0.310506
+60    0.920752
+dtype: float64
+
+In [59]: s.loc[30]
+---------------------------------------------------------------------------
+KeyError                                  Traceback (most recent call last)
+File /usr/local/lib/python3.8/dist-packages/pandas/core/indexes/base.py:3621, in Index.get_loc(self, key, method, tolerance)
+   3620 try:
+-> 3621     return self._engine.get_loc(casted_key)
+   3622 except KeyError as err:
+
+File /usr/local/lib/python3.8/dist-packages/pandas/_libs/index.pyx:136, in pandas._libs.index.IndexEngine.get_loc()
+
+File /usr/local/lib/python3.8/dist-packages/pandas/_libs/index.pyx:163, in pandas._libs.index.IndexEngine.get_loc()
+
+File pandas/_libs/hashtable_class_helper.pxi:2131, in pandas._libs.hashtable.Int64HashTable.get_item()
+
+File pandas/_libs/hashtable_class_helper.pxi:2140, in pandas._libs.hashtable.Int64HashTable.get_item()
+
+KeyError: 30
+
+The above exception was the direct cause of the following exception:
+
+KeyError                                  Traceback (most recent call last)
+Input In [59], in <cell line: 1>()
+----> 1 s.loc[30]
+
+File /usr/local/lib/python3.8/dist-packages/pandas/core/indexing.py:967, in _LocationIndexer.__getitem__(self, key)
+    964 axis = self.axis or 0
+    966 maybe_callable = com.apply_if_callable(key, self.obj)
+--> 967 return self._getitem_axis(maybe_callable, axis=axis)
+
+File /usr/local/lib/python3.8/dist-packages/pandas/core/indexing.py:1202, in _LocIndexer._getitem_axis(self, key, axis)
+   1200 # fall thru to straight lookup
+   1201 self._validate_key(key, axis)
+-> 1202 return self._get_label(key, axis=axis)
+
+File /usr/local/lib/python3.8/dist-packages/pandas/core/indexing.py:1153, in _LocIndexer._get_label(self, label, axis)
+   1151 def _get_label(self, label, axis: int):
+   1152     # GH#5667 this will fail if the label is not present in the axis.
+-> 1153     return self.obj.xs(label, axis=axis)
+
+File /usr/local/lib/python3.8/dist-packages/pandas/core/generic.py:3876, in NDFrame.xs(self, key, axis, level, drop_level)
+   3874             new_index = index[loc]
+   3875 else:
+-> 3876     loc = index.get_loc(key)
+   3878     if isinstance(loc, np.ndarray):
+   3879         if loc.dtype == np.bool_:
+
+File /usr/local/lib/python3.8/dist-packages/pandas/core/indexes/base.py:3623, in Index.get_loc(self, key, method, tolerance)
+   3621     return self._engine.get_loc(casted_key)
+   3622 except KeyError as err:
+-> 3623     raise KeyError(key) from err
+   3624 except TypeError:
+   3625     # If we have a listlike key, _check_indexing_error will raise
+   3626     #  InvalidIndexError. Otherwise we fall through and re-raise
+   3627     #  the TypeError.
+   3628     self._check_indexing_error(key)
+
+KeyError: 30
+> /usr/local/lib/python3.8/dist-packages/pandas/core/indexes/base.py(3623)get_loc()
+   3621                 return self._engine.get_loc(casted_key)
+   3622             except KeyError as err:
+-> 3623                 raise KeyError(key) from err
+   3624             except TypeError:
+   3625                 # If we have a listlike key, _check_indexing_error will raise
+
+ipdb> c
+
+In [60]: s.loc[40]
+Out[60]: 0.3105059619428381
+
+In [61]: s.loc[30:70]
+Out[61]:
+40    0.310506
+60    0.920752
+dtype: float64
+
+In [62]: type(s.loc[40])
+Out[62]: numpy.float64
+
+In [63]: s.loc[30:70]
+Out[63]:
+40    0.310506
+60    0.920752
+dtype: float64
+
+In [64]: s.loc[30:40]
+Out[64]:
+40    0.310506
+dtype: float64
+
+In [65]: type(s.loc[30:40])
+Out[65]: pandas.core.series.Series
+
+In [66]: s.loc[30:70]
+Out[66]:
+40    0.310506
+60    0.920752
+dtype: float64
+
+In [67]: s.loc[30:70].values
+Out[67]: array([0.31050596, 0.92075188])
+
+In [68]: s.loc[30:70].inde
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+Input In [68], in <cell line: 1>()
+----> 1 s.loc[30:70].inde
+
+File /usr/local/lib/python3.8/dist-packages/pandas/core/generic.py:5583, in NDFrame.__getattr__(self, name)
+   5576 if (
+   5577     name not in self._internal_names_set
+   5578     and name not in self._metadata
+   5579     and name not in self._accessors
+   5580     and self._info_axis._can_hold_identifiers_and_holds_name(name)
+   5581 ):
+   5582     return self[name]
+-> 5583 return object.__getattribute__(self, name)
+
+AttributeError: 'Series' object has no attribute 'inde'
+> /usr/local/lib/python3.8/dist-packages/pandas/core/generic.py(5583)__getattr__()
+   5581         ):
+   5582             return self[name]
+-> 5583         return object.__getattribute__(self, name)
+   5584
+   5585     def __setattr__(self, name: str, value) -> None:
+
+ipdb> c
+
+In [69]: s.loc[30:70].index
+Out[69]: Int64Index([40, 60], dtype='int64')
+
+In [70]: type(s.loc[30:70].index)
+Out[70]: pandas.core.indexes.numeric.Int64Index
+
+In [71]: s.loc[30:70].index
+Out[71]: Int64Index([40, 60], dtype='int64')
+
+In [72]: s.loc[30:70].index.values
+Out[72]: array([40, 60])
+
+In [73]: s.loc[30:70].values
+Out[73]: array([0.31050596, 0.92075188])
+
+In [74]: s.loc[30:70].index.values
+Out[74]: array([40, 60])
+
+In [75]: s.loc[30:70]
+Out[75]:
+40    0.310506
+60    0.920752
+dtype: float64
+
+In [76]: s.iloc
+Out[76]: <pandas.core.indexing._iLocIndexer at 0x7f555bde6b30>
+
+In [77]: s.loc
+Out[77]: <pandas.core.indexing._LocIndexer at 0x7f555bef1bd0>
+
+In [78]: s.loc[30:70]
+Out[78]:
+40    0.310506
+60    0.920752
+dtype: float64
+
+In [79]: s[30:70]
+Out[79]: Series([], dtype: float64)
+
+In [80]: s.iloc[30:70]
+Out[80]: Series([], dtype: float64)
+
+In [81]: len(s)
+Out[81]: 20
+
+In [82]: s[5:10]
+Out[82]:
+100    0.206306
+120    0.429470
+140    0.918023
+160    0.372976
+180    0.980179
+dtype: float64
+
+In [83]: s.iloc[5:10]
+Out[83]:
+100    0.206306
+120    0.429470
+140    0.918023
+160    0.372976
+180    0.980179
+dtype: float64
+
+In [84]: tfloat = np.arange(0, 2, 0.1)
+
+In [85]: tfloat
+Out[85]:
+array([0. , 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1. , 1.1, 1.2,
+       1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9])
+
+In [86]: len(tfloat)
+Out[86]: 20
+
+In [87]: tfloat.dtype
+Out[87]: dtype('float64')
+
+In [88]: sfloat = pd.Series(data=fl, index=tfloat)
+
+In [89]: sfloat
+Out[89]:
+0.0    0.704673
+0.1    0.172660
+0.2    0.310506
+0.3    0.920752
+0.4    0.570925
+0.5    0.206306
+0.6    0.429470
+0.7    0.918023
+0.8    0.372976
+0.9    0.980179
+1.0    0.051422
+1.1    0.468135
+1.2    0.215157
+1.3    0.941504
+1.4    0.025926
+1.5    0.776130
+1.6    0.106927
+1.7    0.446269
+1.8    0.838421
+1.9    0.172738
+dtype: float64
+
+In [90]: s
+Out[90]:
+0      0.704673
+20     0.172660
+40     0.310506
+60     0.920752
+80     0.570925
+100    0.206306
+120    0.429470
+140    0.918023
+160    0.372976
+180    0.980179
+200    0.051422
+220    0.468135
+240    0.215157
+260    0.941504
+280    0.025926
+300    0.776130
+320    0.106927
+340    0.446269
+360    0.838421
+380    0.172738
+dtype: float64
+
+In [91]: sfloat.loc[0.0]
+Out[91]: 0.7046725874792413
+
+In [92]: sfloat
+Out[92]:
+0.0    0.704673
+0.1    0.172660
+0.2    0.310506
+0.3    0.920752
+0.4    0.570925
+0.5    0.206306
+0.6    0.429470
+0.7    0.918023
+0.8    0.372976
+0.9    0.980179
+1.0    0.051422
+1.1    0.468135
+1.2    0.215157
+1.3    0.941504
+1.4    0.025926
+1.5    0.776130
+1.6    0.106927
+1.7    0.446269
+1.8    0.838421
+1.9    0.172738
+dtype: float64
+
+In [93]: sfloat.loc[0.1]
+Out[93]: 0.17266007057485977
+
+In [94]: sfloat.loc[0.2]
+Out[94]: 0.3105059619428381
+
+In [95]: sfloat.loc[0.3]
+---------------------------------------------------------------------------
+KeyError                                  Traceback (most recent call last)
+File /usr/local/lib/python3.8/dist-packages/pandas/core/indexes/base.py:3621, in Index.get_loc(self, key, method, tolerance)
+   3620 try:
+-> 3621     return self._engine.get_loc(casted_key)
+   3622 except KeyError as err:
+
+File /usr/local/lib/python3.8/dist-packages/pandas/_libs/index.pyx:136, in pandas._libs.index.IndexEngine.get_loc()
+
+File /usr/local/lib/python3.8/dist-packages/pandas/_libs/index.pyx:163, in pandas._libs.index.IndexEngine.get_loc()
+
+File pandas/_libs/hashtable_class_helper.pxi:1533, in pandas._libs.hashtable.Float64HashTable.get_item()
+
+File pandas/_libs/hashtable_class_helper.pxi:1542, in pandas._libs.hashtable.Float64HashTable.get_item()
+
+KeyError: 0.3
+
+The above exception was the direct cause of the following exception:
+
+KeyError                                  Traceback (most recent call last)
+Input In [95], in <cell line: 1>()
+----> 1 sfloat.loc[0.3]
+
+File /usr/local/lib/python3.8/dist-packages/pandas/core/indexing.py:967, in _LocationIndexer.__getitem__(self, key)
+    964 axis = self.axis or 0
+    966 maybe_callable = com.apply_if_callable(key, self.obj)
+--> 967 return self._getitem_axis(maybe_callable, axis=axis)
+
+File /usr/local/lib/python3.8/dist-packages/pandas/core/indexing.py:1202, in _LocIndexer._getitem_axis(self, key, axis)
+   1200 # fall thru to straight lookup
+   1201 self._validate_key(key, axis)
+-> 1202 return self._get_label(key, axis=axis)
+
+File /usr/local/lib/python3.8/dist-packages/pandas/core/indexing.py:1153, in _LocIndexer._get_label(self, label, axis)
+   1151 def _get_label(self, label, axis: int):
+   1152     # GH#5667 this will fail if the label is not present in the axis.
+-> 1153     return self.obj.xs(label, axis=axis)
+
+File /usr/local/lib/python3.8/dist-packages/pandas/core/generic.py:3876, in NDFrame.xs(self, key, axis, level, drop_level)
+   3874             new_index = index[loc]
+   3875 else:
+-> 3876     loc = index.get_loc(key)
+   3878     if isinstance(loc, np.ndarray):
+   3879         if loc.dtype == np.bool_:
+
+File /usr/local/lib/python3.8/dist-packages/pandas/core/indexes/base.py:3623, in Index.get_loc(self, key, method, tolerance)
+   3621     return self._engine.get_loc(casted_key)
+   3622 except KeyError as err:
+-> 3623     raise KeyError(key) from err
+   3624 except TypeError:
+   3625     # If we have a listlike key, _check_indexing_error will raise
+   3626     #  InvalidIndexError. Otherwise we fall through and re-raise
+   3627     #  the TypeError.
+   3628     self._check_indexing_error(key)
+
+KeyError: 0.3
+> /usr/local/lib/python3.8/dist-packages/pandas/core/indexes/base.py(3623)get_loc()
+   3621                 return self._engine.get_loc(casted_key)
+   3622             except KeyError as err:
+-> 3623                 raise KeyError(key) from err
+   3624             except TypeError:
+   3625                 # If we have a listlike key, _check_indexing_error will raise
+
+ipdb> c
+
+In [96]: sfloat
+Out[96]:
+0.0    0.704673
+0.1    0.172660
+0.2    0.310506
+0.3    0.920752
+0.4    0.570925
+0.5    0.206306
+0.6    0.429470
+0.7    0.918023
+0.8    0.372976
+0.9    0.980179
+1.0    0.051422
+1.1    0.468135
+1.2    0.215157
+1.3    0.941504
+1.4    0.025926
+1.5    0.776130
+1.6    0.106927
+1.7    0.446269
+1.8    0.838421
+1.9    0.172738
+dtype: float64
+
+In [97]: sfloat.index
+Out[97]:
+Float64Index([                0.0,                 0.1,                 0.2,
+              0.30000000000000004,                 0.4,                 0.5,
+               0.6000000000000001,  0.7000000000000001,                 0.8,
+                              0.9,                 1.0,                 1.1,
+               1.2000000000000002,                 1.3,  1.4000000000000001,
+                              1.5,                 1.6,  1.7000000000000002,
+                              1.8,  1.9000000000000001],
+             dtype='float64')
+
+In [98]: sfloat.loc[0.30000000000000004]
+Out[98]: 0.9207518818011903
+
+In [99]: sfloat.loc[0.30000000000000001]
+---------------------------------------------------------------------------
+KeyError                                  Traceback (most recent call last)
+File /usr/local/lib/python3.8/dist-packages/pandas/core/indexes/base.py:3621, in Index.get_loc(self, key, method, tolerance)
+   3620 try:
+-> 3621     return self._engine.get_loc(casted_key)
+   3622 except KeyError as err:
+
+File /usr/local/lib/python3.8/dist-packages/pandas/_libs/index.pyx:136, in pandas._libs.index.IndexEngine.get_loc()
+
+File /usr/local/lib/python3.8/dist-packages/pandas/_libs/index.pyx:163, in pandas._libs.index.IndexEngine.get_loc()
+
+File pandas/_libs/hashtable_class_helper.pxi:1533, in pandas._libs.hashtable.Float64HashTable.get_item()
+
+File pandas/_libs/hashtable_class_helper.pxi:1542, in pandas._libs.hashtable.Float64HashTable.get_item()
+
+KeyError: 0.3
+
+The above exception was the direct cause of the following exception:
+
+KeyError                                  Traceback (most recent call last)
+Input In [99], in <cell line: 1>()
+----> 1 sfloat.loc[0.30000000000000001]
+
+File /usr/local/lib/python3.8/dist-packages/pandas/core/indexing.py:967, in _LocationIndexer.__getitem__(self, key)
+    964 axis = self.axis or 0
+    966 maybe_callable = com.apply_if_callable(key, self.obj)
+--> 967 return self._getitem_axis(maybe_callable, axis=axis)
+
+File /usr/local/lib/python3.8/dist-packages/pandas/core/indexing.py:1202, in _LocIndexer._getitem_axis(self, key, axis)
+   1200 # fall thru to straight lookup
+   1201 self._validate_key(key, axis)
+-> 1202 return self._get_label(key, axis=axis)
+
+File /usr/local/lib/python3.8/dist-packages/pandas/core/indexing.py:1153, in _LocIndexer._get_label(self, label, axis)
+   1151 def _get_label(self, label, axis: int):
+   1152     # GH#5667 this will fail if the label is not present in the axis.
+-> 1153     return self.obj.xs(label, axis=axis)
+
+File /usr/local/lib/python3.8/dist-packages/pandas/core/generic.py:3876, in NDFrame.xs(self, key, axis, level, drop_level)
+   3874             new_index = index[loc]
+   3875 else:
+-> 3876     loc = index.get_loc(key)
+   3878     if isinstance(loc, np.ndarray):
+   3879         if loc.dtype == np.bool_:
+
+File /usr/local/lib/python3.8/dist-packages/pandas/core/indexes/base.py:3623, in Index.get_loc(self, key, method, tolerance)
+   3621     return self._engine.get_loc(casted_key)
+   3622 except KeyError as err:
+-> 3623     raise KeyError(key) from err
+   3624 except TypeError:
+   3625     # If we have a listlike key, _check_indexing_error will raise
+   3626     #  InvalidIndexError. Otherwise we fall through and re-raise
+   3627     #  the TypeError.
+   3628     self._check_indexing_error(key)
+
+KeyError: 0.3
+> /usr/local/lib/python3.8/dist-packages/pandas/core/indexes/base.py(3623)get_loc()
+   3621                 return self._engine.get_loc(casted_key)
+   3622             except KeyError as err:
+-> 3623                 raise KeyError(key) from err
+   3624             except TypeError:
+   3625                 # If we have a listlike key, _check_indexing_error will raise
+
+ipdb> c
+
+In [100]: sfloat.loc[0.30000000000000003]
+Out[100]: 0.9207518818011903
+
+In [101]: sfloat.loc[0.30000000000000002]
+Out[101]: 0.9207518818011903
+
+In [102]: sfloat.loc[0.30000000000000001]
+---------------------------------------------------------------------------
+KeyError                                  Traceback (most recent call last)
+File /usr/local/lib/python3.8/dist-packages/pandas/core/indexes/base.py:3621, in Index.get_loc(self, key, method, tolerance)
+   3620 try:
+-> 3621     return self._engine.get_loc(casted_key)
+   3622 except KeyError as err:
+
+File /usr/local/lib/python3.8/dist-packages/pandas/_libs/index.pyx:136, in pandas._libs.index.IndexEngine.get_loc()
+
+File /usr/local/lib/python3.8/dist-packages/pandas/_libs/index.pyx:163, in pandas._libs.index.IndexEngine.get_loc()
+
+File pandas/_libs/hashtable_class_helper.pxi:1533, in pandas._libs.hashtable.Float64HashTable.get_item()
+
+File pandas/_libs/hashtable_class_helper.pxi:1542, in pandas._libs.hashtable.Float64HashTable.get_item()
+
+KeyError: 0.3
+
+The above exception was the direct cause of the following exception:
+
+KeyError                                  Traceback (most recent call last)
+Input In [102], in <cell line: 1>()
+----> 1 sfloat.loc[0.30000000000000001]
+
+File /usr/local/lib/python3.8/dist-packages/pandas/core/indexing.py:967, in _LocationIndexer.__getitem__(self, key)
+    964 axis = self.axis or 0
+    966 maybe_callable = com.apply_if_callable(key, self.obj)
+--> 967 return self._getitem_axis(maybe_callable, axis=axis)
+
+File /usr/local/lib/python3.8/dist-packages/pandas/core/indexing.py:1202, in _LocIndexer._getitem_axis(self, key, axis)
+   1200 # fall thru to straight lookup
+   1201 self._validate_key(key, axis)
+-> 1202 return self._get_label(key, axis=axis)
+
+File /usr/local/lib/python3.8/dist-packages/pandas/core/indexing.py:1153, in _LocIndexer._get_label(self, label, axis)
+   1151 def _get_label(self, label, axis: int):
+   1152     # GH#5667 this will fail if the label is not present in the axis.
+-> 1153     return self.obj.xs(label, axis=axis)
+
+File /usr/local/lib/python3.8/dist-packages/pandas/core/generic.py:3876, in NDFrame.xs(self, key, axis, level, drop_level)
+   3874             new_index = index[loc]
+   3875 else:
+-> 3876     loc = index.get_loc(key)
+   3878     if isinstance(loc, np.ndarray):
+   3879         if loc.dtype == np.bool_:
+
+File /usr/local/lib/python3.8/dist-packages/pandas/core/indexes/base.py:3623, in Index.get_loc(self, key, method, tolerance)
+   3621     return self._engine.get_loc(casted_key)
+   3622 except KeyError as err:
+-> 3623     raise KeyError(key) from err
+   3624 except TypeError:
+   3625     # If we have a listlike key, _check_indexing_error will raise
+   3626     #  InvalidIndexError. Otherwise we fall through and re-raise
+   3627     #  the TypeError.
+   3628     self._check_indexing_error(key)
+
+KeyError: 0.3
+> /usr/local/lib/python3.8/dist-packages/pandas/core/indexes/base.py(3623)get_loc()
+   3621                 return self._engine.get_loc(casted_key)
+   3622             except KeyError as err:
+-> 3623                 raise KeyError(key) from err
+   3624             except TypeError:
+   3625                 # If we have a listlike key, _check_indexing_error will raise
+
+ipdb> c
+
+In [103]: sfloat
+Out[103]:
+0.0    0.704673
+0.1    0.172660
+0.2    0.310506
+0.3    0.920752
+0.4    0.570925
+0.5    0.206306
+0.6    0.429470
+0.7    0.918023
+0.8    0.372976
+0.9    0.980179
+1.0    0.051422
+1.1    0.468135
+1.2    0.215157
+1.3    0.941504
+1.4    0.025926
+1.5    0.776130
+1.6    0.106927
+1.7    0.446269
+1.8    0.838421
+1.9    0.172738
+dtype: float64
+
+In [104]: sfloat.dtype
+Out[104]: dtype('float64')
+
+In [105]: sfloat.loc[0.29:0.31]
+Out[105]:
+0.3    0.920752
+dtype: float64
+
+In [106]: sfloat.loc[0.3]
+---------------------------------------------------------------------------
+KeyError                                  Traceback (most recent call last)
+File /usr/local/lib/python3.8/dist-packages/pandas/core/indexes/base.py:3621, in Index.get_loc(self, key, method, tolerance)
+   3620 try:
+-> 3621     return self._engine.get_loc(casted_key)
+   3622 except KeyError as err:
+
+File /usr/local/lib/python3.8/dist-packages/pandas/_libs/index.pyx:136, in pandas._libs.index.IndexEngine.get_loc()
+
+File /usr/local/lib/python3.8/dist-packages/pandas/_libs/index.pyx:163, in pandas._libs.index.IndexEngine.get_loc()
+
+File pandas/_libs/hashtable_class_helper.pxi:1533, in pandas._libs.hashtable.Float64HashTable.get_item()
+
+File pandas/_libs/hashtable_class_helper.pxi:1542, in pandas._libs.hashtable.Float64HashTable.get_item()
+
+KeyError: 0.3
+
+The above exception was the direct cause of the following exception:
+
+KeyError                                  Traceback (most recent call last)
+Input In [106], in <cell line: 1>()
+----> 1 sfloat.loc[0.3]
+
+File /usr/local/lib/python3.8/dist-packages/pandas/core/indexing.py:967, in _LocationIndexer.__getitem__(self, key)
+    964 axis = self.axis or 0
+    966 maybe_callable = com.apply_if_callable(key, self.obj)
+--> 967 return self._getitem_axis(maybe_callable, axis=axis)
+
+File /usr/local/lib/python3.8/dist-packages/pandas/core/indexing.py:1202, in _LocIndexer._getitem_axis(self, key, axis)
+   1200 # fall thru to straight lookup
+   1201 self._validate_key(key, axis)
+-> 1202 return self._get_label(key, axis=axis)
+
+File /usr/local/lib/python3.8/dist-packages/pandas/core/indexing.py:1153, in _LocIndexer._get_label(self, label, axis)
+   1151 def _get_label(self, label, axis: int):
+   1152     # GH#5667 this will fail if the label is not present in the axis.
+-> 1153     return self.obj.xs(label, axis=axis)
+
+File /usr/local/lib/python3.8/dist-packages/pandas/core/generic.py:3876, in NDFrame.xs(self, key, axis, level, drop_level)
+   3874             new_index = index[loc]
+   3875 else:
+-> 3876     loc = index.get_loc(key)
+   3878     if isinstance(loc, np.ndarray):
+   3879         if loc.dtype == np.bool_:
+
+File /usr/local/lib/python3.8/dist-packages/pandas/core/indexes/base.py:3623, in Index.get_loc(self, key, method, tolerance)
+   3621     return self._engine.get_loc(casted_key)
+   3622 except KeyError as err:
+-> 3623     raise KeyError(key) from err
+   3624 except TypeError:
+   3625     # If we have a listlike key, _check_indexing_error will raise
+   3626     #  InvalidIndexError. Otherwise we fall through and re-raise
+   3627     #  the TypeError.
+   3628     self._check_indexing_error(key)
+
+KeyError: 0.3
+> /usr/local/lib/python3.8/dist-packages/pandas/core/indexes/base.py(3623)get_loc()
+   3621                 return self._engine.get_loc(casted_key)
+   3622             except KeyError as err:
+-> 3623                 raise KeyError(key) from err
+   3624             except TypeError:
+   3625                 # If we have a listlike key, _check_indexing_error will raise
+
+ipdb> c
+
+In [107]: sfloat.loc[0.29:0.31]
+Out[107]:
+0.3    0.920752
+dtype: float64
+
+In [108]: sfloat
+Out[108]:
+0.0    0.704673
+0.1    0.172660
+0.2    0.310506
+0.3    0.920752
+0.4    0.570925
+0.5    0.206306
+0.6    0.429470
+0.7    0.918023
+0.8    0.372976
+0.9    0.980179
+1.0    0.051422
+1.1    0.468135
+1.2    0.215157
+1.3    0.941504
+1.4    0.025926
+1.5    0.776130
+1.6    0.106927
+1.7    0.446269
+1.8    0.838421
+1.9    0.172738
+dtype: float64
+
+In [109]: s
+Out[109]:
+0      0.704673
+20     0.172660
+40     0.310506
+60     0.920752
+80     0.570925
+100    0.206306
+120    0.429470
+140    0.918023
+160    0.372976
+180    0.980179
+200    0.051422
+220    0.468135
+240    0.215157
+260    0.941504
+280    0.025926
+300    0.776130
+320    0.106927
+340    0.446269
+360    0.838421
+380    0.172738
+dtype: float64
+
+In [110]: s - 5
+Out[110]:
+0     -4.295327
+20    -4.827340
+40    -4.689494
+60    -4.079248
+80    -4.429075
+100   -4.793694
+120   -4.570530
+140   -4.081977
+160   -4.627024
+180   -4.019821
+200   -4.948578
+220   -4.531865
+240   -4.784843
+260   -4.058496
+280   -4.974074
+300   -4.223870
+320   -4.893073
+340   -4.553731
+360   -4.161579
+380   -4.827262
+dtype: float64
+
+In [111]: (s - 5).loc[160]
+Out[111]: -4.6270244410791515
+
+In [112]: s.loc[160]
+Out[112]: 0.37297555892084844
+
+In [113]: s
+Out[113]:
+0      0.704673
+20     0.172660
+40     0.310506
+60     0.920752
+80     0.570925
+100    0.206306
+120    0.429470
+140    0.918023
+160    0.372976
+180    0.980179
+200    0.051422
+220    0.468135
+240    0.215157
+260    0.941504
+280    0.025926
+300    0.776130
+320    0.106927
+340    0.446269
+360    0.838421
+380    0.172738
+dtype: float64
+
+In [114]: s < 0.5
+Out[114]:
+0      False
+20      True
+40      True
+60     False
+80     False
+100     True
+120     True
+140    False
+160     True
+180    False
+200     True
+220     True
+240     True
+260    False
+280     True
+300    False
+320     True
+340     True
+360    False
+380     True
+dtype: bool
+
+In [115]: s[s < 0.5]
+Out[115]:
+20     0.172660
+40     0.310506
+100    0.206306
+120    0.429470
+160    0.372976
+200    0.051422
+220    0.468135
+240    0.215157
+280    0.025926
+320    0.106927
+340    0.446269
+380    0.172738
+dtype: float64
+
+In [116]: s[s < 0.5]
+Out[116]:
+20     0.172660
+40     0.310506
+100    0.206306
+120    0.429470
+160    0.372976
+200    0.051422
+220    0.468135
+240    0.215157
+280    0.025926
+320    0.106927
+340    0.446269
+380    0.172738
+dtype: float64
+
+In [117]: s.iloc[s < 0.5]
+---------------------------------------------------------------------------
+NotImplementedError                       Traceback (most recent call last)
+Input In [117], in <cell line: 1>()
+----> 1 s.iloc[s < 0.5]
+
+File /usr/local/lib/python3.8/dist-packages/pandas/core/indexing.py:967, in _LocationIndexer.__getitem__(self, key)
+    964 axis = self.axis or 0
+    966 maybe_callable = com.apply_if_callable(key, self.obj)
+--> 967 return self._getitem_axis(maybe_callable, axis=axis)
+
+File /usr/local/lib/python3.8/dist-packages/pandas/core/indexing.py:1506, in _iLocIndexer._getitem_axis(self, key, axis)
+   1503     key = np.asarray(key)
+   1505 if com.is_bool_indexer(key):
+-> 1506     self._validate_key(key, axis)
+   1507     return self._getbool_axis(key, axis=axis)
+   1509 # a list of integers
+
+File /usr/local/lib/python3.8/dist-packages/pandas/core/indexing.py:1347, in _iLocIndexer._validate_key(self, key, axis)
+   1345 if hasattr(key, "index") and isinstance(key.index, Index):
+   1346     if key.index.inferred_type == "integer":
+-> 1347         raise NotImplementedError(
+   1348             "iLocation based boolean "
+   1349             "indexing on an integer type "
+   1350             "is not available"
+   1351         )
+   1352     raise ValueError(
+   1353         "iLocation based boolean indexing cannot use "
+   1354         "an indexable as a mask"
+   1355     )
+   1356 return
+
+NotImplementedError: iLocation based boolean indexing on an integer type is not available
+> /usr/local/lib/python3.8/dist-packages/pandas/core/indexing.py(1347)_validate_key()
+   1345             if hasattr(key, "index") and isinstance(key.index, Index):
+   1346                 if key.index.inferred_type == "integer":
+-> 1347                     raise NotImplementedError(
+   1348                         "iLocation based boolean "
+   1349                         "indexing on an integer type "
+
+ipdb> c
+
+In [118]: s < 0.5
+Out[118]:
+0      False
+20      True
+40      True
+60     False
+80     False
+100     True
+120     True
+140    False
+160     True
+180    False
+200     True
+220     True
+240     True
+260    False
+280     True
+300    False
+320     True
+340     True
+360    False
+380     True
+dtype: bool
+
+In [119]: (s < 0.5).values
+Out[119]:
+array([False,  True,  True, False, False,  True,  True, False,  True,
+       False,  True,  True,  True, False,  True, False,  True,  True,
+       False,  True])
+
+In [120]: s[s < 0.5]
+Out[120]:
+20     0.172660
+40     0.310506
+100    0.206306
+120    0.429470
+160    0.372976
+200    0.051422
+220    0.468135
+240    0.215157
+280    0.025926
+320    0.106927
+340    0.446269
+380    0.172738
+dtype: float64
+
+In [121]: s.loc[s < 0.5]
+Out[121]:
+20     0.172660
+40     0.310506
+100    0.206306
+120    0.429470
+160    0.372976
+200    0.051422
+220    0.468135
+240    0.215157
+280    0.025926
+320    0.106927
+340    0.446269
+380    0.172738
+dtype: float64
+
+In [122]: s[30:70]
+Out[122]: Series([], dtype: float64)
+
+In [123]: s[5:10]
+Out[123]:
+100    0.206306
+120    0.429470
+140    0.918023
+160    0.372976
+180    0.980179
+dtype: float64
+
+In [124]: s.iloc[5:10]
+Out[124]:
+100    0.206306
+120    0.429470
+140    0.918023
+160    0.372976
+180    0.980179
+dtype: float64
+
+In [125]: s.loc[s < 0.5]
+Out[125]:
+20     0.172660
+40     0.310506
+100    0.206306
+120    0.429470
+160    0.372976
+200    0.051422
+220    0.468135
+240    0.215157
+280    0.025926
+320    0.106927
+340    0.446269
+380    0.172738
+dtype: float64
+
+In [126]: s.loc[s < 0.5].values
+Out[126]:
+array([0.17266007, 0.31050596, 0.20630611, 0.42947006, 0.37297556,
+       0.05142249, 0.46813528, 0.21515737, 0.02592641, 0.1069272 ,
+       0.44626856, 0.17273816])
+
+In [127]: s.plot?
+
+In [128]: s.plot()
+Out[128]: <AxesSubplot:>
+
+In [129]: f, ax = plt.subplots()
+
+In [130]: s.plot.hist?
+
+In [131]: s.plot.hist()
+Out[131]: <AxesSubplot:ylabel='Frequency'>
+
+In [132]: s.plot.hist()
+Out[132]: <AxesSubplot:ylabel='Frequency'>
+
+In [133]: s.plot.hist()
+Out[133]: <AxesSubplot:ylabel='Frequency'>
+
+In [134]: s.min()
+Out[134]: 0.025926409962906516
+
+In [135]: s.max()
+Out[135]: 0.9801785074900214
+
+In [136]: s.mean()
+Out[136]: 0.4814549543357294
+
+In [137]: s.median()
+Out[137]: 0.4378693083429477
+
+In [138]: s.sum()
+Out[138]: 9.629099086714588
+
+In [139]: s.std()
+Out[139]: 0.32695799206155224
+
+In [140]: s.describe()
+Out[140]:
+count    20.000000
+mean      0.481455
+std       0.326958
+min       0.025926
+25%       0.197914
+50%       0.437869
+75%       0.791703
+max       0.980179
+dtype: float64
+
+In [141]: s.describe().index
+Out[141]: Index(['count', 'mean', 'std', 'min', '25%', '50%', '75%', 'max'], dtype='object')
+
+In [142]: pd.date_range('2017-06-01', periods=10, freq='D')
+Out[142]:
+DatetimeIndex(['2017-06-01', '2017-06-02', '2017-06-03', '2017-06-04',
+               '2017-06-05', '2017-06-06', '2017-06-07', '2017-06-08',
+               '2017-06-09', '2017-06-10'],
+              dtype='datetime64[ns]', freq='D')
+
+In [143]: pd.date_range('2017-06-01', periods=10, freq='D').values
+Out[143]:
+array(['2017-06-01T00:00:00.000000000', '2017-06-02T00:00:00.000000000',
+       '2017-06-03T00:00:00.000000000', '2017-06-04T00:00:00.000000000',
+       '2017-06-05T00:00:00.000000000', '2017-06-06T00:00:00.000000000',
+       '2017-06-07T00:00:00.000000000', '2017-06-08T00:00:00.000000000',
+       '2017-06-09T00:00:00.000000000', '2017-06-10T00:00:00.000000000'],
+      dtype='datetime64[ns]')
+
+In [144]: pd.date_range('2017-06-01', periods=10, freq='D').values[0]
+Out[144]: numpy.datetime64('2017-06-01T00:00:00.000000000')
+
+In [145]: dr = pd.date_range('2017-06-01', periods=10, freq='D').values[0]
+
+In [146]: dr = pd.date_range('2017-06-01', periods=10, freq='D')
+
+In [147]: dr
+Out[147]:
+DatetimeIndex(['2017-06-01', '2017-06-02', '2017-06-03', '2017-06-04',
+               '2017-06-05', '2017-06-06', '2017-06-07', '2017-06-08',
+               '2017-06-09', '2017-06-10'],
+              dtype='datetime64[ns]', freq='D')
+
+In [148]: s3 = pd.Series(data=fl[:10], index=dr)
+
+In [149]: s3
+Out[149]:
+2017-06-01    0.704673
+2017-06-02    0.172660
+2017-06-03    0.310506
+2017-06-04    0.920752
+2017-06-05    0.570925
+2017-06-06    0.206306
+2017-06-07    0.429470
+2017-06-08    0.918023
+2017-06-09    0.372976
+2017-06-10    0.980179
+Freq: D, dtype: float64
+
+In [150]: s.loc['2017-06-01']
+---------------------------------------------------------------------------
+KeyError                                  Traceback (most recent call last)
+File /usr/local/lib/python3.8/dist-packages/pandas/core/indexes/base.py:3621, in Index.get_loc(self, key, method, tolerance)
+   3620 try:
+-> 3621     return self._engine.get_loc(casted_key)
+   3622 except KeyError as err:
+
+File /usr/local/lib/python3.8/dist-packages/pandas/_libs/index.pyx:136, in pandas._libs.index.IndexEngine.get_loc()
+
+File /usr/local/lib/python3.8/dist-packages/pandas/_libs/index.pyx:144, in pandas._libs.index.IndexEngine.get_loc()
+
+File pandas/_libs/index_class_helper.pxi:41, in pandas._libs.index.Int64Engine._check_type()
+
+KeyError: '2017-06-01'
+
+The above exception was the direct cause of the following exception:
+
+KeyError                                  Traceback (most recent call last)
+Input In [150], in <cell line: 1>()
+----> 1 s.loc['2017-06-01']
+
+File /usr/local/lib/python3.8/dist-packages/pandas/core/indexing.py:967, in _LocationIndexer.__getitem__(self, key)
+    964 axis = self.axis or 0
+    966 maybe_callable = com.apply_if_callable(key, self.obj)
+--> 967 return self._getitem_axis(maybe_callable, axis=axis)
+
+File /usr/local/lib/python3.8/dist-packages/pandas/core/indexing.py:1202, in _LocIndexer._getitem_axis(self, key, axis)
+   1200 # fall thru to straight lookup
+   1201 self._validate_key(key, axis)
+-> 1202 return self._get_label(key, axis=axis)
+
+File /usr/local/lib/python3.8/dist-packages/pandas/core/indexing.py:1153, in _LocIndexer._get_label(self, label, axis)
+   1151 def _get_label(self, label, axis: int):
+   1152     # GH#5667 this will fail if the label is not present in the axis.
+-> 1153     return self.obj.xs(label, axis=axis)
+
+File /usr/local/lib/python3.8/dist-packages/pandas/core/generic.py:3876, in NDFrame.xs(self, key, axis, level, drop_level)
+   3874             new_index = index[loc]
+   3875 else:
+-> 3876     loc = index.get_loc(key)
+   3878     if isinstance(loc, np.ndarray):
+   3879         if loc.dtype == np.bool_:
+
+File /usr/local/lib/python3.8/dist-packages/pandas/core/indexes/base.py:3623, in Index.get_loc(self, key, method, tolerance)
+   3621     return self._engine.get_loc(casted_key)
+   3622 except KeyError as err:
+-> 3623     raise KeyError(key) from err
+   3624 except TypeError:
+   3625     # If we have a listlike key, _check_indexing_error will raise
+   3626     #  InvalidIndexError. Otherwise we fall through and re-raise
+   3627     #  the TypeError.
+   3628     self._check_indexing_error(key)
+
+KeyError: '2017-06-01'
+> /usr/local/lib/python3.8/dist-packages/pandas/core/indexes/base.py(3623)get_loc()
+   3621                 return self._engine.get_loc(casted_key)
+   3622             except KeyError as err:
+-> 3623                 raise KeyError(key) from err
+   3624             except TypeError:
+   3625                 # If we have a listlike key, _check_indexing_error will raise
+
+ipdb> c
+
+In [151]: s['2017-06-01']
+---------------------------------------------------------------------------
+KeyError                                  Traceback (most recent call last)
+File /usr/local/lib/python3.8/dist-packages/pandas/core/indexes/base.py:3621, in Index.get_loc(self, key, method, tolerance)
+   3620 try:
+-> 3621     return self._engine.get_loc(casted_key)
+   3622 except KeyError as err:
+
+File /usr/local/lib/python3.8/dist-packages/pandas/_libs/index.pyx:136, in pandas._libs.index.IndexEngine.get_loc()
+
+File /usr/local/lib/python3.8/dist-packages/pandas/_libs/index.pyx:144, in pandas._libs.index.IndexEngine.get_loc()
+
+File pandas/_libs/index_class_helper.pxi:41, in pandas._libs.index.Int64Engine._check_type()
+
+KeyError: '2017-06-01'
+
+The above exception was the direct cause of the following exception:
+
+KeyError                                  Traceback (most recent call last)
+Input In [151], in <cell line: 1>()
+----> 1 s['2017-06-01']
+
+File /usr/local/lib/python3.8/dist-packages/pandas/core/series.py:958, in Series.__getitem__(self, key)
+    955     return self._values[key]
+    957 elif key_is_scalar:
+--> 958     return self._get_value(key)
+    960 if is_hashable(key):
+    961     # Otherwise index.get_value will raise InvalidIndexError
+    962     try:
+    963         # For labels that don't resolve as scalars like tuples and frozensets
+
+File /usr/local/lib/python3.8/dist-packages/pandas/core/series.py:1069, in Series._get_value(self, label, takeable)
+   1066     return self._values[label]
+   1068 # Similar to Index.get_value, but we do not fall back to positional
+-> 1069 loc = self.index.get_loc(label)
+   1070 return self.index._get_values_for_loc(self, loc, label)
+
+File /usr/local/lib/python3.8/dist-packages/pandas/core/indexes/base.py:3623, in Index.get_loc(self, key, method, tolerance)
+   3621     return self._engine.get_loc(casted_key)
+   3622 except KeyError as err:
+-> 3623     raise KeyError(key) from err
+   3624 except TypeError:
+   3625     # If we have a listlike key, _check_indexing_error will raise
+   3626     #  InvalidIndexError. Otherwise we fall through and re-raise
+   3627     #  the TypeError.
+   3628     self._check_indexing_error(key)
+
+KeyError: '2017-06-01'
+> /usr/local/lib/python3.8/dist-packages/pandas/core/indexes/base.py(3623)get_loc()
+   3621                 return self._engine.get_loc(casted_key)
+   3622             except KeyError as err:
+-> 3623                 raise KeyError(key) from err
+   3624             except TypeError:
+   3625                 # If we have a listlike key, _check_indexing_error will raise
+
+ipdb> c
+
+In [152]: s
+Out[152]:
+0      0.704673
+20     0.172660
+40     0.310506
+60     0.920752
+80     0.570925
+100    0.206306
+120    0.429470
+140    0.918023
+160    0.372976
+180    0.980179
+200    0.051422
+220    0.468135
+240    0.215157
+260    0.941504
+280    0.025926
+300    0.776130
+320    0.106927
+340    0.446269
+360    0.838421
+380    0.172738
+dtype: float64
+
+In [153]: s3.loc['2017-06-01']
+Out[153]: 0.7046725874792413
+
+In [154]: s3
+Out[154]:
+2017-06-01    0.704673
+2017-06-02    0.172660
+2017-06-03    0.310506
+2017-06-04    0.920752
+2017-06-05    0.570925
+2017-06-06    0.206306
+2017-06-07    0.429470
+2017-06-08    0.918023
+2017-06-09    0.372976
+2017-06-10    0.980179
+Freq: D, dtype: float64
+
+In [155]: s3['2017-06-01']
+Out[155]: 0.7046725874792413
+
+In [156]: s3.iloc['2017-06-01']
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+Input In [156], in <cell line: 1>()
+----> 1 s3.iloc['2017-06-01']
+
+File /usr/local/lib/python3.8/dist-packages/pandas/core/indexing.py:967, in _LocationIndexer.__getitem__(self, key)
+    964 axis = self.axis or 0
+    966 maybe_callable = com.apply_if_callable(key, self.obj)
+--> 967 return self._getitem_axis(maybe_callable, axis=axis)
+
+File /usr/local/lib/python3.8/dist-packages/pandas/core/indexing.py:1517, in _iLocIndexer._getitem_axis(self, key, axis)
+   1515 key = item_from_zerodim(key)
+   1516 if not is_integer(key):
+-> 1517     raise TypeError("Cannot index by location index with a non-integer key")
+   1519 # validate the location
+   1520 self._validate_integer(key, axis)
+
+TypeError: Cannot index by location index with a non-integer key
+> /usr/local/lib/python3.8/dist-packages/pandas/core/indexing.py(1517)_getitem_axis()
+   1515             key = item_from_zerodim(key)
+   1516             if not is_integer(key):
+-> 1517                 raise TypeError("Cannot index by location index with a non-integer key")
+   1518
+   1519             # validate the location
+
+ipdb> c
+
+In [157]: s3['2017-06-01']
+Out[157]: 0.7046725874792413
+
+In [158]:         t2 = np.array([ 50,  70,  40,  20,  10,  80,  90,  30,  0,  60])
+     ...:
+
+In [159]: t2
+Out[159]: array([50, 70, 40, 20, 10, 80, 90, 30,  0, 60])
+
+In [160]: s2 = pd.Series(data=fl[:10], index=ts)
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+Input In [160], in <cell line: 1>()
+----> 1 s2 = pd.Series(data=fl[:10], index=ts)
+
+NameError: name 'ts' is not defined
+> <ipython-input-160-904089a1a31b>(1)<cell line: 1>()
+----> 1 s2 = pd.Series(data=fl[:10], index=ts)
+
+ipdb> c
+
+In [161]: s2 = pd.Series(data=fl[:10], index=t2)
+
+In [162]: s2
+Out[162]:
+50    0.704673
+70    0.172660
+40    0.310506
+20    0.920752
+10    0.570925
+80    0.206306
+90    0.429470
+30    0.918023
+0     0.372976
+60    0.980179
+dtype: float64
+
+In [163]: s2.loc[50:70]
+Out[163]:
+50    0.704673
+70    0.172660
+dtype: float64
+
+In [164]: s2.loc[50:20]
+Out[164]:
+50    0.704673
+70    0.172660
+40    0.310506
+20    0.920752
+dtype: float64
+
+In [165]: sfloat
+Out[165]:
+0.0    0.704673
+0.1    0.172660
+0.2    0.310506
+0.3    0.920752
+0.4    0.570925
+0.5    0.206306
+0.6    0.429470
+0.7    0.918023
+0.8    0.372976
+0.9    0.980179
+1.0    0.051422
+1.1    0.468135
+1.2    0.215157
+1.3    0.941504
+1.4    0.025926
+1.5    0.776130
+1.6    0.106927
+1.7    0.446269
+1.8    0.838421
+1.9    0.172738
+dtype: float64
+
+In [166]: sfloat.loc[1.4]
+---------------------------------------------------------------------------
+KeyError                                  Traceback (most recent call last)
+File /usr/local/lib/python3.8/dist-packages/pandas/core/indexes/base.py:3621, in Index.get_loc(self, key, method, tolerance)
+   3620 try:
+-> 3621     return self._engine.get_loc(casted_key)
+   3622 except KeyError as err:
+
+File /usr/local/lib/python3.8/dist-packages/pandas/_libs/index.pyx:136, in pandas._libs.index.IndexEngine.get_loc()
+
+File /usr/local/lib/python3.8/dist-packages/pandas/_libs/index.pyx:163, in pandas._libs.index.IndexEngine.get_loc()
+
+File pandas/_libs/hashtable_class_helper.pxi:1533, in pandas._libs.hashtable.Float64HashTable.get_item()
+
+File pandas/_libs/hashtable_class_helper.pxi:1542, in pandas._libs.hashtable.Float64HashTable.get_item()
+
+KeyError: 1.4
+
+The above exception was the direct cause of the following exception:
+
+KeyError                                  Traceback (most recent call last)
+Input In [166], in <cell line: 1>()
+----> 1 sfloat.loc[1.4]
+
+File /usr/local/lib/python3.8/dist-packages/pandas/core/indexing.py:967, in _LocationIndexer.__getitem__(self, key)
+    964 axis = self.axis or 0
+    966 maybe_callable = com.apply_if_callable(key, self.obj)
+--> 967 return self._getitem_axis(maybe_callable, axis=axis)
+
+File /usr/local/lib/python3.8/dist-packages/pandas/core/indexing.py:1202, in _LocIndexer._getitem_axis(self, key, axis)
+   1200 # fall thru to straight lookup
+   1201 self._validate_key(key, axis)
+-> 1202 return self._get_label(key, axis=axis)
+
+File /usr/local/lib/python3.8/dist-packages/pandas/core/indexing.py:1153, in _LocIndexer._get_label(self, label, axis)
+   1151 def _get_label(self, label, axis: int):
+   1152     # GH#5667 this will fail if the label is not present in the axis.
+-> 1153     return self.obj.xs(label, axis=axis)
+
+File /usr/local/lib/python3.8/dist-packages/pandas/core/generic.py:3876, in NDFrame.xs(self, key, axis, level, drop_level)
+   3874             new_index = index[loc]
+   3875 else:
+-> 3876     loc = index.get_loc(key)
+   3878     if isinstance(loc, np.ndarray):
+   3879         if loc.dtype == np.bool_:
+
+File /usr/local/lib/python3.8/dist-packages/pandas/core/indexes/base.py:3623, in Index.get_loc(self, key, method, tolerance)
+   3621     return self._engine.get_loc(casted_key)
+   3622 except KeyError as err:
+-> 3623     raise KeyError(key) from err
+   3624 except TypeError:
+   3625     # If we have a listlike key, _check_indexing_error will raise
+   3626     #  InvalidIndexError. Otherwise we fall through and re-raise
+   3627     #  the TypeError.
+   3628     self._check_indexing_error(key)
+
+KeyError: 1.4
+> /usr/local/lib/python3.8/dist-packages/pandas/core/indexes/base.py(3623)get_loc()
+   3621                 return self._engine.get_loc(casted_key)
+   3622             except KeyError as err:
+-> 3623                 raise KeyError(key) from err
+   3624             except TypeError:
+   3625                 # If we have a listlike key, _check_indexing_error will raise
+
+ipdb> c
+
+In [167]: sfloat
+Out[167]:
+0.0    0.704673
+0.1    0.172660
+0.2    0.310506
+0.3    0.920752
+0.4    0.570925
+0.5    0.206306
+0.6    0.429470
+0.7    0.918023
+0.8    0.372976
+0.9    0.980179
+1.0    0.051422
+1.1    0.468135
+1.2    0.215157
+1.3    0.941504
+1.4    0.025926
+1.5    0.776130
+1.6    0.106927
+1.7    0.446269
+1.8    0.838421
+1.9    0.172738
+dtype: float64
+
+In [168]: s.plot()
+Out[168]: <AxesSubplot:ylabel='Frequency'>
+
+In [169]: s.plot()
+Out[169]: <AxesSubplot:>
+
+In [170]: ax = s.plot()
+
+In [171]: ax
+Out[171]: <AxesSubplot:>
+
+In [172]: ax.set_title('sdfsdfs')
+Out[172]: Text(0.5, 1.0, 'sdfsdfs')
+
+In [173]: ax.show()
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+Input In [173], in <cell line: 1>()
+----> 1 ax.show()
+
+AttributeError: 'AxesSubplot' object has no attribute 'show'
+> <ipython-input-173-ece30bd5e827>(1)<cell line: 1>()
+----> 1 ax.show()
+
+ipdb> c
+
+In [174]: plt.show()
+
+In [175]: s.plot?
+
+In [176]: ls
+09_history.txt  09_pandas.pdf                    exp1.csv  exp.xlsx    spikes.png       t.npy
+09_pandas.md    DataFrame_exercise_solutions.py  exp2.csv  Galton.csv  spike_times.npy  V.npy
+
+In [177]: t = np.load('t.npy')
+
+In [178]: V = np.load('V.npy')
+
+In [179]: t
+Out[179]:
+array([0.  , 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.1 ,
+       0.11, 0.12, 0.13, 0.14, 0.15, 0.16, 0.17, 0.18, 0.19, 0.2 , 0.21,
+       0.22, 0.23, 0.24, 0.25, 0.26, 0.27, 0.28, 0.29, 0.3 , 0.31, 0.32,
+       0.33, 0.34, 0.35, 0.36, 0.37, 0.38, 0.39, 0.4 , 0.41, 0.42, 0.43,
+       0.44, 0.45, 0.46, 0.47, 0.48, 0.49, 0.5 , 0.51, 0.52, 0.53, 0.54,
+       0.55, 0.56, 0.57, 0.58, 0.59, 0.6 , 0.61, 0.62, 0.63, 0.64, 0.65,
+       0.66, 0.67, 0.68, 0.69, 0.7 , 0.71, 0.72, 0.73, 0.74, 0.75, 0.76,
+       0.77, 0.78, 0.79, 0.8 , 0.81, 0.82, 0.83, 0.84, 0.85, 0.86, 0.87,
+       0.88, 0.89, 0.9 , 0.91, 0.92, 0.93, 0.94, 0.95, 0.96, 0.97, 0.98,
+       0.99])
+
+In [180]: V
+Out[180]:
+array([8.24777758e+01, 6.02342590e+01, 3.08380753e+01, 8.64603373e+01,
+       3.56536647e+00, 2.00348496e+01, 5.91368637e+01, 4.15162129e+01,
+       5.06776828e+01, 1.00000000e+03, 7.54405999e+01, 6.86314204e+01,
+       2.61417936e+01, 3.51484713e+01, 2.58092387e+01, 1.04773450e+01,
+       1.32408917e+01, 3.18672503e+01, 5.94482817e+01, 2.66580904e+01,
+       5.91594717e+01, 6.53570651e+00, 8.58836573e+00, 1.00000000e+03,
+       1.00000000e+03, 8.38927097e+01, 2.21202156e+01, 4.25819646e+01,
+       3.83306221e+01, 2.09746967e+01, 7.53824835e+01, 4.45993633e+01,
+       2.80853871e+01, 4.17249415e+01, 1.00000000e+03, 7.02201328e+01,
+       3.63630564e+01, 5.22943367e+01, 1.00000000e+03, 6.16236716e+01,
+       3.81947390e+01, 4.38238019e+01, 6.11110182e+01, 5.44227315e+01,
+       2.45454038e+01, 4.02545425e+01, 2.14279017e+01, 6.62861764e+01,
+       2.82545726e+01, 1.68717858e+01, 7.61757221e+01, 9.97308451e+00,
+       4.37940989e+01, 8.95652919e+01, 3.18723823e+00, 8.79707384e+01,
+       4.75663828e+01, 5.34237421e+01, 7.42926799e+01, 1.82295787e+01,
+       5.64432797e+01, 5.74893311e+01, 1.00000000e+03, 7.39651359e+01,
+       2.21320752e+01, 1.00000000e+03, 1.09191910e+01, 2.26514960e+01,
+       1.69261930e+01, 4.44302184e+00, 8.89804525e+01, 8.77941436e+01,
+       1.32775860e+01, 8.02132297e+01, 4.58869800e+01, 1.54311492e+01,
+       7.52881650e+01, 3.07195208e+01, 3.12770187e+01, 3.49414948e+01,
+       8.72803186e+01, 4.22898083e+01, 6.60830128e+01, 7.20574664e+01,
+       1.00000000e+03, 5.18257219e+00, 6.97242785e+01, 4.99391302e+01,
+       7.90815702e+01, 7.60846665e+01, 2.80442394e+01, 1.00118143e+01,
+       5.65604354e+01, 8.32990442e+01, 4.40094004e+01, 5.55926930e+01,
+       7.09025454e+01, 2.90419840e+01, 3.45839593e+01, 7.90880387e-01])
+
+In [181]: pd.Series(data=V, index=t)
+Out[181]:
+0.00    82.477776
+0.01    60.234259
+0.02    30.838075
+0.03    86.460337
+0.04     3.565366
+          ...
+0.95    55.592693
+0.96    70.902545
+0.97    29.041984
+0.98    34.583959
+0.99     0.790880
+Length: 100, dtype: float64
+
+In [182]: s = pd.Series(data=V, index=t)
+
+In [183]: s.plot()
+Out[183]: <AxesSubplot:>
+
+In [184]: ax = s.plot()
+
+In [185]: ax.set_xlabel('Time (s)')
+Out[185]: Text(0.5, 13.94444444444443, 'Time (s)')
+
+In [186]: s
+Out[186]:
+0.00    82.477776
+0.01    60.234259
+0.02    30.838075
+0.03    86.460337
+0.04     3.565366
+          ...
+0.95    55.592693
+0.96    70.902545
+0.97    29.041984
+0.98    34.583959
+0.99     0.790880
+Length: 100, dtype: float64
+
+In [187]: s.plot
+Out[187]: <pandas.plotting._core.PlotAccessor object at 0x7f5558b324f0>
+
+In [188]: s.plot?
+
+In [189]: import seaborn
+
+In [190]: ax.set_ylabel('Voltage (mv)')
+Out[190]: Text(13.944444444444452, 0.5, 'Voltage (mv)')
+
+In [191]: s
+Out[191]:
+0.00    82.477776
+0.01    60.234259
+0.02    30.838075
+0.03    86.460337
+0.04     3.565366
+          ...
+0.95    55.592693
+0.96    70.902545
+0.97    29.041984
+0.98    34.583959
+0.99     0.790880
+Length: 100, dtype: float64
+
+In [192]: s > 500
+Out[192]:
+0.00    False
+0.01    False
+0.02    False
+0.03    False
+0.04    False
+        ...
+0.95    False
+0.96    False
+0.97    False
+0.98    False
+0.99    False
+Length: 100, dtype: bool
+
+In [193]: (s > 500).values
+Out[193]:
+array([False, False, False, False, False, False, False, False, False,
+        True, False, False, False, False, False, False, False, False,
+       False, False, False, False, False,  True,  True, False, False,
+       False, False, False, False, False, False, False,  True, False,
+       False, False,  True, False, False, False, False, False, False,
+       False, False, False, False, False, False, False, False, False,
+       False, False, False, False, False, False, False, False,  True,
+       False, False,  True, False, False, False, False, False, False,
+       False, False, False, False, False, False, False, False, False,
+       False, False, False,  True, False, False, False, False, False,
+       False, False, False, False, False, False, False, False, False,
+       False])
+
+In [194]: s > 500
+Out[194]:
+0.00    False
+0.01    False
+0.02    False
+0.03    False
+0.04    False
+        ...
+0.95    False
+0.96    False
+0.97    False
+0.98    False
+0.99    False
+Length: 100, dtype: bool
+
+In [195]: s[s > 500]
+Out[195]:
+0.09    1000.0
+0.23    1000.0
+0.24    1000.0
+0.34    1000.0
+0.38    1000.0
+0.62    1000.0
+0.65    1000.0
+0.84    1000.0
+dtype: float64
+
+In [196]: s[s > 500].index
+Out[196]: Float64Index([0.09, 0.23, 0.24, 0.34, 0.38, 0.62, 0.65, 0.84], dtype='float64')
+
+In [197]: s[s > 500].index.values
+Out[197]: array([0.09, 0.23, 0.24, 0.34, 0.38, 0.62, 0.65, 0.84])
+
+In [198]: st = s[s > 500].index.values
+
+In [199]: np.save('spike_times.npy', st)
+
+In [200]: ls
+09_history.txt  09_pandas.pdf                    exp1.csv  exp.xlsx    spikes.png       t.npy
+09_pandas.md    DataFrame_exercise_solutions.py  exp2.csv  Galton.csv  spike_times.npy  V.npy
+
+In [201]: np.load('spike_times.npy')
+Out[201]: array([0.09, 0.23, 0.24, 0.34, 0.38, 0.62, 0.65, 0.84])
+
+In [202]: s.plot
+Out[202]: <pandas.plotting._core.PlotAccessor object at 0x7f5558b324f0>
+
+In [203]: s
+Out[203]:
+0.00    82.477776
+0.01    60.234259
+0.02    30.838075
+0.03    86.460337
+0.04     3.565366
+          ...
+0.95    55.592693
+0.96    70.902545
+0.97    29.041984
+0.98    34.583959
+0.99     0.790880
+Length: 100, dtype: float64
+
+In [204]: ss = s[s > 500]
+
+In [205]: ss
+Out[205]:
+0.09    1000.0
+0.23    1000.0
+0.24    1000.0
+0.34    1000.0
+0.38    1000.0
+0.62    1000.0
+0.65    1000.0
+0.84    1000.0
+dtype: float64
+
+In [206]: ss.plot(ls='', marker='.')
+Out[206]: <AxesSubplot:xlabel='Time (s)', ylabel='Voltage (mv)'>
+
+In [207]: ax.get_figure?
+Signature: ax.get_figure()
+Docstring: Return the `.Figure` instance the artist belongs to.
+File:      /usr/local/lib/python3.8/dist-packages/matplotlib/artist.py
+Type:      method
+
+In [208]: ax.get_figure()
+Out[208]: <Figure size 1095x486 with 1 Axes>
+
+In [209]: ax.get_figure().savefig?
+Object `savefig` not found.
+
+In [210]: ax.get_figure().canvas
+Out[210]: <matplotlib.backends.backend_qtagg.FigureCanvasQTAgg at 0x7f5558b8c160>
+
+In [211]: ax.get_figure().canvas.savefig
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+Input In [211], in <cell line: 1>()
+----> 1 ax.get_figure().canvas.savefig
+
+AttributeError: 'FigureCanvasQTAgg' object has no attribute 'savefig'
+> <ipython-input-211-e25df7a45da2>(1)<cell line: 1>()
+----> 1 ax.get_figure().canvas.savefig
+
+ipdb> c
+
+In [212]: ax.get_figure().savefig?
+Object `savefig` not found.
+
+In [213]: f = ax.get_figure()
+
+In [214]: f.savefig
+Out[214]: <bound method Figure.savefig of <Figure size 1095x486 with 1 Axes>>
+
+In [215]: ax.get_figure().savefig?
+Object `savefig` not found.
+
+In [216]: ax.get_figure().savefig
+Out[216]: <bound method Figure.savefig of <Figure size 1095x486 with 1 Axes>>
+
+In [217]: ax.get_figure().savefig('spikes.png')
+
+In [218]: ls
+09_history.txt  09_pandas.pdf                    exp1.csv  exp.xlsx    spikes.png       t.npy
+09_pandas.md    DataFrame_exercise_solutions.py  exp2.csv  Galton.csv  spike_times.npy  V.npy
+
+In [219]: savefig
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+Input In [219], in <cell line: 1>()
+----> 1 savefig
+
+NameError: name 'savefig' is not defined
+> <ipython-input-219-aa76aa57159f>(1)<cell line: 1>()
+----> 1 savefig
+
+ipdb> c
+
+In [220]: import matplotlib.pyplot as plt
+
+In [221]: s
+Out[221]:
+0.00    82.477776
+0.01    60.234259
+0.02    30.838075
+0.03    86.460337
+0.04     3.565366
+          ...
+0.95    55.592693
+0.96    70.902545
+0.97    29.041984
+0.98    34.583959
+0.99     0.790880
+Length: 100, dtype: float64
+
+In [222]: eeg = np.random.random((20, 3))
+
+In [223]: eeg
+Out[223]:
+array([[0.3854037 , 0.20299013, 0.17081578],
+       [0.82680611, 0.63354595, 0.17027801],
+       [0.82503445, 0.8120988 , 0.54239161],
+       [0.71456861, 0.16307985, 0.5786294 ],
+       [0.96171468, 0.84066692, 0.44695524],
+       [0.94721793, 0.01403394, 0.62068087],
+       [0.4044683 , 0.20834777, 0.69303875],
+       [0.71808609, 0.69356438, 0.6236449 ],
+       [0.31425901, 0.10707187, 0.25288243],
+       [0.90264128, 0.40014673, 0.58267904],
+       [0.77347699, 0.16227358, 0.72732791],
+       [0.70877336, 0.47494681, 0.31773898],
+       [0.14608029, 0.80069147, 0.17102867],
+       [0.72277369, 0.08580539, 0.25229656],
+       [0.32480572, 0.4497124 , 0.58042274],
+       [0.73933178, 0.53669045, 0.27719776],
+       [0.91443451, 0.97735989, 0.87682871],
+       [0.26937097, 0.39285341, 0.5536371 ],
+       [0.64038302, 0.63671319, 0.26736526],
+       [0.62236023, 0.91552282, 0.60718438]])
+
+In [224]: chans = ['Fz', 'Cz', 'Pz']
+
+In [225]: t = np.arange(0, 20*50, 50)
+
+In [226]: len(t)
+Out[226]: 20
+
+In [227]: t
+Out[227]:
+array([  0,  50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600,
+       650, 700, 750, 800, 850, 900, 950])
+
+In [228]: df = pd.DataFrame(data=eeg, index=t, columns=chans)
+
+In [229]: df
+Out[229]:
+           Fz        Cz        Pz
+0    0.385404  0.202990  0.170816
+50   0.826806  0.633546  0.170278
+100  0.825034  0.812099  0.542392
+150  0.714569  0.163080  0.578629
+200  0.961715  0.840667  0.446955
+250  0.947218  0.014034  0.620681
+300  0.404468  0.208348  0.693039
+350  0.718086  0.693564  0.623645
+400  0.314259  0.107072  0.252882
+450  0.902641  0.400147  0.582679
+500  0.773477  0.162274  0.727328
+550  0.708773  0.474947  0.317739
+600  0.146080  0.800691  0.171029
+650  0.722774  0.085805  0.252297
+700  0.324806  0.449712  0.580423
+750  0.739332  0.536690  0.277198
+800  0.914435  0.977360  0.876829
+850  0.269371  0.392853  0.553637
+900  0.640383  0.636713  0.267365
+950  0.622360  0.915523  0.607184
+
+In [230]: df.iloc[:5]
+Out[230]:
+           Fz        Cz        Pz
+0    0.385404  0.202990  0.170816
+50   0.826806  0.633546  0.170278
+100  0.825034  0.812099  0.542392
+150  0.714569  0.163080  0.578629
+200  0.961715  0.840667  0.446955
+
+In [231]: df.iloc[0]
+Out[231]:
+Fz    0.385404
+Cz    0.202990
+Pz    0.170816
+Name: 0, dtype: float64
+
+In [232]: df.iloc[50]
+---------------------------------------------------------------------------
+IndexError                                Traceback (most recent call last)
+Input In [232], in <cell line: 1>()
+----> 1 df.iloc[50]
+
+File /usr/local/lib/python3.8/dist-packages/pandas/core/indexing.py:967, in _LocationIndexer.__getitem__(self, key)
+    964 axis = self.axis or 0
+    966 maybe_callable = com.apply_if_callable(key, self.obj)
+--> 967 return self._getitem_axis(maybe_callable, axis=axis)
+
+File /usr/local/lib/python3.8/dist-packages/pandas/core/indexing.py:1520, in _iLocIndexer._getitem_axis(self, key, axis)
+   1517     raise TypeError("Cannot index by location index with a non-integer key")
+   1519 # validate the location
+-> 1520 self._validate_integer(key, axis)
+   1522 return self.obj._ixs(key, axis=axis)
+
+File /usr/local/lib/python3.8/dist-packages/pandas/core/indexing.py:1452, in _iLocIndexer._validate_integer(self, key, axis)
+   1450 len_axis = len(self.obj._get_axis(axis))
+   1451 if key >= len_axis or key < -len_axis:
+-> 1452     raise IndexError("single positional indexer is out-of-bounds")
+
+IndexError: single positional indexer is out-of-bounds
+> /usr/local/lib/python3.8/dist-packages/pandas/core/indexing.py(1452)_validate_integer()
+   1450         len_axis = len(self.obj._get_axis(axis))
+   1451         if key >= len_axis or key < -len_axis:
+-> 1452             raise IndexError("single positional indexer is out-of-bounds")
+   1453
+   1454     # -------------------------------------------------------------------
+
+ipdb> c
+
+In [233]: df.iloc[0]
+Out[233]:
+Fz    0.385404
+Cz    0.202990
+Pz    0.170816
+Name: 0, dtype: float64
+
+In [234]: type(df.iloc[0])
+Out[234]: pandas.core.series.Series
+
+In [235]: df.iloc[0]['Fz']
+Out[235]: 0.38540370077818364
+
+In [236]: df.iloc[0].loc['Fz']
+Out[236]: 0.38540370077818364
+
+In [237]: df.iloc[0].iloc[0]
+Out[237]: 0.38540370077818364
+
+In [238]: df.iloc[0]
+Out[238]:
+Fz    0.385404
+Cz    0.202990
+Pz    0.170816
+Name: 0, dtype: float64
+
+In [239]: df
+Out[239]:
+           Fz        Cz        Pz
+0    0.385404  0.202990  0.170816
+50   0.826806  0.633546  0.170278
+100  0.825034  0.812099  0.542392
+150  0.714569  0.163080  0.578629
+200  0.961715  0.840667  0.446955
+250  0.947218  0.014034  0.620681
+300  0.404468  0.208348  0.693039
+350  0.718086  0.693564  0.623645
+400  0.314259  0.107072  0.252882
+450  0.902641  0.400147  0.582679
+500  0.773477  0.162274  0.727328
+550  0.708773  0.474947  0.317739
+600  0.146080  0.800691  0.171029
+650  0.722774  0.085805  0.252297
+700  0.324806  0.449712  0.580423
+750  0.739332  0.536690  0.277198
+800  0.914435  0.977360  0.876829
+850  0.269371  0.392853  0.553637
+900  0.640383  0.636713  0.267365
+950  0.622360  0.915523  0.607184
+
+In [240]: df.iloc[0, 0]
+Out[240]: 0.38540370077818364
+
+In [241]: df.iloc[-1, -1]
+Out[241]: 0.6071843772843476
+
+In [242]: df['Fz']
+Out[242]:
+0      0.385404
+50     0.826806
+100    0.825034
+150    0.714569
+200    0.961715
+250    0.947218
+300    0.404468
+350    0.718086
+400    0.314259
+450    0.902641
+500    0.773477
+550    0.708773
+600    0.146080
+650    0.722774
+700    0.324806
+750    0.739332
+800    0.914435
+850    0.269371
+900    0.640383
+950    0.622360
+Name: Fz, dtype: float64
+
+In [243]: type(df['Fz'])
+Out[243]: pandas.core.series.Series
+
+In [244]: df['Pz']
+Out[244]:
+0      0.170816
+50     0.170278
+100    0.542392
+150    0.578629
+200    0.446955
+250    0.620681
+300    0.693039
+350    0.623645
+400    0.252882
+450    0.582679
+500    0.727328
+550    0.317739
+600    0.171029
+650    0.252297
+700    0.580423
+750    0.277198
+800    0.876829
+850    0.553637
+900    0.267365
+950    0.607184
+Name: Pz, dtype: float64
+
+In [245]: df['Pz'].index.values
+Out[245]:
+array([  0,  50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600,
+       650, 700, 750, 800, 850, 900, 950])
+
+In [246]: df['Pz'].index
+Out[246]:
+Int64Index([  0,  50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600,
+            650, 700, 750, 800, 850, 900, 950],
+           dtype='int64')
+
+In [247]: df['Pz'].values
+Out[247]:
+array([0.17081578, 0.17027801, 0.54239161, 0.5786294 , 0.44695524,
+       0.62068087, 0.69303875, 0.6236449 , 0.25288243, 0.58267904,
+       0.72732791, 0.31773898, 0.17102867, 0.25229656, 0.58042274,
+       0.27719776, 0.87682871, 0.5536371 , 0.26736526, 0.60718438])
+
+In [248]: df
+Out[248]:
+           Fz        Cz        Pz
+0    0.385404  0.202990  0.170816
+50   0.826806  0.633546  0.170278
+100  0.825034  0.812099  0.542392
+150  0.714569  0.163080  0.578629
+200  0.961715  0.840667  0.446955
+250  0.947218  0.014034  0.620681
+300  0.404468  0.208348  0.693039
+350  0.718086  0.693564  0.623645
+400  0.314259  0.107072  0.252882
+450  0.902641  0.400147  0.582679
+500  0.773477  0.162274  0.727328
+550  0.708773  0.474947  0.317739
+600  0.146080  0.800691  0.171029
+650  0.722774  0.085805  0.252297
+700  0.324806  0.449712  0.580423
+750  0.739332  0.536690  0.277198
+800  0.914435  0.977360  0.876829
+850  0.269371  0.392853  0.553637
+900  0.640383  0.636713  0.267365
+950  0.622360  0.915523  0.607184
+
+In [249]: df.iloc[0]
+Out[249]:
+Fz    0.385404
+Cz    0.202990
+Pz    0.170816
+Name: 0, dtype: float64
+
+In [250]: df.iloc[10]
+Out[250]:
+Fz    0.773477
+Cz    0.162274
+Pz    0.727328
+Name: 500, dtype: float64
+
+In [251]: df.loc[300]
+Out[251]:
+Fz    0.404468
+Cz    0.208348
+Pz    0.693039
+Name: 300, dtype: float64
+
+In [252]: df.loc[300].loc['Fz']
+Out[252]: 0.40446830112685794
+
+In [253]: df.loc[300]['Fz']
+Out[253]: 0.40446830112685794
+
+In [254]: df['Fz']
+Out[254]:
+0      0.385404
+50     0.826806
+100    0.825034
+150    0.714569
+200    0.961715
+250    0.947218
+300    0.404468
+350    0.718086
+400    0.314259
+450    0.902641
+500    0.773477
+550    0.708773
+600    0.146080
+650    0.722774
+700    0.324806
+750    0.739332
+800    0.914435
+850    0.269371
+900    0.640383
+950    0.622360
+Name: Fz, dtype: float64
+
+In [255]: df['Fz'].loc[300]
+Out[255]: 0.40446830112685794
+
+In [256]: df.values
+Out[256]:
+array([[0.3854037 , 0.20299013, 0.17081578],
+       [0.82680611, 0.63354595, 0.17027801],
+       [0.82503445, 0.8120988 , 0.54239161],
+       [0.71456861, 0.16307985, 0.5786294 ],
+       [0.96171468, 0.84066692, 0.44695524],
+       [0.94721793, 0.01403394, 0.62068087],
+       [0.4044683 , 0.20834777, 0.69303875],
+       [0.71808609, 0.69356438, 0.6236449 ],
+       [0.31425901, 0.10707187, 0.25288243],
+       [0.90264128, 0.40014673, 0.58267904],
+       [0.77347699, 0.16227358, 0.72732791],
+       [0.70877336, 0.47494681, 0.31773898],
+       [0.14608029, 0.80069147, 0.17102867],
+       [0.72277369, 0.08580539, 0.25229656],
+       [0.32480572, 0.4497124 , 0.58042274],
+       [0.73933178, 0.53669045, 0.27719776],
+       [0.91443451, 0.97735989, 0.87682871],
+       [0.26937097, 0.39285341, 0.5536371 ],
+       [0.64038302, 0.63671319, 0.26736526],
+       [0.62236023, 0.91552282, 0.60718438]])
+
+In [257]: df.values.dtype
+Out[257]: dtype('float64')
+
+In [258]: ls
+09_history.txt  09_pandas.pdf                    exp1.csv  exp.xlsx    spikes.png       t.npy
+09_pandas.md    DataFrame_exercise_solutions.py  exp2.csv  Galton.csv  spike_times.npy  V.npy
+
+In [259]: pd.read_csv?
+
+In [260]: pd.read_csv('exp1.csv')
+Out[260]:
+  subject  start_time  end_time stimulus outcome
+0     A01         2.3       5.6        L    pass
+1     A01         1.6       2.1        R    pass
+2     A01         2.3       5.6        R    pass
+3     A01         4.0      10.2        R    fail
+4     A01         2.8       4.5        L    pass
+5     A01         0.7       6.1        L    pass
+6     A01         3.5      11.2        R    fail
+7     A01         2.7       5.6        L    pass
+
+In [261]: exp1 = pd.read_csv('exp1.csv')
+
+In [262]: exp1
+Out[262]:
+  subject  start_time  end_time stimulus outcome
+0     A01         2.3       5.6        L    pass
+1     A01         1.6       2.1        R    pass
+2     A01         2.3       5.6        R    pass
+3     A01         4.0      10.2        R    fail
+4     A01         2.8       4.5        L    pass
+5     A01         0.7       6.1        L    pass
+6     A01         3.5      11.2        R    fail
+7     A01         2.7       5.6        L    pass
+
+In [263]: exp1.loc['subject']
+---------------------------------------------------------------------------
+KeyError                                  Traceback (most recent call last)
+Input In [263], in <cell line: 1>()
+----> 1 exp1.loc['subject']
+
+File /usr/local/lib/python3.8/dist-packages/pandas/core/indexing.py:967, in _LocationIndexer.__getitem__(self, key)
+    964 axis = self.axis or 0
+    966 maybe_callable = com.apply_if_callable(key, self.obj)
+--> 967 return self._getitem_axis(maybe_callable, axis=axis)
+
+File /usr/local/lib/python3.8/dist-packages/pandas/core/indexing.py:1202, in _LocIndexer._getitem_axis(self, key, axis)
+   1200 # fall thru to straight lookup
+   1201 self._validate_key(key, axis)
+-> 1202 return self._get_label(key, axis=axis)
+
+File /usr/local/lib/python3.8/dist-packages/pandas/core/indexing.py:1153, in _LocIndexer._get_label(self, label, axis)
+   1151 def _get_label(self, label, axis: int):
+   1152     # GH#5667 this will fail if the label is not present in the axis.
+-> 1153     return self.obj.xs(label, axis=axis)
+
+File /usr/local/lib/python3.8/dist-packages/pandas/core/generic.py:3876, in NDFrame.xs(self, key, axis, level, drop_level)
+   3874             new_index = index[loc]
+   3875 else:
+-> 3876     loc = index.get_loc(key)
+   3878     if isinstance(loc, np.ndarray):
+   3879         if loc.dtype == np.bool_:
+
+File /usr/local/lib/python3.8/dist-packages/pandas/core/indexes/range.py:389, in RangeIndex.get_loc(self, key, method, tolerance)
+    387             raise KeyError(key) from err
+    388     self._check_indexing_error(key)
+--> 389     raise KeyError(key)
+    390 return super().get_loc(key, method=method, tolerance=tolerance)
+
+KeyError: 'subject'
+> /usr/local/lib/python3.8/dist-packages/pandas/core/indexes/range.py(389)get_loc()
+    387                     raise KeyError(key) from err
+    388             self._check_indexing_error(key)
+--> 389             raise KeyError(key)
+    390         return super().get_loc(key, method=method, tolerance=tolerance)
+    391
+
+ipdb> c
+
+In [264]: exp1
+Out[264]:
+  subject  start_time  end_time stimulus outcome
+0     A01         2.3       5.6        L    pass
+1     A01         1.6       2.1        R    pass
+2     A01         2.3       5.6        R    pass
+3     A01         4.0      10.2        R    fail
+4     A01         2.8       4.5        L    pass
+5     A01         0.7       6.1        L    pass
+6     A01         3.5      11.2        R    fail
+7     A01         2.7       5.6        L    pass
+
+In [265]: exp1['subject']
+Out[265]:
+0    A01
+1    A01
+2    A01
+3    A01
+4    A01
+5    A01
+6    A01
+7    A01
+Name: subject, dtype: object
+
+In [266]: exp1['subject'].values
+Out[266]:
+array(['A01', 'A01', 'A01', 'A01', 'A01', 'A01', 'A01', 'A01'],
+      dtype=object)
+
+In [267]: exp1['subject']
+Out[267]:
+0    A01
+1    A01
+2    A01
+3    A01
+4    A01
+5    A01
+6    A01
+7    A01
+Name: subject, dtype: object
+
+In [268]: exp1['subject'].iloc[0]
+Out[268]: 'A01'
+
+In [269]: type(exp1['subject'].iloc[0])
+Out[269]: str
+
+In [270]: exp1['start_time']
+Out[270]:
+0    2.3
+1    1.6
+2    2.3
+3    4.0
+4    2.8
+5    0.7
+6    3.5
+7    2.7
+Name: start_time, dtype: float64
+
+In [271]: exp1['end_time']
+Out[271]:
+0     5.6
+1     2.1
+2     5.6
+3    10.2
+4     4.5
+5     6.1
+6    11.2
+7     5.6
+Name: end_time, dtype: float64
+
+In [272]: exp1['stimulus']
+Out[272]:
+0    L
+1    R
+2    R
+3    R
+4    L
+5    L
+6    R
+7    L
+Name: stimulus, dtype: object
+
+In [273]: exp1['stimulus'].iloc[0].dtype
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+Input In [273], in <cell line: 1>()
+----> 1 exp1['stimulus'].iloc[0].dtype
+
+AttributeError: 'str' object has no attribute 'dtype'
+> <ipython-input-273-99166a155f9e>(1)<cell line: 1>()
+----> 1 exp1['stimulus'].iloc[0].dtype
+
+ipdb> c
+
+In [274]: type(exp1['stimulus'].iloc[0])
+Out[274]: str
+
+In [275]: type(exp1['outcome'].iloc[0])
+Out[275]: str
+
+In [276]: df
+Out[276]:
+           Fz        Cz        Pz
+0    0.385404  0.202990  0.170816
+50   0.826806  0.633546  0.170278
+100  0.825034  0.812099  0.542392
+150  0.714569  0.163080  0.578629
+200  0.961715  0.840667  0.446955
+250  0.947218  0.014034  0.620681
+300  0.404468  0.208348  0.693039
+350  0.718086  0.693564  0.623645
+400  0.314259  0.107072  0.252882
+450  0.902641  0.400147  0.582679
+500  0.773477  0.162274  0.727328
+550  0.708773  0.474947  0.317739
+600  0.146080  0.800691  0.171029
+650  0.722774  0.085805  0.252297
+700  0.324806  0.449712  0.580423
+750  0.739332  0.536690  0.277198
+800  0.914435  0.977360  0.876829
+850  0.269371  0.392853  0.553637
+900  0.640383  0.636713  0.267365
+950  0.622360  0.915523  0.607184
+
+In [277]: exp1
+Out[277]:
+  subject  start_time  end_time stimulus outcome
+0     A01         2.3       5.6        L    pass
+1     A01         1.6       2.1        R    pass
+2     A01         2.3       5.6        R    pass
+3     A01         4.0      10.2        R    fail
+4     A01         2.8       4.5        L    pass
+5     A01         0.7       6.1        L    pass
+6     A01         3.5      11.2        R    fail
+7     A01         2.7       5.6        L    pass
+
+In [278]: exp1.plot.hist()
+Out[278]: <AxesSubplot:ylabel='Frequency'>
+
+In [279]: exp1.hist()
+Out[279]:
+array([[<AxesSubplot:title={'center':'start_time'}>,
+        <AxesSubplot:title={'center':'end_time'}>]], dtype=object)
+
+In [280]: exp1.hist?
+
+In [281]: exp2 = pd.read_csv('exp2.csv')
+
+In [282]: exp2
+Out[282]:
+   subject  start_time  end_time stimulus outcome
+0      A02         2.7       5.6        L    pass
+1      A02         1.2       4.3        L    pass
+2      A02         4.0      10.4        R    fail
+3      A02         2.3       5.6        R    pass
+4      A02         4.1      10.0        R    fail
+5      A02         3.9      12.1        R    fail
+6      A02         2.8       4.5        L    pass
+7      A02         1.3       3.1        R    pass
+8      A02         0.8       4.1        L    pass
+9      A02         3.6      12.4        R    fail
+10     A02         5.5      13.3        R    fail
+
+In [283]: exp1.hist?
+
+In [284]: exp1
+Out[284]:
+  subject  start_time  end_time stimulus outcome
+0     A01         2.3       5.6        L    pass
+1     A01         1.6       2.1        R    pass
+2     A01         2.3       5.6        R    pass
+3     A01         4.0      10.2        R    fail
+4     A01         2.8       4.5        L    pass
+5     A01         0.7       6.1        L    pass
+6     A01         3.5      11.2        R    fail
+7     A01         2.7       5.6        L    pass
+
+In [285]: exp2
+Out[285]:
+   subject  start_time  end_time stimulus outcome
+0      A02         2.7       5.6        L    pass
+1      A02         1.2       4.3        L    pass
+2      A02         4.0      10.4        R    fail
+3      A02         2.3       5.6        R    pass
+4      A02         4.1      10.0        R    fail
+5      A02         3.9      12.1        R    fail
+6      A02         2.8       4.5        L    pass
+7      A02         1.3       3.1        R    pass
+8      A02         0.8       4.1        L    pass
+9      A02         3.6      12.4        R    fail
+10     A02         5.5      13.3        R    fail
+
+In [286]: pd.concat?
+
+In [287]: pd.concat([exp1, exp2])
+Out[287]:
+   subject  start_time  end_time stimulus outcome
+0      A01         2.3       5.6        L    pass
+1      A01         1.6       2.1        R    pass
+2      A01         2.3       5.6        R    pass
+3      A01         4.0      10.2        R    fail
+4      A01         2.8       4.5        L    pass
+5      A01         0.7       6.1        L    pass
+6      A01         3.5      11.2        R    fail
+7      A01         2.7       5.6        L    pass
+0      A02         2.7       5.6        L    pass
+1      A02         1.2       4.3        L    pass
+2      A02         4.0      10.4        R    fail
+3      A02         2.3       5.6        R    pass
+4      A02         4.1      10.0        R    fail
+5      A02         3.9      12.1        R    fail
+6      A02         2.8       4.5        L    pass
+7      A02         1.3       3.1        R    pass
+8      A02         0.8       4.1        L    pass
+9      A02         3.6      12.4        R    fail
+10     A02         5.5      13.3        R    fail
+
+In [288]: exps = pd.concat([exp1, exp2])
+
+In [289]: exps
+Out[289]:
+   subject  start_time  end_time stimulus outcome
+0      A01         2.3       5.6        L    pass
+1      A01         1.6       2.1        R    pass
+2      A01         2.3       5.6        R    pass
+3      A01         4.0      10.2        R    fail
+4      A01         2.8       4.5        L    pass
+5      A01         0.7       6.1        L    pass
+6      A01         3.5      11.2        R    fail
+7      A01         2.7       5.6        L    pass
+0      A02         2.7       5.6        L    pass
+1      A02         1.2       4.3        L    pass
+2      A02         4.0      10.4        R    fail
+3      A02         2.3       5.6        R    pass
+4      A02         4.1      10.0        R    fail
+5      A02         3.9      12.1        R    fail
+6      A02         2.8       4.5        L    pass
+7      A02         1.3       3.1        R    pass
+8      A02         0.8       4.1        L    pass
+9      A02         3.6      12.4        R    fail
+10     A02         5.5      13.3        R    fail
+
+In [290]: exps.loc[0]
+Out[290]:
+  subject  start_time  end_time stimulus outcome
+0     A01         2.3       5.6        L    pass
+0     A02         2.7       5.6        L    pass
+
+In [291]: pd.concat([exp1, exp2], axis=1)
+Out[291]:
+   subject  start_time  end_time stimulus outcome subject  start_time  end_time stimulus outcome
+0      A01         2.3       5.6        L    pass     A02         2.7       5.6        L    pass
+1      A01         1.6       2.1        R    pass     A02         1.2       4.3        L    pass
+2      A01         2.3       5.6        R    pass     A02         4.0      10.4        R    fail
+3      A01         4.0      10.2        R    fail     A02         2.3       5.6        R    pass
+4      A01         2.8       4.5        L    pass     A02         4.1      10.0        R    fail
+5      A01         0.7       6.1        L    pass     A02         3.9      12.1        R    fail
+6      A01         3.5      11.2        R    fail     A02         2.8       4.5        L    pass
+7      A01         2.7       5.6        L    pass     A02         1.3       3.1        R    pass
+8      NaN         NaN       NaN      NaN     NaN     A02         0.8       4.1        L    pass
+9      NaN         NaN       NaN      NaN     NaN     A02         3.6      12.4        R    fail
+10     NaN         NaN       NaN      NaN     NaN     A02         5.5      13.3        R    fail
+
+In [292]: hexps = pd.concat([exp1, exp2], axis=1)
+
+In [293]: hexps['start_time']
+Out[293]:
+    start_time  start_time
+0          2.3         2.7
+1          1.6         1.2
+2          2.3         4.0
+3          4.0         2.3
+4          2.8         4.1
+5          0.7         3.9
+6          3.5         2.8
+7          2.7         1.3
+8          NaN         0.8
+9          NaN         3.6
+10         NaN         5.5
+
+In [294]: ls
+09_history.txt  09_pandas.pdf                    exp1.csv  exp.xlsx    spikes.png       t.npy
+09_pandas.md    DataFrame_exercise_solutions.py  exp2.csv  Galton.csv  spike_times.npy  V.npy
+
+In [295]: exp1 = pd.read_excel('exp.xlsx')
+
+In [296]: exp1 = pd.read_excel('exp.xlsx', sheet_name='exp1')
+
+In [297]: exp1
+Out[297]:
+  subject  start_time  end_time stimulus outcome
+0     A01         2.3       5.6        L    pass
+1     A01         1.6       2.1        R    pass
+2     A01         2.3       5.6        R    pass
+3     A01         4.0      10.2        R    fail
+4     A01         2.8       4.5        L    pass
+5     A01         0.7       6.1        L    pass
+6     A01         3.5      11.2        R    fail
+7     A01         2.7       5.6        L    pass
+
+In [298]: exp2 = pd.read_excel('exp.xlsx', sheet_name='exp2')
+
+In [299]: exp2
+Out[299]:
+   subject  start_time  end_time stimulus outcome
+0      A02         2.7       5.6        L    pass
+1      A02         1.2       4.3        L    pass
+2      A02         4.0      10.4        R    fail
+3      A02         2.3       5.6        R    pass
+4      A02         4.1      10.0        R    fail
+5      A02         3.9      12.1        R    fail
+6      A02         2.8       4.5        L    pass
+7      A02         1.3       3.1        R    pass
+8      A02         0.8       4.1        L    pass
+9      A02         3.6      12.4        R    fail
+10     A02         5.5      13.3        R    fail
+
+In [300]: exp2.max()
+Out[300]:
+subject        A02
+start_time     5.5
+end_time      13.3
+stimulus         R
+outcome       pass
+dtype: object
+
+In [301]: exps
+Out[301]:
+   subject  start_time  end_time stimulus outcome
+0      A01         2.3       5.6        L    pass
+1      A01         1.6       2.1        R    pass
+2      A01         2.3       5.6        R    pass
+3      A01         4.0      10.2        R    fail
+4      A01         2.8       4.5        L    pass
+5      A01         0.7       6.1        L    pass
+6      A01         3.5      11.2        R    fail
+7      A01         2.7       5.6        L    pass
+0      A02         2.7       5.6        L    pass
+1      A02         1.2       4.3        L    pass
+2      A02         4.0      10.4        R    fail
+3      A02         2.3       5.6        R    pass
+4      A02         4.1      10.0        R    fail
+5      A02         3.9      12.1        R    fail
+6      A02         2.8       4.5        L    pass
+7      A02         1.3       3.1        R    pass
+8      A02         0.8       4.1        L    pass
+9      A02         3.6      12.4        R    fail
+10     A02         5.5      13.3        R    fail
+
+In [302]: exps.max()
+Out[302]:
+subject        A02
+start_time     5.5
+end_time      13.3
+stimulus         R
+outcome       pass
+dtype: object
+
+In [303]: exps.min()
+Out[303]:
+subject        A01
+start_time     0.7
+end_time       2.1
+stimulus         L
+outcome       fail
+dtype: object
+
+In [304]: exps.std()
+<ipython-input-304-bb55764e1ee9>:1: FutureWarning: Dropping of nuisance columns in DataFrame reductions (with 'numeric_only=None') is deprecated; in a future version this will raise TypeError.  Select only valid columns before calling the reduction.
+  exps.std()
+Out[304]:
+start_time    1.281629
+end_time      3.502038
+dtype: float64
+
+In [305]: exp2.describe()
+Out[305]:
+       start_time   end_time
+count   11.000000  11.000000
+mean     2.927273   7.763636
+std      1.454710   3.874086
+min      0.800000   3.100000
+25%      1.800000   4.400000
+50%      2.800000   5.600000
+75%      3.950000  11.250000
+max      5.500000  13.300000
+
+In [306]: exp2
+Out[306]:
+   subject  start_time  end_time stimulus outcome
+0      A02         2.7       5.6        L    pass
+1      A02         1.2       4.3        L    pass
+2      A02         4.0      10.4        R    fail
+3      A02         2.3       5.6        R    pass
+4      A02         4.1      10.0        R    fail
+5      A02         3.9      12.1        R    fail
+6      A02         2.8       4.5        L    pass
+7      A02         1.3       3.1        R    pass
+8      A02         0.8       4.1        L    pass
+9      A02         3.6      12.4        R    fail
+10     A02         5.5      13.3        R    fail
+
+In [307]: exp2.describe()
+Out[307]:
+       start_time   end_time
+count   11.000000  11.000000
+mean     2.927273   7.763636
+std      1.454710   3.874086
+min      0.800000   3.100000
+25%      1.800000   4.400000
+50%      2.800000   5.600000
+75%      3.950000  11.250000
+max      5.500000  13.300000
+
+In [308]: exps
+Out[308]:
+   subject  start_time  end_time stimulus outcome
+0      A01         2.3       5.6        L    pass
+1      A01         1.6       2.1        R    pass
+2      A01         2.3       5.6        R    pass
+3      A01         4.0      10.2        R    fail
+4      A01         2.8       4.5        L    pass
+5      A01         0.7       6.1        L    pass
+6      A01         3.5      11.2        R    fail
+7      A01         2.7       5.6        L    pass
+0      A02         2.7       5.6        L    pass
+1      A02         1.2       4.3        L    pass
+2      A02         4.0      10.4        R    fail
+3      A02         2.3       5.6        R    pass
+4      A02         4.1      10.0        R    fail
+5      A02         3.9      12.1        R    fail
+6      A02         2.8       4.5        L    pass
+7      A02         1.3       3.1        R    pass
+8      A02         0.8       4.1        L    pass
+9      A02         3.6      12.4        R    fail
+10     A02         5.5      13.3        R    fail
+
+In [309]: exps['subject']
+Out[309]:
+0     A01
+1     A01
+2     A01
+3     A01
+4     A01
+5     A01
+6     A01
+7     A01
+0     A02
+1     A02
+2     A02
+3     A02
+4     A02
+5     A02
+6     A02
+7     A02
+8     A02
+9     A02
+10    A02
+Name: subject, dtype: object
+
+In [310]: exps['subject'].nunique()
+Out[310]: 2
+
+In [311]: exps['subject'].unique()
+Out[311]: array(['A01', 'A02'], dtype=object)
+
+In [312]: len(exps['subject'].unique())
+Out[312]: 2
+
+In [313]: exps
+Out[313]:
+   subject  start_time  end_time stimulus outcome
+0      A01         2.3       5.6        L    pass
+1      A01         1.6       2.1        R    pass
+2      A01         2.3       5.6        R    pass
+3      A01         4.0      10.2        R    fail
+4      A01         2.8       4.5        L    pass
+5      A01         0.7       6.1        L    pass
+6      A01         3.5      11.2        R    fail
+7      A01         2.7       5.6        L    pass
+0      A02         2.7       5.6        L    pass
+1      A02         1.2       4.3        L    pass
+2      A02         4.0      10.4        R    fail
+3      A02         2.3       5.6        R    pass
+4      A02         4.1      10.0        R    fail
+5      A02         3.9      12.1        R    fail
+6      A02         2.8       4.5        L    pass
+7      A02         1.3       3.1        R    pass
+8      A02         0.8       4.1        L    pass
+9      A02         3.6      12.4        R    fail
+10     A02         5.5      13.3        R    fail
+
+In [314]: exps.groupby()
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+Input In [314], in <cell line: 1>()
+----> 1 exps.groupby()
+
+File /usr/local/lib/python3.8/dist-packages/pandas/core/frame.py:7700, in DataFrame.groupby(self, by, axis, level, as_index, sort, group_keys, squeeze, observed, dropna)
+   7697     squeeze = False
+   7699 if level is None and by is None:
+-> 7700     raise TypeError("You have to supply one of 'by' and 'level'")
+   7701 axis = self._get_axis_number(axis)
+   7703 # https://github.com/python/mypy/issues/7642
+   7704 # error: Argument "squeeze" to "DataFrameGroupBy" has incompatible type
+   7705 # "Union[bool, NoDefault]"; expected "bool"
+
+TypeError: You have to supply one of 'by' and 'level'
+> /usr/local/lib/python3.8/dist-packages/pandas/core/frame.py(7700)groupby()
+   7698
+   7699         if level is None and by is None:
+-> 7700             raise TypeError("You have to supply one of 'by' and 'level'")
+   7701         axis = self._get_axis_number(axis)
+   7702
+
+ipdb> c
+
+In [315]: exps
+Out[315]:
+   subject  start_time  end_time stimulus outcome
+0      A01         2.3       5.6        L    pass
+1      A01         1.6       2.1        R    pass
+2      A01         2.3       5.6        R    pass
+3      A01         4.0      10.2        R    fail
+4      A01         2.8       4.5        L    pass
+5      A01         0.7       6.1        L    pass
+6      A01         3.5      11.2        R    fail
+7      A01         2.7       5.6        L    pass
+0      A02         2.7       5.6        L    pass
+1      A02         1.2       4.3        L    pass
+2      A02         4.0      10.4        R    fail
+3      A02         2.3       5.6        R    pass
+4      A02         4.1      10.0        R    fail
+5      A02         3.9      12.1        R    fail
+6      A02         2.8       4.5        L    pass
+7      A02         1.3       3.1        R    pass
+8      A02         0.8       4.1        L    pass
+9      A02         3.6      12.4        R    fail
+10     A02         5.5      13.3        R    fail
+
+In [316]: exps.groupby('outcome')
+Out[316]: <pandas.core.groupby.generic.DataFrameGroupBy object at 0x7f554dc4a6d0>
+
+In [317]: exps.groupby('outcome').mean()
+Out[317]:
+         start_time   end_time
+outcome
+fail       4.085714  11.371429
+pass       1.958333   4.725000
+
+In [318]: exps.groupby('outcome').mean()['start_time']
+Out[318]:
+outcome
+fail    4.085714
+pass    1.958333
+Name: start_time, dtype: float64
+
+In [319]: exps.groupby('outcome').mean()['start_time'].loc['fail']
+Out[319]: 4.085714285714286
+
+In [320]: exps.groupby('outcome').describe()
+Out[320]:
+        start_time                                       ...  end_time
+             count      mean       std  min    25%  50%  ...       std   min    25%    50%    75%   max
+outcome                                                  ...
+fail           7.0  4.085714  0.661888  3.5  3.750  4.0  ...  1.260574  10.0  10.30  11.20  12.25  13.3
+pass          12.0  1.958333  0.793678  0.7  1.275  2.3  ...  1.203121   2.1   4.25   5.05   5.60   6.1
+
+[2 rows x 16 columns]
+
+In [321]: exps
+Out[321]:
+   subject  start_time  end_time stimulus outcome
+0      A01         2.3       5.6        L    pass
+1      A01         1.6       2.1        R    pass
+2      A01         2.3       5.6        R    pass
+3      A01         4.0      10.2        R    fail
+4      A01         2.8       4.5        L    pass
+5      A01         0.7       6.1        L    pass
+6      A01         3.5      11.2        R    fail
+7      A01         2.7       5.6        L    pass
+0      A02         2.7       5.6        L    pass
+1      A02         1.2       4.3        L    pass
+2      A02         4.0      10.4        R    fail
+3      A02         2.3       5.6        R    pass
+4      A02         4.1      10.0        R    fail
+5      A02         3.9      12.1        R    fail
+6      A02         2.8       4.5        L    pass
+7      A02         1.3       3.1        R    pass
+8      A02         0.8       4.1        L    pass
+9      A02         3.6      12.4        R    fail
+10     A02         5.5      13.3        R    fail
+
+In [322]: exps['end_time'] - exps['start_time']
+Out[322]:
+0     3.3
+1     0.5
+2     3.3
+3     6.2
+4     1.7
+5     5.4
+6     7.7
+7     2.9
+0     2.9
+1     3.1
+2     6.4
+3     3.3
+4     5.9
+5     8.2
+6     1.7
+7     1.8
+8     3.3
+9     8.8
+10    7.8
+dtype: float64
+
+In [323]: exps['duration'] = exps['end_time'] - exps['start_time']
+
+In [324]: exps
+Out[324]:
+   subject  start_time  end_time stimulus outcome  duration
+0      A01         2.3       5.6        L    pass       3.3
+1      A01         1.6       2.1        R    pass       0.5
+2      A01         2.3       5.6        R    pass       3.3
+3      A01         4.0      10.2        R    fail       6.2
+4      A01         2.8       4.5        L    pass       1.7
+5      A01         0.7       6.1        L    pass       5.4
+6      A01         3.5      11.2        R    fail       7.7
+7      A01         2.7       5.6        L    pass       2.9
+0      A02         2.7       5.6        L    pass       2.9
+1      A02         1.2       4.3        L    pass       3.1
+2      A02         4.0      10.4        R    fail       6.4
+3      A02         2.3       5.6        R    pass       3.3
+4      A02         4.1      10.0        R    fail       5.9
+5      A02         3.9      12.1        R    fail       8.2
+6      A02         2.8       4.5        L    pass       1.7
+7      A02         1.3       3.1        R    pass       1.8
+8      A02         0.8       4.1        L    pass       3.3
+9      A02         3.6      12.4        R    fail       8.8
+10     A02         5.5      13.3        R    fail       7.8
+
+In [325]: exps.groupby('outcome').mean()
+Out[325]:
+         start_time   end_time  duration
+outcome
+fail       4.085714  11.371429  7.285714
+pass       1.958333   4.725000  2.766667
+
+In [326]:     missd = [[1, 2, 3],
+     ...:              [4, 5],
+     ...:              [7, 8, 9]]
+
+In [327]: missd
+Out[327]: [[1, 2, 3], [4, 5], [7, 8, 9]]
+
+In [328]: np.array(missd)
+<ipython-input-328-8b33692d61c7>:1: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray.
+  np.array(missd)
+Out[328]: array([list([1, 2, 3]), list([4, 5]), list([7, 8, 9])], dtype=object)
+
+In [329]:     missd = [[1, 2, 3],
+     ...:              [4, 5, np.nan],
+     ...:              [7, 8, 9]]
+
+In [330]:     nand  = [[1, 2, 3],
+     ...:              [4, 5, np.nan],
+     ...:              [7, 8, 9]]
+
+In [331]: np.array(nand)
+Out[331]:
+array([[ 1.,  2.,  3.],
+       [ 4.,  5., nan],
+       [ 7.,  8.,  9.]])
+
+In [332]: a = np.array(nand)
+
+In [333]: a.shape
+Out[333]: (3, 3)
+
+In [334]:     missd = [[1, 2, 3],
+     ...:              [4, 5],
+     ...:              [7, 8, 9]]
+
+In [335]: missd
+Out[335]: [[1, 2, 3], [4, 5], [7, 8, 9]]
+
+In [336]: missdf = pd.DataFrame(missd)
+
+In [337]: missdf
+Out[337]:
+   0  1    2
+0  1  2  3.0
+1  4  5  NaN
+2  7  8  9.0
+
+In [338]: nand
+Out[338]: [[1, 2, 3], [4, 5, nan], [7, 8, 9]]
+
+In [339]: nandf = pd.DataFrame(nand)
+
+In [340]: nandf
+Out[340]:
+   0  1    2
+0  1  2  3.0
+1  4  5  NaN
+2  7  8  9.0
+
+In [341]: exps
+Out[341]:
+   subject  start_time  end_time stimulus outcome  duration
+0      A01         2.3       5.6        L    pass       3.3
+1      A01         1.6       2.1        R    pass       0.5
+2      A01         2.3       5.6        R    pass       3.3
+3      A01         4.0      10.2        R    fail       6.2
+4      A01         2.8       4.5        L    pass       1.7
+5      A01         0.7       6.1        L    pass       5.4
+6      A01         3.5      11.2        R    fail       7.7
+7      A01         2.7       5.6        L    pass       2.9
+0      A02         2.7       5.6        L    pass       2.9
+1      A02         1.2       4.3        L    pass       3.1
+2      A02         4.0      10.4        R    fail       6.4
+3      A02         2.3       5.6        R    pass       3.3
+4      A02         4.1      10.0        R    fail       5.9
+5      A02         3.9      12.1        R    fail       8.2
+6      A02         2.8       4.5        L    pass       1.7
+7      A02         1.3       3.1        R    pass       1.8
+8      A02         0.8       4.1        L    pass       3.3
+9      A02         3.6      12.4        R    fail       8.8
+10     A02         5.5      13.3        R    fail       7.8
+
+In [342]: bigexps = pd.concat([exps, exps, exps, exps])
+
+In [343]: bigexps
+Out[343]:
+   subject  start_time  end_time stimulus outcome  duration
+0      A01         2.3       5.6        L    pass       3.3
+1      A01         1.6       2.1        R    pass       0.5
+2      A01         2.3       5.6        R    pass       3.3
+3      A01         4.0      10.2        R    fail       6.2
+4      A01         2.8       4.5        L    pass       1.7
+..     ...         ...       ...      ...     ...       ...
+6      A02         2.8       4.5        L    pass       1.7
+7      A02         1.3       3.1        R    pass       1.8
+8      A02         0.8       4.1        L    pass       3.3
+9      A02         3.6      12.4        R    fail       8.8
+10     A02         5.5      13.3        R    fail       7.8
+
+[76 rows x 6 columns]
+
+In [344]: pd.set_option('display.max_rows', None)
+
+In [345]: pd.set_option('display.max_columns', None)
+
+In [346]: bigexps
+Out[346]:
+   subject  start_time  end_time stimulus outcome  duration
+0      A01         2.3       5.6        L    pass       3.3
+1      A01         1.6       2.1        R    pass       0.5
+2      A01         2.3       5.6        R    pass       3.3
+3      A01         4.0      10.2        R    fail       6.2
+4      A01         2.8       4.5        L    pass       1.7
+5      A01         0.7       6.1        L    pass       5.4
+6      A01         3.5      11.2        R    fail       7.7
+7      A01         2.7       5.6        L    pass       2.9
+0      A02         2.7       5.6        L    pass       2.9
+1      A02         1.2       4.3        L    pass       3.1
+2      A02         4.0      10.4        R    fail       6.4
+3      A02         2.3       5.6        R    pass       3.3
+4      A02         4.1      10.0        R    fail       5.9
+5      A02         3.9      12.1        R    fail       8.2
+6      A02         2.8       4.5        L    pass       1.7
+7      A02         1.3       3.1        R    pass       1.8
+8      A02         0.8       4.1        L    pass       3.3
+9      A02         3.6      12.4        R    fail       8.8
+10     A02         5.5      13.3        R    fail       7.8
+0      A01         2.3       5.6        L    pass       3.3
+1      A01         1.6       2.1        R    pass       0.5
+2      A01         2.3       5.6        R    pass       3.3
+3      A01         4.0      10.2        R    fail       6.2
+4      A01         2.8       4.5        L    pass       1.7
+5      A01         0.7       6.1        L    pass       5.4
+6      A01         3.5      11.2        R    fail       7.7
+7      A01         2.7       5.6        L    pass       2.9
+0      A02         2.7       5.6        L    pass       2.9
+1      A02         1.2       4.3        L    pass       3.1
+2      A02         4.0      10.4        R    fail       6.4
+3      A02         2.3       5.6        R    pass       3.3
+4      A02         4.1      10.0        R    fail       5.9
+5      A02         3.9      12.1        R    fail       8.2
+6      A02         2.8       4.5        L    pass       1.7
+7      A02         1.3       3.1        R    pass       1.8
+8      A02         0.8       4.1        L    pass       3.3
+9      A02         3.6      12.4        R    fail       8.8
+10     A02         5.5      13.3        R    fail       7.8
+0      A01         2.3       5.6        L    pass       3.3
+1      A01         1.6       2.1        R    pass       0.5
+2      A01         2.3       5.6        R    pass       3.3
+3      A01         4.0      10.2        R    fail       6.2
+4      A01         2.8       4.5        L    pass       1.7
+5      A01         0.7       6.1        L    pass       5.4
+6      A01         3.5      11.2        R    fail       7.7
+7      A01         2.7       5.6        L    pass       2.9
+0      A02         2.7       5.6        L    pass       2.9
+1      A02         1.2       4.3        L    pass       3.1
+2      A02         4.0      10.4        R    fail       6.4
+3      A02         2.3       5.6        R    pass       3.3
+4      A02         4.1      10.0        R    fail       5.9
+5      A02         3.9      12.1        R    fail       8.2
+6      A02         2.8       4.5        L    pass       1.7
+7      A02         1.3       3.1        R    pass       1.8
+8      A02         0.8       4.1        L    pass       3.3
+9      A02         3.6      12.4        R    fail       8.8
+10     A02         5.5      13.3        R    fail       7.8
+0      A01         2.3       5.6        L    pass       3.3
+1      A01         1.6       2.1        R    pass       0.5
+2      A01         2.3       5.6        R    pass       3.3
+3      A01         4.0      10.2        R    fail       6.2
+4      A01         2.8       4.5        L    pass       1.7
+5      A01         0.7       6.1        L    pass       5.4
+6      A01         3.5      11.2        R    fail       7.7
+7      A01         2.7       5.6        L    pass       2.9
+0      A02         2.7       5.6        L    pass       2.9
+1      A02         1.2       4.3        L    pass       3.1
+2      A02         4.0      10.4        R    fail       6.4
+3      A02         2.3       5.6        R    pass       3.3
+4      A02         4.1      10.0        R    fail       5.9
+5      A02         3.9      12.1        R    fail       8.2
+6      A02         2.8       4.5        L    pass       1.7
+7      A02         1.3       3.1        R    pass       1.8
+8      A02         0.8       4.1        L    pass       3.3
+9      A02         3.6      12.4        R    fail       8.8
+10     A02         5.5      13.3        R    fail       7.8
+
+In [347]:
