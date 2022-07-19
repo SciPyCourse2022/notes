@@ -4,7 +4,7 @@ As always, show your work, use docstrings and good style, and don't forget to te
 
 #### images
 
-1. Use the `skimage` library to load the file `nissl.tif` as a colour image array. What shape is the array? What is its datatype (`dtype`)?
+1. Use the `skimage` library to load the file `nissl.tif` as a colour image array. NOTE: you might have to run `pip install imagecodecs` in order for skimage to be able to read .tif files. What shape is the array? What is its datatype (`dtype`)?
 
 2. Display the image in matplotlib using `imshow()`. Check each channel (red, green and blue) programmatically to see if it has signal, i.e. non-zero pixel values. Which colour channel has signal?
 
