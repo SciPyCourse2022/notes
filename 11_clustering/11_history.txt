@@ -1,0 +1,1103 @@
+
+mspacek@Godel:~/SciPyCourse2022/notes/homework5$ ls
+homework5.md          homework5_solutions.py              nissl_gray.png   student_solutions
+homework5.pdf         log_reaction_time_distribution.png  nissl.tif
+homework5_samples.py  misc                                stroop_data.csv
+mspacek@Godel:~/SciPyCourse2022/notes/homework5$ ipython
+Python 3.8.10 (default, Jun 22 2022, 20:18:18)
+Type 'copyright', 'credits' or 'license' for more information
+IPython 8.1.1 -- An enhanced Interactive Python. Type '?' for help.
+
+In [1]: from skimage import io
+
+In [2]: io.imread?
+Signature: io.imread(fname, as_gray=False, plugin=None, **plugin_args)
+Docstring:
+Load an image from file.
+
+Parameters
+----------
+fname : string
+    Image file name, e.g. ``test.jpg`` or URL.
+as_gray : bool, optional
+    If True, convert color images to gray-scale (64-bit floats).
+    Images that are already in gray-scale format are not converted.
+plugin : str, optional
+    Name of plugin to use.  By default, the different plugins are
+    tried (starting with imageio) until a suitable
+    candidate is found.  If not given and fname is a tiff file, the
+    tifffile plugin will be used.
+
+Other Parameters
+----------------
+plugin_args : keywords
+    Passed to the given plugin.
+
+Returns
+-------
+img_array : ndarray
+    The different color bands/channels are stored in the
+    third dimension, such that a gray-image is MxN, an
+    RGB-image MxNx3 and an RGBA-image MxNx4.
+File:      /usr/local/lib/python3.8/dist-packages/skimage/io/_io.py
+Type:      function
+
+In [3]: data = io.imread('nissl.tif')
+---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+Input In [3], in <cell line: 1>()
+----> 1 data = io.imread('nissl.tif')
+
+File /usr/local/lib/python3.8/dist-packages/skimage/io/_io.py:53, in imread(fname, as_gray, plugin, **plugin_args)
+     50         plugin = 'tifffile'
+     52 with file_or_url_context(fname) as fname:
+---> 53     img = call_plugin('imread', fname, plugin=plugin, **plugin_args)
+     55 if not hasattr(img, 'ndim'):
+     56     return img
+
+File /usr/local/lib/python3.8/dist-packages/skimage/io/manage_plugins.py:207, in call_plugin(kind, *args, **kwargs)
+    203     except IndexError:
+    204         raise RuntimeError('Could not find the plugin "%s" for %s.' %
+    205                            (plugin, kind))
+--> 207 return func(*args, **kwargs)
+
+File /usr/local/lib/python3.8/dist-packages/skimage/io/_plugins/tifffile_plugin.py:30, in imread(fname, **kwargs)
+     27 if 'img_num' in kwargs:
+     28     kwargs['key'] = kwargs.pop('img_num')
+---> 30 return tifffile_imread(fname, **kwargs)
+
+File /usr/local/lib/python3.8/dist-packages/tifffile/tifffile.py:819, in imread(files, aszarr, **kwargs)
+    817             if aszarr:
+    818                 return tif.aszarr(**kwargs)
+--> 819             return tif.asarray(**kwargs)
+    821 with TiffSequence(files, **kwargs_seq) as imseq:
+    822     if aszarr:
+
+File /usr/local/lib/python3.8/dist-packages/tifffile/tifffile.py:3381, in TiffFile.asarray(self, key, series, level, squeeze, out, maxworkers)
+   3377         result = self.filehandle.read_array(
+   3378             typecode, product(shape), out=out
+   3379         )
+   3380 elif len(pages) == 1:
+-> 3381     result = pages[0].asarray(out=out, maxworkers=maxworkers)
+   3382 else:
+   3383     result = stack_pages(pages, out=out, maxworkers=maxworkers)
+
+File /usr/local/lib/python3.8/dist-packages/tifffile/tifffile.py:6863, in TiffPage.asarray(self, out, squeeze, lock, maxworkers)
+   6857         result[
+   6858             s, d : d + shape[0], l : l + shape[1], w : w + shape[2]
+   6859         ] = segment
+   6860         # except IndexError:
+   6861         #     pass  # corrupted file e.g. with too many strips
+-> 6863     for _ in self.segments(
+   6864         func=func,
+   6865         lock=lock,
+   6866         maxworkers=maxworkers,
+   6867         sort=True,
+   6868         _fullsize=False,
+   6869     ):
+   6870         pass
+   6872 result.shape = keyframe.shaped
+
+File /usr/local/lib/python3.8/dist-packages/tifffile/tifffile.py:6721, in TiffPage.segments(self, lock, maxworkers, func, sort, _fullsize)
+   6713 with ThreadPoolExecutor(maxworkers) as executor:
+   6714     for segments in fh.read_segments(
+   6715         self.dataoffsets,
+   6716         self.databytecounts,
+   (...)
+   6719         flat=False,
+   6720     ):
+-> 6721         yield from executor.map(decode, segments)
+
+File /usr/lib/python3.8/concurrent/futures/_base.py:619, in Executor.map.<locals>.result_iterator()
+    616 while fs:
+    617     # Careful not to keep a reference to the popped future
+    618     if timeout is None:
+--> 619         yield fs.pop().result()
+    620     else:
+    621         yield fs.pop().result(end_time - time.monotonic())
+
+File /usr/lib/python3.8/concurrent/futures/_base.py:437, in Future.result(self, timeout)
+    435     raise CancelledError()
+    436 elif self._state == FINISHED:
+--> 437     return self.__get_result()
+    439 self._condition.wait(timeout)
+    441 if self._state in [CANCELLED, CANCELLED_AND_NOTIFIED]:
+
+File /usr/lib/python3.8/concurrent/futures/_base.py:389, in Future.__get_result(self)
+    387 if self._exception:
+    388     try:
+--> 389         raise self._exception
+    390     finally:
+    391         # Break a reference cycle with the exception in self._exception
+    392         self = None
+
+File /usr/lib/python3.8/concurrent/futures/thread.py:57, in _WorkItem.run(self)
+     54     return
+     56 try:
+---> 57     result = self.fn(*self.args, **self.kwargs)
+     58 except BaseException as exc:
+     59     self.future.set_exception(exc)
+
+File /usr/local/lib/python3.8/dist-packages/tifffile/tifffile.py:6696, in TiffPage.segments.<locals>.decode(args, decodeargs, keyframe, func)
+   6693 def decode(  # type: ignore
+   6694     args, decodeargs=decodeargs, keyframe=keyframe, func=func
+   6695 ):
+-> 6696     return func(keyframe.decode(*args, **decodeargs))
+
+File /usr/local/lib/python3.8/dist-packages/tifffile/tifffile.py:6317, in TiffPage.decode.<locals>.decode(exc, *args, **kwargs)
+   6316 def decode(*args, exc=str(exc)[1:-1], **kwargs):  # type: ignore
+-> 6317     raise ValueError(f'{exc}')
+
+ValueError: <COMPRESSION.LZW: 5> requires the 'imagecodecs' package
+> /usr/local/lib/python3.8/dist-packages/tifffile/tifffile.py(6317)decode()
+   6315
+   6316             def decode(*args, exc=str(exc)[1:-1], **kwargs):  # type: ignore
+-> 6317                 raise ValueError(f'{exc}')
+   6318
+   6319             return cache(decode)
+
+ipdb> c
+
+In [4]:
+mspacek@Godel:~/SciPyCourse2022/notes/homework5$ sudo pip3 install imagecodecs
+[sudo] password for mspacek:
+Collecting imagecodecs
+  Downloading imagecodecs-2022.2.22-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (33.2 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 33.2/33.2 MB 10.5 MB/s eta 0:00:00
+Requirement already satisfied: numpy>=1.19.2 in /usr/local/lib/python3.8/dist-packages (from imagecodecs) (1.21.6)
+Installing collected packages: imagecodecs
+Successfully installed imagecodecs-2022.2.22
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+mspacek@Godel:~/SciPyCourse2022/notes/homework5$ ipython
+Python 3.8.10 (default, Jun 22 2022, 20:18:18)
+Type 'copyright', 'credits' or 'license' for more information
+IPython 8.1.1 -- An enhanced Interactive Python. Type '?' for help.
+
+In [1]: from skimage import io
+
+In [2]: data = io.imread('nissl.tif')
+
+In [3]: data.shape
+Out[3]: (2048, 2048, 3)
+
+In [4]: data.dtype
+Out[4]: dtype('uint8')
+
+In [5]: 2**8
+Out[5]: 256
+
+In [6]: import matplotlib.pyplot as plt
+
+In [7]: f1, ax1 = plt.subplots()
+
+In [8]: ax1.imshow(data)
+Out[8]: <matplotlib.image.AxesImage at 0x7fb458ce0e20>
+
+In [9]: data[:, :, 0].shape
+Out[9]: (2048, 2048)
+
+In [10]: (data[:, :, 0] != 0).any()
+Out[10]: False
+
+In [11]: (data[:, :, 1] != 0).any()
+Out[11]: True
+
+In [12]: (data[:, :, 2] != 0).any()
+Out[12]: False
+
+In [13]: (data[:, :, 0] == 0).all()
+Out[13]: True
+
+In [14]: (data[:, :, 1] == 0).all()
+Out[14]: False
+
+In [15]: (data[:, :, 2] == 0).all()
+Out[15]: True
+
+In [16]: data[:, :, 0]
+Out[16]:
+array([[0, 0, 0, ..., 0, 0, 0],
+       [0, 0, 0, ..., 0, 0, 0],
+       [0, 0, 0, ..., 0, 0, 0],
+       ...,
+       [0, 0, 0, ..., 0, 0, 0],
+       [0, 0, 0, ..., 0, 0, 0],
+       [0, 0, 0, ..., 0, 0, 0]], dtype=uint8)
+
+In [17]: data[:, :, 0] != 0
+Out[17]:
+array([[False, False, False, ..., False, False, False],
+       [False, False, False, ..., False, False, False],
+       [False, False, False, ..., False, False, False],
+       ...,
+       [False, False, False, ..., False, False, False],
+       [False, False, False, ..., False, False, False],
+       [False, False, False, ..., False, False, False]])
+
+In [18]: (data[:, :, 0] != 0).any()
+Out[18]: False
+
+In [19]: (data[:, :, 0] == 0)
+Out[19]:
+array([[ True,  True,  True, ...,  True,  True,  True],
+       [ True,  True,  True, ...,  True,  True,  True],
+       [ True,  True,  True, ...,  True,  True,  True],
+       ...,
+       [ True,  True,  True, ...,  True,  True,  True],
+       [ True,  True,  True, ...,  True,  True,  True],
+       [ True,  True,  True, ...,  True,  True,  True]])
+
+In [20]: (data[:, :, 0] == 0).all()
+Out[20]: True
+
+In [21]: data[:, :, 1]
+Out[21]:
+array([[ 0,  0,  0, ...,  0,  0,  0],
+       [ 1,  0,  1, ...,  0,  0,  0],
+       [ 0,  1,  0, ...,  0,  0,  0],
+       ...,
+       [13, 24, 32, ..., 34, 16,  7],
+       [19, 26, 62, ...,  8,  3, 14],
+       [43, 67, 55, ...,  9,  3, 19]], dtype=uint8)
+
+In [22]: green = data[:, :, 1]
+
+In [23]: green.shape
+Out[23]: (2048, 2048)
+
+In [24]: green
+Out[24]:
+array([[ 0,  0,  0, ...,  0,  0,  0],
+       [ 1,  0,  1, ...,  0,  0,  0],
+       [ 0,  1,  0, ...,  0,  0,  0],
+       ...,
+       [13, 24, 32, ..., 34, 16,  7],
+       [19, 26, 62, ...,  8,  3, 14],
+       [43, 67, 55, ...,  9,  3, 19]], dtype=uint8)
+
+In [25]: 255 - green
+Out[25]:
+array([[255, 255, 255, ..., 255, 255, 255],
+       [254, 255, 254, ..., 255, 255, 255],
+       [255, 254, 255, ..., 255, 255, 255],
+       ...,
+       [242, 231, 223, ..., 221, 239, 248],
+       [236, 229, 193, ..., 247, 252, 241],
+       [212, 188, 200, ..., 246, 252, 236]], dtype=uint8)
+
+In [26]: inv = 255 - green
+
+In [27]: inv
+Out[27]:
+array([[255, 255, 255, ..., 255, 255, 255],
+       [254, 255, 254, ..., 255, 255, 255],
+       [255, 254, 255, ..., 255, 255, 255],
+       ...,
+       [242, 231, 223, ..., 221, 239, 248],
+       [236, 229, 193, ..., 247, 252, 241],
+       [212, 188, 200, ..., 246, 252, 236]], dtype=uint8)
+
+In [28]: inv[::2, ::2]
+Out[28]:
+array([[255, 255, 248, ..., 255, 255, 255],
+       [255, 255, 255, ..., 255, 255, 255],
+       [255, 254, 255, ..., 255, 255, 255],
+       ...,
+       [169, 214, 224, ..., 246, 213, 250],
+       [236, 225, 202, ..., 233, 215, 245],
+       [236, 193, 167, ..., 247, 246, 252]], dtype=uint8)
+
+In [29]: inv[::2, ::2].shape
+Out[29]: (1024, 1024)
+
+In [30]: subsampled = inv[::2, ::2]
+
+In [31]: f2, ax2 = plt.subplots()
+
+In [32]: ax2.imshow(subsampled, cmap='gray')
+Out[32]: <matplotlib.image.AxesImage at 0x7fb43ab53ca0>
+
+In [33]: io.imsaved?
+Object `io.imsaved` not found.
+
+In [34]: io.imsave?
+Signature: io.imsave(fname, arr, plugin=None, check_contrast=True, **plugin_args)
+Docstring:
+Save an image to file.
+
+Parameters
+----------
+fname : str
+    Target filename.
+arr : ndarray of shape (M,N) or (M,N,3) or (M,N,4)
+    Image data.
+plugin : str, optional
+    Name of plugin to use.  By default, the different plugins are
+    tried (starting with imageio) until a suitable
+    candidate is found.  If not given and fname is a tiff file, the
+    tifffile plugin will be used.
+check_contrast : bool, optional
+    Check for low contrast and print warning (default: True).
+
+Other Parameters
+----------------
+plugin_args : keywords
+    Passed to the given plugin.
+
+Notes
+-----
+When saving a JPEG, the compression ratio may be controlled using the
+``quality`` keyword argument which is an integer with values in [1, 100]
+where 1 is worst quality and smallest file size, and 100 is best quality
+and largest file size (default 75).  This is only available when using
+the PIL and imageio plugins.
+File:      /usr/local/lib/python3.8/dist-packages/skimage/io/_io.py
+Type:      function
+
+In [35]: io.imsave('nissl_gray.png', subsampled)
+
+In [36]: ls
+homework5.md          homework5_solutions.py              nissl_gray.png   student_solutions/
+homework5.pdf         log_reaction_time_distribution.png  nissl.tif
+homework5_samples.py  misc/                               stroop_data.csv
+
+In [37]: import pandas as pd
+
+In [38]: pd.load_csv
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+Input In [38], in <cell line: 1>()
+----> 1 pd.load_csv
+
+File /usr/local/lib/python3.8/dist-packages/pandas/__init__.py:261, in __getattr__(name)
+    257     from pandas.core.arrays.sparse import SparseArray as _SparseArray
+    259     return _SparseArray
+--> 261 raise AttributeError(f"module 'pandas' has no attribute '{name}'")
+
+AttributeError: module 'pandas' has no attribute 'load_csv'
+> /usr/local/lib/python3.8/dist-packages/pandas/__init__.py(261)__getattr__()
+    259         return _SparseArray
+    260
+--> 261     raise AttributeError(f"module 'pandas' has no attribute '{name}'")
+    262
+    263
+
+ipdb> c
+
+In [39]: data = pd.read_csv('stroop_data.csv')
+
+In [40]: data
+Out[40]:
+      subject  trial stimword stimcolor respcolor  reaction_time
+0      156772      1        Y         Y         Y           1389
+1      156772      2        G         G         G           2043
+2      156772      3        R         R         R           1389
+3      156772      4        Y         Y         Y           1092
+4      156772      5        G         G         G           1310
+...       ...    ...      ...       ...       ...            ...
+1948   156875     86        G         G         G            936
+1949   156875     87        Y         Y         Y            944
+1950   156875     88        R         R         R            984
+1951   156875     89        G         G         G           1096
+1952   156875     90        R         R         R            984
+
+[1953 rows x 6 columns]
+
+In [41]: len(data)
+Out[41]: 1953
+
+In [42]: data.groupby('subject')
+Out[42]: <pandas.core.groupby.generic.DataFrameGroupBy object at 0x7fb4385e4e50>
+
+In [43]: data.groupby('subject').describe()
+Out[43]:
+        trial                                    ... reaction_time
+        count       mean        std  min    25%  ...           min      25%     50%     75%     max
+subject                                          ...
+156772   90.0  45.500000  26.124701  1.0  23.25  ...         639.0  1029.00  1389.0  1572.0  2387.0
+156839   90.0  45.500000  26.124701  1.0  23.25  ...         119.0   200.00   452.0   624.0  5770.0
+156856   90.0  45.500000  26.124701  1.0  23.25  ...         219.0   826.25   998.0  1275.0  2355.0
+156857   89.0  46.000000  25.836021  2.0  24.00  ...         584.0   944.00  1263.0  1696.0  5312.0
+156858   89.0  46.000000  25.836021  2.0  24.00  ...         584.0   944.00  1263.0  1696.0  5312.0
+156859   89.0  46.000000  25.836021  2.0  24.00  ...         584.0   944.00  1263.0  1696.0  5312.0
+156860   88.0  46.090909  26.120691  1.0  24.75  ...        1063.0  1591.75  1900.0  2286.0  5024.0
+156861   88.0  46.090909  26.120691  1.0  24.75  ...        1063.0  1591.75  1900.0  2286.0  5024.0
+156862   89.0  46.000000  25.836021  2.0  24.00  ...         584.0   944.00  1263.0  1696.0  5312.0
+156863   88.0  46.090909  26.120691  1.0  24.75  ...        1063.0  1591.75  1900.0  2286.0  5024.0
+156864   89.0  45.898876  25.995649  1.0  24.00  ...         440.0  1056.00  1583.0  2149.0  4208.0
+156865   89.0  45.898876  25.995649  1.0  24.00  ...         440.0  1056.00  1583.0  2149.0  4208.0
+156866   89.0  45.898876  25.995649  1.0  24.00  ...         440.0  1056.00  1583.0  2149.0  4208.0
+156867   89.0  45.898876  25.995649  1.0  24.00  ...         440.0  1056.00  1583.0  2149.0  4208.0
+156868   90.0  45.500000  26.124701  1.0  23.25  ...         776.0  1268.00  1592.0  1870.0  4552.0
+156869   89.0  45.898876  25.995649  1.0  24.00  ...         440.0  1056.00  1583.0  2149.0  4208.0
+156870   89.0  45.898876  25.995649  1.0  24.00  ...         440.0  1056.00  1583.0  2149.0  4208.0
+156871   89.0  45.898876  25.995649  1.0  24.00  ...         440.0  1056.00  1583.0  2149.0  4208.0
+156872   87.0  46.931034  25.377060  2.0  25.50  ...        1176.0  1560.00  1944.0  2279.5  4600.0
+156873   89.0  45.898876  25.995649  1.0  24.00  ...         440.0  1056.00  1583.0  2149.0  4208.0
+156874   89.0  45.898876  25.995649  1.0  24.00  ...         440.0  1056.00  1583.0  2149.0  4208.0
+156875   85.0  46.858824  25.735908  3.0  25.00  ...         896.0  1096.00  1551.0  1968.0  5760.0
+
+[22 rows x 16 columns]
+
+In [44]: data
+Out[44]:
+      subject  trial stimword stimcolor respcolor  reaction_time
+0      156772      1        Y         Y         Y           1389
+1      156772      2        G         G         G           2043
+2      156772      3        R         R         R           1389
+3      156772      4        Y         Y         Y           1092
+4      156772      5        G         G         G           1310
+...       ...    ...      ...       ...       ...            ...
+1948   156875     86        G         G         G            936
+1949   156875     87        Y         Y         Y            944
+1950   156875     88        R         R         R            984
+1951   156875     89        G         G         G           1096
+1952   156875     90        R         R         R            984
+
+[1953 rows x 6 columns]
+
+In [45]: data.groupby('subject').describe()
+Out[45]:
+        trial                                    ... reaction_time
+        count       mean        std  min    25%  ...           min      25%     50%     75%     max
+subject                                          ...
+156772   90.0  45.500000  26.124701  1.0  23.25  ...         639.0  1029.00  1389.0  1572.0  2387.0
+156839   90.0  45.500000  26.124701  1.0  23.25  ...         119.0   200.00   452.0   624.0  5770.0
+156856   90.0  45.500000  26.124701  1.0  23.25  ...         219.0   826.25   998.0  1275.0  2355.0
+156857   89.0  46.000000  25.836021  2.0  24.00  ...         584.0   944.00  1263.0  1696.0  5312.0
+156858   89.0  46.000000  25.836021  2.0  24.00  ...         584.0   944.00  1263.0  1696.0  5312.0
+156859   89.0  46.000000  25.836021  2.0  24.00  ...         584.0   944.00  1263.0  1696.0  5312.0
+156860   88.0  46.090909  26.120691  1.0  24.75  ...        1063.0  1591.75  1900.0  2286.0  5024.0
+156861   88.0  46.090909  26.120691  1.0  24.75  ...        1063.0  1591.75  1900.0  2286.0  5024.0
+156862   89.0  46.000000  25.836021  2.0  24.00  ...         584.0   944.00  1263.0  1696.0  5312.0
+156863   88.0  46.090909  26.120691  1.0  24.75  ...        1063.0  1591.75  1900.0  2286.0  5024.0
+156864   89.0  45.898876  25.995649  1.0  24.00  ...         440.0  1056.00  1583.0  2149.0  4208.0
+156865   89.0  45.898876  25.995649  1.0  24.00  ...         440.0  1056.00  1583.0  2149.0  4208.0
+156866   89.0  45.898876  25.995649  1.0  24.00  ...         440.0  1056.00  1583.0  2149.0  4208.0
+156867   89.0  45.898876  25.995649  1.0  24.00  ...         440.0  1056.00  1583.0  2149.0  4208.0
+156868   90.0  45.500000  26.124701  1.0  23.25  ...         776.0  1268.00  1592.0  1870.0  4552.0
+156869   89.0  45.898876  25.995649  1.0  24.00  ...         440.0  1056.00  1583.0  2149.0  4208.0
+156870   89.0  45.898876  25.995649  1.0  24.00  ...         440.0  1056.00  1583.0  2149.0  4208.0
+156871   89.0  45.898876  25.995649  1.0  24.00  ...         440.0  1056.00  1583.0  2149.0  4208.0
+156872   87.0  46.931034  25.377060  2.0  25.50  ...        1176.0  1560.00  1944.0  2279.5  4600.0
+156873   89.0  45.898876  25.995649  1.0  24.00  ...         440.0  1056.00  1583.0  2149.0  4208.0
+156874   89.0  45.898876  25.995649  1.0  24.00  ...         440.0  1056.00  1583.0  2149.0  4208.0
+156875   85.0  46.858824  25.735908  3.0  25.00  ...         896.0  1096.00  1551.0  1968.0  5760.0
+
+[22 rows x 16 columns]
+
+In [46]: data.groupby('subject').describe()['stimcolor']
+---------------------------------------------------------------------------
+KeyError                                  Traceback (most recent call last)
+File /usr/local/lib/python3.8/dist-packages/pandas/core/indexes/base.py:3621, in Index.get_loc(self, key, method, tolerance)
+   3620 try:
+-> 3621     return self._engine.get_loc(casted_key)
+   3622 except KeyError as err:
+
+File /usr/local/lib/python3.8/dist-packages/pandas/_libs/index.pyx:136, in pandas._libs.index.IndexEngine.get_loc()
+
+File /usr/local/lib/python3.8/dist-packages/pandas/_libs/index.pyx:163, in pandas._libs.index.IndexEngine.get_loc()
+
+File pandas/_libs/hashtable_class_helper.pxi:5198, in pandas._libs.hashtable.PyObjectHashTable.get_item()
+
+File pandas/_libs/hashtable_class_helper.pxi:5206, in pandas._libs.hashtable.PyObjectHashTable.get_item()
+
+KeyError: 'stimcolor'
+
+The above exception was the direct cause of the following exception:
+
+KeyError                                  Traceback (most recent call last)
+Input In [46], in <cell line: 1>()
+----> 1 data.groupby('subject').describe()['stimcolor']
+
+File /usr/local/lib/python3.8/dist-packages/pandas/core/frame.py:3504, in DataFrame.__getitem__(self, key)
+   3502 if is_single_key:
+   3503     if self.columns.nlevels > 1:
+-> 3504         return self._getitem_multilevel(key)
+   3505     indexer = self.columns.get_loc(key)
+   3506     if is_integer(indexer):
+
+File /usr/local/lib/python3.8/dist-packages/pandas/core/frame.py:3555, in DataFrame._getitem_multilevel(self, key)
+   3553 def _getitem_multilevel(self, key):
+   3554     # self.columns is a MultiIndex
+-> 3555     loc = self.columns.get_loc(key)
+   3556     if isinstance(loc, (slice, np.ndarray)):
+   3557         new_columns = self.columns[loc]
+
+File /usr/local/lib/python3.8/dist-packages/pandas/core/indexes/multi.py:2871, in MultiIndex.get_loc(self, key, method)
+   2868     return mask
+   2870 if not isinstance(key, tuple):
+-> 2871     loc = self._get_level_indexer(key, level=0)
+   2872     return _maybe_to_slice(loc)
+   2874 keylen = len(key)
+
+File /usr/local/lib/python3.8/dist-packages/pandas/core/indexes/multi.py:3224, in MultiIndex._get_level_indexer(self, key, level, indexer)
+   3220         return slice(i, j, step)
+   3222 else:
+-> 3224     idx = self._get_loc_single_level_index(level_index, key)
+   3226     if level > 0 or self._lexsort_depth == 0:
+   3227         # Desired level is not sorted
+   3228         if isinstance(idx, slice):
+   3229             # test_get_loc_partial_timestamp_multiindex
+
+File /usr/local/lib/python3.8/dist-packages/pandas/core/indexes/multi.py:2804, in MultiIndex._get_loc_single_level_index(self, level_index, key)
+   2802     return -1
+   2803 else:
+-> 2804     return level_index.get_loc(key)
+
+File /usr/local/lib/python3.8/dist-packages/pandas/core/indexes/base.py:3623, in Index.get_loc(self, key, method, tolerance)
+   3621     return self._engine.get_loc(casted_key)
+   3622 except KeyError as err:
+-> 3623     raise KeyError(key) from err
+   3624 except TypeError:
+   3625     # If we have a listlike key, _check_indexing_error will raise
+   3626     #  InvalidIndexError. Otherwise we fall through and re-raise
+   3627     #  the TypeError.
+   3628     self._check_indexing_error(key)
+
+KeyError: 'stimcolor'
+> /usr/local/lib/python3.8/dist-packages/pandas/core/indexes/base.py(3623)get_loc()
+   3621                 return self._engine.get_loc(casted_key)
+   3622             except KeyError as err:
+-> 3623                 raise KeyError(key) from err
+   3624             except TypeError:
+   3625                 # If we have a listlike key, _check_indexing_error will raise
+
+ipdb> c
+
+In [47]: data.groupby('subject').describe().columns
+Out[47]:
+MultiIndex([(        'trial', 'count'),
+            (        'trial',  'mean'),
+            (        'trial',   'std'),
+            (        'trial',   'min'),
+            (        'trial',   '25%'),
+            (        'trial',   '50%'),
+            (        'trial',   '75%'),
+            (        'trial',   'max'),
+            ('reaction_time', 'count'),
+            ('reaction_time',  'mean'),
+            ('reaction_time',   'std'),
+            ('reaction_time',   'min'),
+            ('reaction_time',   '25%'),
+            ('reaction_time',   '50%'),
+            ('reaction_time',   '75%'),
+            ('reaction_time',   'max')],
+           )
+
+In [48]: data.groupby('subject').describe()
+Out[48]:
+        trial                                    ... reaction_time
+        count       mean        std  min    25%  ...           min      25%     50%     75%     max
+subject                                          ...
+156772   90.0  45.500000  26.124701  1.0  23.25  ...         639.0  1029.00  1389.0  1572.0  2387.0
+156839   90.0  45.500000  26.124701  1.0  23.25  ...         119.0   200.00   452.0   624.0  5770.0
+156856   90.0  45.500000  26.124701  1.0  23.25  ...         219.0   826.25   998.0  1275.0  2355.0
+156857   89.0  46.000000  25.836021  2.0  24.00  ...         584.0   944.00  1263.0  1696.0  5312.0
+156858   89.0  46.000000  25.836021  2.0  24.00  ...         584.0   944.00  1263.0  1696.0  5312.0
+156859   89.0  46.000000  25.836021  2.0  24.00  ...         584.0   944.00  1263.0  1696.0  5312.0
+156860   88.0  46.090909  26.120691  1.0  24.75  ...        1063.0  1591.75  1900.0  2286.0  5024.0
+156861   88.0  46.090909  26.120691  1.0  24.75  ...        1063.0  1591.75  1900.0  2286.0  5024.0
+156862   89.0  46.000000  25.836021  2.0  24.00  ...         584.0   944.00  1263.0  1696.0  5312.0
+156863   88.0  46.090909  26.120691  1.0  24.75  ...        1063.0  1591.75  1900.0  2286.0  5024.0
+156864   89.0  45.898876  25.995649  1.0  24.00  ...         440.0  1056.00  1583.0  2149.0  4208.0
+156865   89.0  45.898876  25.995649  1.0  24.00  ...         440.0  1056.00  1583.0  2149.0  4208.0
+156866   89.0  45.898876  25.995649  1.0  24.00  ...         440.0  1056.00  1583.0  2149.0  4208.0
+156867   89.0  45.898876  25.995649  1.0  24.00  ...         440.0  1056.00  1583.0  2149.0  4208.0
+156868   90.0  45.500000  26.124701  1.0  23.25  ...         776.0  1268.00  1592.0  1870.0  4552.0
+156869   89.0  45.898876  25.995649  1.0  24.00  ...         440.0  1056.00  1583.0  2149.0  4208.0
+156870   89.0  45.898876  25.995649  1.0  24.00  ...         440.0  1056.00  1583.0  2149.0  4208.0
+156871   89.0  45.898876  25.995649  1.0  24.00  ...         440.0  1056.00  1583.0  2149.0  4208.0
+156872   87.0  46.931034  25.377060  2.0  25.50  ...        1176.0  1560.00  1944.0  2279.5  4600.0
+156873   89.0  45.898876  25.995649  1.0  24.00  ...         440.0  1056.00  1583.0  2149.0  4208.0
+156874   89.0  45.898876  25.995649  1.0  24.00  ...         440.0  1056.00  1583.0  2149.0  4208.0
+156875   85.0  46.858824  25.735908  3.0  25.00  ...         896.0  1096.00  1551.0  1968.0  5760.0
+
+[22 rows x 16 columns]
+
+In [49]: len(data.groupby('subject').describe())
+Out[49]: 22
+
+In [50]: data
+Out[50]:
+      subject  trial stimword stimcolor respcolor  reaction_time
+0      156772      1        Y         Y         Y           1389
+1      156772      2        G         G         G           2043
+2      156772      3        R         R         R           1389
+3      156772      4        Y         Y         Y           1092
+4      156772      5        G         G         G           1310
+...       ...    ...      ...       ...       ...            ...
+1948   156875     86        G         G         G            936
+1949   156875     87        Y         Y         Y            944
+1950   156875     88        R         R         R            984
+1951   156875     89        G         G         G           1096
+1952   156875     90        R         R         R            984
+
+[1953 rows x 6 columns]
+
+In [51]: data['subject']
+Out[51]:
+0       156772
+1       156772
+2       156772
+3       156772
+4       156772
+         ...
+1948    156875
+1949    156875
+1950    156875
+1951    156875
+1952    156875
+Name: subject, Length: 1953, dtype: int64
+
+In [52]: data['subject'].nunique()
+Out[52]: 22
+
+In [53]: data.groupby('subject')
+Out[53]: <pandas.core.groupby.generic.DataFrameGroupBy object at 0x7fb43051bf10>
+
+In [54]: data.groupby('subject')['mean']
+---------------------------------------------------------------------------
+KeyError                                  Traceback (most recent call last)
+Input In [54], in <cell line: 1>()
+----> 1 data.groupby('subject')['mean']
+
+File /usr/local/lib/python3.8/dist-packages/pandas/core/groupby/generic.py:1338, in DataFrameGroupBy.__getitem__(self, key)
+   1329 if isinstance(key, tuple) and len(key) > 1:
+   1330     # if len == 1, then it becomes a SeriesGroupBy and this is actually
+   1331     # valid syntax, so don't raise warning
+   1332     warnings.warn(
+   1333         "Indexing with multiple keys (implicitly converted to a tuple "
+   1334         "of keys) will be deprecated, use a list instead.",
+   1335         FutureWarning,
+   1336         stacklevel=find_stack_level(),
+   1337     )
+-> 1338 return super().__getitem__(key)
+
+File /usr/local/lib/python3.8/dist-packages/pandas/core/base.py:250, in SelectionMixin.__getitem__(self, key)
+    248 else:
+    249     if key not in self.obj:
+--> 250         raise KeyError(f"Column not found: {key}")
+    251     subset = self.obj[key]
+    252     ndim = subset.ndim
+
+KeyError: 'Column not found: mean'
+> /usr/local/lib/python3.8/dist-packages/pandas/core/base.py(250)__getitem__()
+    248         else:
+    249             if key not in self.obj:
+--> 250                 raise KeyError(f"Column not found: {key}")
+    251             subset = self.obj[key]
+    252             ndim = subset.ndim
+
+ipdb> c
+
+In [55]: data.groupby('subject').mean()
+Out[55]:
+             trial  reaction_time
+subject
+156772   45.500000    1339.344444
+156839   45.500000     601.711111
+156856   45.500000    1080.044444
+156857   46.000000    1523.977528
+156858   46.000000    1523.977528
+156859   46.000000    1523.977528
+156860   46.090909    2058.443182
+156861   46.090909    2058.443182
+156862   46.000000    1523.977528
+156863   46.090909    2058.443182
+156864   45.898876    1700.865169
+156865   45.898876    1700.865169
+156866   45.898876    1700.865169
+156867   45.898876    1700.865169
+156868   45.500000    1671.988889
+156869   45.898876    1700.865169
+156870   45.898876    1700.865169
+156871   45.898876    1700.865169
+156872   46.931034    2064.712644
+156873   45.898876    1700.865169
+156874   45.898876    1700.865169
+156875   46.858824    1844.541176
+
+In [56]: data['subject'].mean()
+Out[56]: 156859.9467485919
+
+In [57]: data['reaction_time'].mean()
+Out[57]: 1642.1669226830518
+
+In [58]: data.groupby('subject').mean().mean()
+Out[58]:
+trial              45.961476
+reaction_time    1644.607677
+dtype: float64
+
+In [59]: data.groupby('subject').mean()
+Out[59]:
+             trial  reaction_time
+subject
+156772   45.500000    1339.344444
+156839   45.500000     601.711111
+156856   45.500000    1080.044444
+156857   46.000000    1523.977528
+156858   46.000000    1523.977528
+156859   46.000000    1523.977528
+156860   46.090909    2058.443182
+156861   46.090909    2058.443182
+156862   46.000000    1523.977528
+156863   46.090909    2058.443182
+156864   45.898876    1700.865169
+156865   45.898876    1700.865169
+156866   45.898876    1700.865169
+156867   45.898876    1700.865169
+156868   45.500000    1671.988889
+156869   45.898876    1700.865169
+156870   45.898876    1700.865169
+156871   45.898876    1700.865169
+156872   46.931034    2064.712644
+156873   45.898876    1700.865169
+156874   45.898876    1700.865169
+156875   46.858824    1844.541176
+
+In [60]: data.groupby('subject').describe()
+Out[60]:
+        trial                                    ... reaction_time
+        count       mean        std  min    25%  ...           min      25%     50%     75%     max
+subject                                          ...
+156772   90.0  45.500000  26.124701  1.0  23.25  ...         639.0  1029.00  1389.0  1572.0  2387.0
+156839   90.0  45.500000  26.124701  1.0  23.25  ...         119.0   200.00   452.0   624.0  5770.0
+156856   90.0  45.500000  26.124701  1.0  23.25  ...         219.0   826.25   998.0  1275.0  2355.0
+156857   89.0  46.000000  25.836021  2.0  24.00  ...         584.0   944.00  1263.0  1696.0  5312.0
+156858   89.0  46.000000  25.836021  2.0  24.00  ...         584.0   944.00  1263.0  1696.0  5312.0
+156859   89.0  46.000000  25.836021  2.0  24.00  ...         584.0   944.00  1263.0  1696.0  5312.0
+156860   88.0  46.090909  26.120691  1.0  24.75  ...        1063.0  1591.75  1900.0  2286.0  5024.0
+156861   88.0  46.090909  26.120691  1.0  24.75  ...        1063.0  1591.75  1900.0  2286.0  5024.0
+156862   89.0  46.000000  25.836021  2.0  24.00  ...         584.0   944.00  1263.0  1696.0  5312.0
+156863   88.0  46.090909  26.120691  1.0  24.75  ...        1063.0  1591.75  1900.0  2286.0  5024.0
+156864   89.0  45.898876  25.995649  1.0  24.00  ...         440.0  1056.00  1583.0  2149.0  4208.0
+156865   89.0  45.898876  25.995649  1.0  24.00  ...         440.0  1056.00  1583.0  2149.0  4208.0
+156866   89.0  45.898876  25.995649  1.0  24.00  ...         440.0  1056.00  1583.0  2149.0  4208.0
+156867   89.0  45.898876  25.995649  1.0  24.00  ...         440.0  1056.00  1583.0  2149.0  4208.0
+156868   90.0  45.500000  26.124701  1.0  23.25  ...         776.0  1268.00  1592.0  1870.0  4552.0
+156869   89.0  45.898876  25.995649  1.0  24.00  ...         440.0  1056.00  1583.0  2149.0  4208.0
+156870   89.0  45.898876  25.995649  1.0  24.00  ...         440.0  1056.00  1583.0  2149.0  4208.0
+156871   89.0  45.898876  25.995649  1.0  24.00  ...         440.0  1056.00  1583.0  2149.0  4208.0
+156872   87.0  46.931034  25.377060  2.0  25.50  ...        1176.0  1560.00  1944.0  2279.5  4600.0
+156873   89.0  45.898876  25.995649  1.0  24.00  ...         440.0  1056.00  1583.0  2149.0  4208.0
+156874   89.0  45.898876  25.995649  1.0  24.00  ...         440.0  1056.00  1583.0  2149.0  4208.0
+156875   85.0  46.858824  25.735908  3.0  25.00  ...         896.0  1096.00  1551.0  1968.0  5760.0
+
+[22 rows x 16 columns]
+
+In [61]: data.groupby('subject').describe()['reaction_time']
+Out[61]:
+         count         mean          std     min      25%     50%     75%     max
+subject
+156772    90.0  1339.344444   360.489840   639.0  1029.00  1389.0  1572.0  2387.0
+156839    90.0   601.711111   739.645029   119.0   200.00   452.0   624.0  5770.0
+156856    90.0  1080.044444   379.719202   219.0   826.25   998.0  1275.0  2355.0
+156857    89.0  1523.977528   888.860302   584.0   944.00  1263.0  1696.0  5312.0
+156858    89.0  1523.977528   888.860302   584.0   944.00  1263.0  1696.0  5312.0
+156859    89.0  1523.977528   888.860302   584.0   944.00  1263.0  1696.0  5312.0
+156860    88.0  2058.443182   774.802056  1063.0  1591.75  1900.0  2286.0  5024.0
+156861    88.0  2058.443182   774.802056  1063.0  1591.75  1900.0  2286.0  5024.0
+156862    89.0  1523.977528   888.860302   584.0   944.00  1263.0  1696.0  5312.0
+156863    88.0  2058.443182   774.802056  1063.0  1591.75  1900.0  2286.0  5024.0
+156864    89.0  1700.865169   819.255124   440.0  1056.00  1583.0  2149.0  4208.0
+156865    89.0  1700.865169   819.255124   440.0  1056.00  1583.0  2149.0  4208.0
+156866    89.0  1700.865169   819.255124   440.0  1056.00  1583.0  2149.0  4208.0
+156867    89.0  1700.865169   819.255124   440.0  1056.00  1583.0  2149.0  4208.0
+156868    90.0  1671.988889   607.828193   776.0  1268.00  1592.0  1870.0  4552.0
+156869    89.0  1700.865169   819.255124   440.0  1056.00  1583.0  2149.0  4208.0
+156870    89.0  1700.865169   819.255124   440.0  1056.00  1583.0  2149.0  4208.0
+156871    89.0  1700.865169   819.255124   440.0  1056.00  1583.0  2149.0  4208.0
+156872    87.0  2064.712644   659.718666  1176.0  1560.00  1944.0  2279.5  4600.0
+156873    89.0  1700.865169   819.255124   440.0  1056.00  1583.0  2149.0  4208.0
+156874    89.0  1700.865169   819.255124   440.0  1056.00  1583.0  2149.0  4208.0
+156875    85.0  1844.541176  1111.735693   896.0  1096.00  1551.0  1968.0  5760.0
+
+In [62]: data.groupby('subject').describe()['reaction_time']['mean']
+Out[62]:
+subject
+156772    1339.344444
+156839     601.711111
+156856    1080.044444
+156857    1523.977528
+156858    1523.977528
+156859    1523.977528
+156860    2058.443182
+156861    2058.443182
+156862    1523.977528
+156863    2058.443182
+156864    1700.865169
+156865    1700.865169
+156866    1700.865169
+156867    1700.865169
+156868    1671.988889
+156869    1700.865169
+156870    1700.865169
+156871    1700.865169
+156872    2064.712644
+156873    1700.865169
+156874    1700.865169
+156875    1844.541176
+Name: mean, dtype: float64
+
+In [63]: data.groupby('subject').describe()['reaction_time']['mean'].mean()
+Out[63]: 1644.607676532076
+
+In [64]: data.groupby('subject').describe()['reaction_time', 'mean']
+Out[64]:
+subject
+156772    1339.344444
+156839     601.711111
+156856    1080.044444
+156857    1523.977528
+156858    1523.977528
+156859    1523.977528
+156860    2058.443182
+156861    2058.443182
+156862    1523.977528
+156863    2058.443182
+156864    1700.865169
+156865    1700.865169
+156866    1700.865169
+156867    1700.865169
+156868    1671.988889
+156869    1700.865169
+156870    1700.865169
+156871    1700.865169
+156872    2064.712644
+156873    1700.865169
+156874    1700.865169
+156875    1844.541176
+Name: (reaction_time, mean), dtype: float64
+
+In [65]: data.groupby('subject').describe()['reaction_time', 'mean'].mean()
+Out[65]: 1644.607676532076
+
+In [66]: data.groupby('subject').describe()
+Out[66]:
+        trial                                    ... reaction_time
+        count       mean        std  min    25%  ...           min      25%     50%     75%     max
+subject                                          ...
+156772   90.0  45.500000  26.124701  1.0  23.25  ...         639.0  1029.00  1389.0  1572.0  2387.0
+156839   90.0  45.500000  26.124701  1.0  23.25  ...         119.0   200.00   452.0   624.0  5770.0
+156856   90.0  45.500000  26.124701  1.0  23.25  ...         219.0   826.25   998.0  1275.0  2355.0
+156857   89.0  46.000000  25.836021  2.0  24.00  ...         584.0   944.00  1263.0  1696.0  5312.0
+156858   89.0  46.000000  25.836021  2.0  24.00  ...         584.0   944.00  1263.0  1696.0  5312.0
+156859   89.0  46.000000  25.836021  2.0  24.00  ...         584.0   944.00  1263.0  1696.0  5312.0
+156860   88.0  46.090909  26.120691  1.0  24.75  ...        1063.0  1591.75  1900.0  2286.0  5024.0
+156861   88.0  46.090909  26.120691  1.0  24.75  ...        1063.0  1591.75  1900.0  2286.0  5024.0
+156862   89.0  46.000000  25.836021  2.0  24.00  ...         584.0   944.00  1263.0  1696.0  5312.0
+156863   88.0  46.090909  26.120691  1.0  24.75  ...        1063.0  1591.75  1900.0  2286.0  5024.0
+156864   89.0  45.898876  25.995649  1.0  24.00  ...         440.0  1056.00  1583.0  2149.0  4208.0
+156865   89.0  45.898876  25.995649  1.0  24.00  ...         440.0  1056.00  1583.0  2149.0  4208.0
+156866   89.0  45.898876  25.995649  1.0  24.00  ...         440.0  1056.00  1583.0  2149.0  4208.0
+156867   89.0  45.898876  25.995649  1.0  24.00  ...         440.0  1056.00  1583.0  2149.0  4208.0
+156868   90.0  45.500000  26.124701  1.0  23.25  ...         776.0  1268.00  1592.0  1870.0  4552.0
+156869   89.0  45.898876  25.995649  1.0  24.00  ...         440.0  1056.00  1583.0  2149.0  4208.0
+156870   89.0  45.898876  25.995649  1.0  24.00  ...         440.0  1056.00  1583.0  2149.0  4208.0
+156871   89.0  45.898876  25.995649  1.0  24.00  ...         440.0  1056.00  1583.0  2149.0  4208.0
+156872   87.0  46.931034  25.377060  2.0  25.50  ...        1176.0  1560.00  1944.0  2279.5  4600.0
+156873   89.0  45.898876  25.995649  1.0  24.00  ...         440.0  1056.00  1583.0  2149.0  4208.0
+156874   89.0  45.898876  25.995649  1.0  24.00  ...         440.0  1056.00  1583.0  2149.0  4208.0
+156875   85.0  46.858824  25.735908  3.0  25.00  ...         896.0  1096.00  1551.0  1968.0  5760.0
+
+[22 rows x 16 columns]
+
+In [67]: data.groupby('subject')['reaction_time']
+Out[67]: <pandas.core.groupby.generic.SeriesGroupBy object at 0x7fb42bc35760>
+
+In [68]: data.groupby('subject')['reaction_time'].mean()
+Out[68]:
+subject
+156772    1339.344444
+156839     601.711111
+156856    1080.044444
+156857    1523.977528
+156858    1523.977528
+156859    1523.977528
+156860    2058.443182
+156861    2058.443182
+156862    1523.977528
+156863    2058.443182
+156864    1700.865169
+156865    1700.865169
+156866    1700.865169
+156867    1700.865169
+156868    1671.988889
+156869    1700.865169
+156870    1700.865169
+156871    1700.865169
+156872    2064.712644
+156873    1700.865169
+156874    1700.865169
+156875    1844.541176
+Name: reaction_time, dtype: float64
+
+In [69]: data.groupby('subject')['reaction_time'].mean().mean()
+Out[69]: 1644.607676532076
+
+In [70]: data.groupby('subject')['reaction_time']['mean']
+---------------------------------------------------------------------------
+IndexError                                Traceback (most recent call last)
+Input In [70], in <cell line: 1>()
+----> 1 data.groupby('subject')['reaction_time']['mean']
+
+File /usr/local/lib/python3.8/dist-packages/pandas/core/base.py:235, in SelectionMixin.__getitem__(self, key)
+    233 def __getitem__(self, key):
+    234     if self._selection is not None:
+--> 235         raise IndexError(f"Column(s) {self._selection} already selected")
+    237     if isinstance(key, (list, tuple, ABCSeries, ABCIndex, np.ndarray)):
+    238         if len(self.obj.columns.intersection(key)) != len(set(key)):
+
+IndexError: Column(s) reaction_time already selected
+> /usr/local/lib/python3.8/dist-packages/pandas/core/base.py(235)__getitem__()
+    233     def __getitem__(self, key):
+    234         if self._selection is not None:
+--> 235             raise IndexError(f"Column(s) {self._selection} already selected")
+    236
+    237         if isinstance(key, (list, tuple, ABCSeries, ABCIndex, np.ndarray)):
+
+ipdb> c
+
+In [71]: data.groupby('subject')['reaction_time'].mean().mean()
+Out[71]: 1644.607676532076
+
+In [72]: f, ax = plt.subplots()
+
+In [73]: nbins = 30
+
+In [74]: np.sqrt(1953)
+Out[74]: 44.19275958796871
+
+In [75]: data.hist?
+
+In [76]: data['reaction_time']
+Out[76]:
+0       1389
+1       2043
+2       1389
+3       1092
+4       1310
+        ...
+1948     936
+1949     944
+1950     984
+1951    1096
+1952     984
+Name: reaction_time, Length: 1953, dtype: int64
+
+In [77]: data['reaction_time'].values
+Out[77]: array([1389, 2043, 1389, ...,  984, 1096,  984])
+
+In [78]: ax.hist(data['reaction_time'], bins=nbins)
+Out[78]:
+(array([ 37.,  28.,  50., 135., 259., 233., 225., 174., 149., 159., 110.,
+         87.,  69.,  55.,  34.,  29.,  34.,   5.,   8.,  24.,  15.,   9.,
+          3.,   2.,   3.,   1.,   7.,   7.,   0.,   2.]),
+ array([ 119.        ,  307.36666667,  495.73333333,  684.1       ,
+         872.46666667, 1060.83333333, 1249.2       , 1437.56666667,
+        1625.93333333, 1814.3       , 2002.66666667, 2191.03333333,
+        2379.4       , 2567.76666667, 2756.13333333, 2944.5       ,
+        3132.86666667, 3321.23333333, 3509.6       , 3697.96666667,
+        3886.33333333, 4074.7       , 4263.06666667, 4451.43333333,
+        4639.8       , 4828.16666667, 5016.53333333, 5204.9       ,
+        5393.26666667, 5581.63333333, 5770.        ]),
+ <BarContainer object of 30 artists>)
+
+In [79]: ax.set_xlabel('Reaction time (ms)')
+Out[79]: Text(0.5, 13.94444444444443, 'Reaction time (ms)')
+
+In [80]: ax.set_ylabel('Trial count')
+Out[80]: Text(13.944444444444452, 0.5, 'Trial count')
+
+In [81]: f.canvas.set_window_title('Reaction time distribution')
+<ipython-input-81-d65f42272386>:1: MatplotlibDeprecationWarning:
+The set_window_title function was deprecated in Matplotlib 3.4 and will be removed two minor releases later. Use manager.set_window_title or GUI-specific methods instead.
+  f.canvas.set_window_title('Reaction time distribution')
+
+In [82]: f2, ax2 = plt.subplots()
+
+In [83]: np.linspace?
+
+In [84]: np.logpsace?
+Object `np.logpsace` not found.
+
+In [85]: np.logspace?
+
+In [86]: np.log10(100)
+Out[86]: 2.0
+
+In [87]: np.log10(10000)
+Out[87]: 4.0
+
+In [88]: edges = np.logspace(2, 4, nbins+1)
+
+In [89]: edges
+Out[89]:
+array([  100.        ,   116.59144012,   135.93563909,   158.48931925,
+         184.78497974,   215.443469  ,   251.18864315,   292.86445646,
+         341.45488738,   398.10717055,   464.15888336,   541.16952655,
+         630.95734448,   735.64225446,   857.69589859,  1000.        ,
+        1165.91440118,  1359.35639088,  1584.89319246,  1847.84979742,
+        2154.43469003,  2511.88643151,  2928.64456463,  3414.54887383,
+        3981.07170553,  4641.58883361,  5411.69526546,  6309.5734448 ,
+        7356.4225446 ,  8576.95898591, 10000.        ])
+
+In [90]: ax2.hist(data['reaction_time'], bins=edges)
+Out[90]:
+(array([  0.,   4.,   5.,  10.,  12.,   4.,   2.,   1.,   4.,  18.,  19.,
+         28.,  33.,  93., 187., 206., 249., 196., 243., 229., 167.,  84.,
+         76.,  35.,  28.,  18.,   2.,   0.,   0.,   0.]),
+ array([  100.        ,   116.59144012,   135.93563909,   158.48931925,
+          184.78497974,   215.443469  ,   251.18864315,   292.86445646,
+          341.45488738,   398.10717055,   464.15888336,   541.16952655,
+          630.95734448,   735.64225446,   857.69589859,  1000.        ,
+         1165.91440118,  1359.35639088,  1584.89319246,  1847.84979742,
+         2154.43469003,  2511.88643151,  2928.64456463,  3414.54887383,
+         3981.07170553,  4641.58883361,  5411.69526546,  6309.5734448 ,
+         7356.4225446 ,  8576.95898591, 10000.        ]),
+ <BarContainer object of 30 artists>)
+
+In [91]: ax2.set_xscale?
+Signature: ax2.set_xscale(value, **kwargs)
+Docstring:
+Set the x-axis scale.
+
+Parameters
+----------
+value : {"linear", "log", "symlog", "logit", ...} or `.ScaleBase`
+    The axis scale type to apply.
+
+**kwargs
+    Different keyword arguments are accepted, depending on the scale.
+    See the respective class keyword arguments:
+
+    - `matplotlib.scale.LinearScale`
+    - `matplotlib.scale.LogScale`
+    - `matplotlib.scale.SymmetricalLogScale`
+    - `matplotlib.scale.LogitScale`
+    - `matplotlib.scale.FuncScale`
+
+Notes
+-----
+By default, Matplotlib supports the above mentioned scales.
+Additionally, custom scales may be registered using
+`matplotlib.scale.register_scale`. These scales can then also
+be used here.
+File:      /usr/local/lib/python3.8/dist-packages/matplotlib/axes/_base.py
+Type:      method
+
+In [92]: ax2.set_xscale('log')
+
+In [93]: ax2.set_xlabel('Log reaction time (ms)')
+Out[93]: Text(0.5, 13.944444444444438, 'Log reaction time (ms)')
+
+In [94]: ax2.set_ylabel('Trial count')
+Out[94]: Text(13.944444444444438, 0.5, 'Trial count')
+
+In [95]: from sklearn import cluster
+
+In [96]: cluster.DBSCAN?
+
+In [97]:
