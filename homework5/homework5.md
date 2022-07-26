@@ -16,7 +16,7 @@ As always, show your work, use docstrings and good style, and don't forget to te
 
 6. Display the image again in a new figure window. Use the `gray` color map.
 
-7. Save the image to a .png name `nissl_gray.png`.
+7. Save the image to a .png named `nissl_gray.png`.
 
 #### pandas
 
