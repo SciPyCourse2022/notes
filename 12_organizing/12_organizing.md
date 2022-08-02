@@ -91,6 +91,8 @@
             - bugs are detected faster, because all your scripts rely on the same common functions in your module(s) - one error will likely affect all of your scripts, instead of just one or two scripts
 
 - Python lets you control what happens if a `.py` file is being run as a script vs. if it's being imported as a module
+    - in IPython, can use `whos` to spot the difference between e.g. `run example.py` and `import example`
+    - running a script is like copying and pasting all the code into your Python session, importing it just provides the name of the module as a new name in your session
     - at the end of the file, you can write:
         `if __name__ == '__main__':`
     - this says "if I'm being run as a script, do the following:"
@@ -191,9 +193,8 @@
         - use the diff to help you describe the changes you made and write your commit message
         - convention is to capitalize first word, start with a verb (Add, Fix, Change, etc.), end without a period
         - e.g. `Add filename.txt` or `Fix roundoff error`
-    - commit early and often, in small logical chunks
-        - chunks are not necessarily files, but subsets of files, maybe multiple subsets
-        across multiple files
+    - commit early and often, in small logical sets of changes (chunks)
+        - chunks don't have to be all the changes you've made to each file, but can be subsets of changes of each file, or maybe multiple subsets across multiple files
 
 - `git log`
     - each commit has an long hexadecimal ID, like `f7e6501a935cf7214389372af84d51e3c6e9988e`
@@ -206,7 +207,7 @@
 - `git checkout`
     - revert uncommited changes with `git checkout -- filename` or `git checkout --force filename`
     - "check out" the state of your files at a particular time in history by specifying the commit ID:
-        - `git checkout f7e6501`
+        - e.g. `git checkout f7e6501` (your actual commit ID will be something different)
         - notice the `HEAD detached` message in `git status`
         - to go back to the latest version, use `git checkout master`
 
@@ -238,7 +239,7 @@
         - `git gui` - for staging and committing
         - `gitk` - for browsing the history (graphical version of `git log`)
     - Linux/Mac/Windows:
-        - `git-cola` - https://git-cola.github.io/ - Martin's current favourite
+        - `git-cola` & `git-dag` - https://git-cola.github.io/ - Martin's current favourite
     - Windows:
         - TortoiseGit - https://tortoisegit.org
             - modifies Windows Explorer icons, right click menu
