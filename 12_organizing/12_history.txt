@@ -1,0 +1,1022 @@
+
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing$ ipython
+Python 3.8.10 (default, Jun 22 2022, 20:18:18)
+Type 'copyright', 'credits' or 'license' for more information
+IPython 8.1.1 -- An enhanced Interactive Python. Type '?' for help.
+
+In [1]: ipython
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+Input In [1], in <cell line: 1>()
+----> 1 ipython
+
+NameError: name 'ipython' is not defined
+> <ipython-input-1-0c8359920307>(1)<cell line: 1>()
+----> 1 ipython
+
+ipdb> c
+
+In [2]: whos
+Variable   Type      Data/Info
+------------------------------
+np         module    <module 'numpy' from '/us<...>kages/numpy/__init__.py'>
+plt        module    <module 'matplotlib.pyplo<...>es/matplotlib/pyplot.py'>
+
+In [3]: run example.py
+This .py file has been run as a script
+
+In [4]: whos
+Variable   Type        Data/Info
+--------------------------------
+np         module      <module 'numpy' from '/us<...>kages/numpy/__init__.py'>
+plt        module      <module 'matplotlib.pyplo<...>es/matplotlib/pyplot.py'>
+squared    function    <function squared at 0x7fdb75c14940>
+
+In [5]:
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing$ ipython
+Python 3.8.10 (default, Jun 22 2022, 20:18:18)
+Type 'copyright', 'credits' or 'license' for more information
+IPython 8.1.1 -- An enhanced Interactive Python. Type '?' for help.
+
+In [1]: import example
+
+In [2]: whos
+Variable   Type      Data/Info
+------------------------------
+example    module    <module 'example' from '/<...>2_organizing/example.py'>
+np         module    <module 'numpy' from '/us<...>kages/numpy/__init__.py'>
+plt        module    <module 'matplotlib.pyplo<...>es/matplotlib/pyplot.py'>
+
+In [3]: example.squared?
+Signature: example.squared(x)
+Docstring:
+Return the square of x.
+
+>>> squared(2)
+4
+>>> squared(3)
+9
+>>> squared(4)
+15
+File:      ~/SciPyCourse2022/notes/12_organizing/example.py
+Type:      function
+
+In [4]: example.squared(2)
+Out[4]: 4
+
+In [5]: from example import squared
+
+In [6]: whos
+Variable   Type        Data/Info
+--------------------------------
+example    module      <module 'example' from '/<...>2_organizing/example.py'>
+np         module      <module 'numpy' from '/us<...>kages/numpy/__init__.py'>
+plt        module      <module 'matplotlib.pyplo<...>es/matplotlib/pyplot.py'>
+squared    function    <function squared at 0x7fe3293b18b0>
+
+In [7]: squared(2)
+Out[7]: 4
+
+In [8]:
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing$ python3
+Python 3.8.10 (default, Jun 22 2022, 20:18:18)
+[GCC 9.4.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> 1+1
+2
+>>>
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing$ ls
+12_exercises.md   12_organizing.pdf                      git_file_states.png
+12_exercises.pdf  combined_vs_separate_organization.odp  github-git-cheat-sheet.pdf
+12_history.txt    combined_vs_separate_organization.pdf  __pycache__
+12_organizing.md  example.py
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing$ python3 -m doctest -v example.py
+Trying:
+    squared(2)
+Expecting:
+    4
+ok
+Trying:
+    squared(3)
+Expecting:
+    9
+ok
+Trying:
+    squared(4)
+Expecting:
+    15
+**********************************************************************
+File "/home/mspacek/SciPyCourse2022/notes/12_organizing/example.py", line 8, in example.squared
+Failed example:
+    squared(4)
+Expected:
+    15
+Got:
+    16
+1 items had no tests:
+    example
+**********************************************************************
+1 items had failures:
+   1 of   3 in example.squared
+3 tests in 2 items.
+2 passed and 1 failed.
+***Test Failed*** 1 failures.
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing$ python3 -m doctest -v example.py
+Trying:
+    squared(2)
+Expecting:
+    4
+ok
+Trying:
+    squared(3)
+Expecting:
+    9
+ok
+Trying:
+    squared(4)
+Expecting:
+    16
+ok
+1 items had no tests:
+    example
+1 items passed all tests:
+   3 tests in example.squared
+3 tests in 2 items.
+3 passed and 0 failed.
+Test passed.
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing$ python3 -m doctest -v example.py
+Trying:
+    squared(2)
+Expecting:
+    4
+**********************************************************************
+File "/home/mspacek/SciPyCourse2022/notes/12_organizing/example.py", line 4, in example.squared
+Failed example:
+    squared(2)
+Expected:
+    4
+Got:
+    8
+Trying:
+    squared(3)
+Expecting:
+    9
+**********************************************************************
+File "/home/mspacek/SciPyCourse2022/notes/12_organizing/example.py", line 6, in example.squared
+Failed example:
+    squared(3)
+Expected:
+    9
+Got:
+    27
+Trying:
+    squared(4)
+Expecting:
+    16
+**********************************************************************
+File "/home/mspacek/SciPyCourse2022/notes/12_organizing/example.py", line 8, in example.squared
+Failed example:
+    squared(4)
+Expected:
+    16
+Got:
+    64
+1 items had no tests:
+    example
+**********************************************************************
+1 items had failures:
+   3 of   3 in example.squared
+3 tests in 2 items.
+0 passed and 3 failed.
+***Test Failed*** 3 failures.
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing$ git --help
+usage: git [--version] [--help] [-C <path>] [-c <name>=<value>]
+           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]
+           [-p | --paginate | -P | --no-pager] [--no-replace-objects] [--bare]
+           [--git-dir=<path>] [--work-tree=<path>] [--namespace=<name>]
+           <command> [<args>]
+
+These are common Git commands used in various situations:
+
+start a working area (see also: git help tutorial)
+   clone             Clone a repository into a new directory
+   init              Create an empty Git repository or reinitialize an existing one
+
+work on the current change (see also: git help everyday)
+   add               Add file contents to the index
+   mv                Move or rename a file, a directory, or a symlink
+   restore           Restore working tree files
+   rm                Remove files from the working tree and from the index
+   sparse-checkout   Initialize and modify the sparse-checkout
+
+examine the history and state (see also: git help revisions)
+   bisect            Use binary search to find the commit that introduced a bug
+   diff              Show changes between commits, commit and working tree, etc
+   grep              Print lines matching a pattern
+   log               Show commit logs
+   show              Show various types of objects
+   status            Show the working tree status
+
+grow, mark and tweak your common history
+   branch            List, create, or delete branches
+   commit            Record changes to the repository
+   merge             Join two or more development histories together
+   rebase            Reapply commits on top of another base tip
+   reset             Reset current HEAD to the specified state
+   switch            Switch branches
+   tag               Create, list, delete or verify a tag object signed with GPG
+
+collaborate (see also: git help workflows)
+   fetch             Download objects and refs from another repository
+   pull              Fetch from and integrate with another repository or a local branch
+   push              Update remote refs along with associated objects
+
+'git help -a' and 'git help -g' list available subcommands and some
+concept guides. See 'git help <command>' or 'git help <concept>'
+to read about a specific subcommand or concept.
+See 'git help git' for an overview of the system.
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing$ git
+usage: git [--version] [--help] [-C <path>] [-c <name>=<value>]
+           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]
+           [-p | --paginate | -P | --no-pager] [--no-replace-objects] [--bare]
+           [--git-dir=<path>] [--work-tree=<path>] [--namespace=<name>]
+           <command> [<args>]
+
+These are common Git commands used in various situations:
+
+start a working area (see also: git help tutorial)
+   clone             Clone a repository into a new directory
+   init              Create an empty Git repository or reinitialize an existing one
+
+work on the current change (see also: git help everyday)
+   add               Add file contents to the index
+   mv                Move or rename a file, a directory, or a symlink
+   restore           Restore working tree files
+   rm                Remove files from the working tree and from the index
+   sparse-checkout   Initialize and modify the sparse-checkout
+
+examine the history and state (see also: git help revisions)
+   bisect            Use binary search to find the commit that introduced a bug
+   diff              Show changes between commits, commit and working tree, etc
+   grep              Print lines matching a pattern
+   log               Show commit logs
+   show              Show various types of objects
+   status            Show the working tree status
+
+grow, mark and tweak your common history
+   branch            List, create, or delete branches
+   commit            Record changes to the repository
+   merge             Join two or more development histories together
+   rebase            Reapply commits on top of another base tip
+   reset             Reset current HEAD to the specified state
+   switch            Switch branches
+   tag               Create, list, delete or verify a tag object signed with GPG
+
+collaborate (see also: git help workflows)
+   fetch             Download objects and refs from another repository
+   pull              Fetch from and integrate with another repository or a local branch
+   push              Update remote refs along with associated objects
+
+'git help -a' and 'git help -g' list available subcommands and some
+concept guides. See 'git help <command>' or 'git help <concept>'
+to read about a specific subcommand or concept.
+See 'git help git' for an overview of the system.
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing$ git config
+usage: git config [<options>]
+
+Config file location
+    --global              use global config file
+    --system              use system config file
+    --local               use repository config file
+    --worktree            use per-worktree config file
+    -f, --file <file>     use given config file
+    --blob <blob-id>      read config from given blob object
+
+Action
+    --get                 get value: name [value-regex]
+    --get-all             get all values: key [value-regex]
+    --get-regexp          get values for regexp: name-regex [value-regex]
+    --get-urlmatch        get value specific for the URL: section[.var] URL
+    --replace-all         replace all matching variables: name value [value_regex]
+    --add                 add a new variable: name value
+    --unset               remove a variable: name [value-regex]
+    --unset-all           remove all matches: name [value-regex]
+    --rename-section      rename section: old-name new-name
+    --remove-section      remove a section: name
+    -l, --list            list all
+    -e, --edit            open an editor
+    --get-color           find the color configured: slot [default]
+    --get-colorbool       find the color setting: slot [stdout-is-tty]
+
+Type
+    -t, --type <>         value is given this type
+    --bool                value is "true" or "false"
+    --int                 value is decimal number
+    --bool-or-int         value is --bool or --int
+    --path                value is a path (file or directory name)
+    --expiry-date         value is an expiry date
+
+Other
+    -z, --null            terminate values with NUL byte
+    --name-only           show variable names only
+    --includes            respect include directives on lookup
+    --show-origin         show origin of config (file, standard input, blob, command line)
+    --default <value>     with --get, use default value when missing entry
+
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing$ git config --global user.name "Martin Spacek"
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing$ git config --global user.email git@mspacek.mm.st
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing$ git config --list
+user.name=Martin Spacek
+user.email=git@mspacek.mm.st
+credential.https://git.overleaf.com.username=overleaf@mspacek.mm.st
+color.status=auto
+color.branch=auto
+color.interactive=auto
+color.diff=auto
+github.user=mspacek
+github.token=aa40656bdd2380ec70ab11ebcad1f788
+merge.tool=meld
+diff.tool=meld
+cola.fontdiff=Lucida Console,13,-1,5,50,0,0,0,0,0
+cola.tabwidth=4
+cola.boldheaders=true
+cola.spellcheck=false
+gui.editor=geany
+gui.fontdiff=-family "Lucida Console" -size -12 -weight normal -slant roman -underline 0 -overstrike 0
+gui.fontui=-family "Noto Sans" -size 10 -weight normal -slant roman -underline 0 -overstrike 0
+gui.tabsize=4
+alias.d=diff
+alias.df=diff
+alias.s=status
+alias.st=status
+alias.br=branch
+alias.co=checkout
+alias.discard=checkout -f
+alias.uncommit=reset --soft HEAD~1
+alias.count=rev-list HEAD --count
+alias.ls=ls-files -cdmo --stage
+giggle.main-window-maximized=false
+giggle.main-window-geometry=962x1032+826+0
+giggle.main-window-view=HistoryView
+giggle.show-graph=true
+giggle.history-view-vpane-position=414
+giggle.file-view-vpane-position=907
+push.default=simple
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing$ ls
+12_exercises.md   12_organizing.pdf                      git_file_states.png
+12_exercises.pdf  combined_vs_separate_organization.odp  github-git-cheat-sheet.pdf
+12_history.txt    combined_vs_separate_organization.pdf  __pycache__
+12_organizing.md  example.py
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing$ mkdir test
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing$ ls
+12_exercises.md   12_organizing.pdf                      git_file_states.png
+12_exercises.pdf  combined_vs_separate_organization.odp  github-git-cheat-sheet.pdf
+12_history.txt    combined_vs_separate_organization.pdf  __pycache__
+12_organizing.md  example.py                             test
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing$ cd test
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/test$ ls
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/test$ ls -al
+total 8
+drwxrwxr-x 2 mspacek mspacek 4096 Aug  2 13:57 .
+drwxrwxr-x 4 mspacek mspacek 4096 Aug  2 13:57 ..
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/test$ git init
+Initialized empty Git repository in /home/mspacek/SciPyCourse2022/notes/12_organizing/test/.git/
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/test$ ls -al
+total 12
+drwxrwxr-x 3 mspacek mspacek 4096 Aug  2 13:57 .
+drwxrwxr-x 4 mspacek mspacek 4096 Aug  2 13:57 ..
+drwxrwxr-x 7 mspacek mspacek 4096 Aug  2 13:57 .git
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/test$ git status
+On branch master
+
+No commits yet
+
+nothing to commit (create/copy files and use "git add" to track)
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/test$ touch filename.txt
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/test$ git status
+On branch master
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+    filename.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/test$ git add filename.txt
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/test$ git status
+On branch master
+
+No commits yet
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+    new file:   filename.txt
+
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/test$ git commit -m "Add filename.txt"
+[master (root-commit) a71f603] Add filename.txt
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 filename.txt
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/test$ git status
+On branch master
+nothing to commit, working tree clean
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/test$ git log
+commit a71f60384a9552a7221562ca84dc12814c690dc7 (HEAD -> master)
+Author: Martin Spacek <git@mspacek.mm.st>
+Date:   Tue Aug 2 14:31:22 2022 +0200
+
+    Add filename.txt
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/test$ ls -al
+total 12
+drwxrwxr-x 3 mspacek mspacek 4096 Aug  2 14:27 .
+drwxrwxr-x 4 mspacek mspacek 4096 Aug  2 14:09 ..
+-rw-rw-r-- 1 mspacek mspacek    0 Aug  2 14:27 filename.txt
+drwxrwxr-x 8 mspacek mspacek 4096 Aug  2 14:31 .git
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/test$ git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+    modified:   filename.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/test$ git diff
+diff --git a/filename.txt b/filename.txt
+index e69de29..10ddd6d 100644
+--- a/filename.txt
++++ b/filename.txt
+@@ -0,0 +1 @@
++Hello!
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/test$ git add filename.txt
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/test$ git commit -m "Add a greeting"
+[master af22cce] Add a greeting
+ 1 file changed, 1 insertion(+)
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/test$ git status
+On branch master
+nothing to commit, working tree clean
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/test$ git log
+commit af22cce9e1011a4b85c521707619bd9b658f3bfc (HEAD -> master)
+Author: Martin Spacek <git@mspacek.mm.st>
+Date:   Tue Aug 2 14:34:31 2022 +0200
+
+    Add a greeting
+
+commit a71f60384a9552a7221562ca84dc12814c690dc7
+Author: Martin Spacek <git@mspacek.mm.st>
+Date:   Tue Aug 2 14:31:22 2022 +0200
+
+    Add filename.txt
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/test$ git-dag
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/test$ git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+    modified:   filename.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/test$ git diff
+diff --git a/filename.txt b/filename.txt
+index 10ddd6d..980a0d5 100644
+--- a/filename.txt
++++ b/filename.txt
+@@ -1 +1 @@
+-Hello!
++Hello World!
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/test$ git add filename.txt
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/test$ git commit -m "Improve greeting"
+[master f8b9527] Improve greeting
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/test$ git status
+On branch master
+nothing to commit, working tree clean
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/test$ git log
+commit f8b952732d082d313d6bcd45a75c6cc2e7f520c0 (HEAD -> master)
+Author: Martin Spacek <git@mspacek.mm.st>
+Date:   Tue Aug 2 14:36:36 2022 +0200
+
+    Improve greeting
+
+commit af22cce9e1011a4b85c521707619bd9b658f3bfc
+Author: Martin Spacek <git@mspacek.mm.st>
+Date:   Tue Aug 2 14:34:31 2022 +0200
+
+    Add a greeting
+
+commit a71f60384a9552a7221562ca84dc12814c690dc7
+Author: Martin Spacek <git@mspacek.mm.st>
+Date:   Tue Aug 2 14:31:22 2022 +0200
+
+    Add filename.txt
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/test$ git-dag
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/test$
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/test$ git log
+commit f8b952732d082d313d6bcd45a75c6cc2e7f520c0 (HEAD -> master)
+Author: Martin Spacek <git@mspacek.mm.st>
+Date:   Tue Aug 2 14:36:36 2022 +0200
+
+    Improve greeting
+
+commit af22cce9e1011a4b85c521707619bd9b658f3bfc
+Author: Martin Spacek <git@mspacek.mm.st>
+Date:   Tue Aug 2 14:34:31 2022 +0200
+
+    Add a greeting
+
+commit a71f60384a9552a7221562ca84dc12814c690dc7
+Author: Martin Spacek <git@mspacek.mm.st>
+Date:   Tue Aug 2 14:31:22 2022 +0200
+
+    Add filename.txt
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/test$ cd ..
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing$ mkdir tesproject
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing$ rm tesproject/
+rm: cannot remove 'tesproject/': Is a directory
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing$ rm -rfv tesproject/
+removed directory 'tesproject/'
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing$ mkdir testproject
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing$ cd testproject/
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/testproject$ git init
+Initialized empty Git repository in /home/mspacek/SciPyCourse2022/notes/12_organizing/testproject/.git/
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/testproject$ git status
+On branch master
+
+No commits yet
+
+nothing to commit (create/copy files and use "git add" to track)
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/testproject$ touch test.py
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/testproject$ ls -al
+total 12
+drwxrwxr-x 3 mspacek mspacek 4096 Aug  2 14:45 .
+drwxrwxr-x 5 mspacek mspacek 4096 Aug  2 14:45 ..
+drwxrwxr-x 7 mspacek mspacek 4096 Aug  2 14:45 .git
+-rw-rw-r-- 1 mspacek mspacek    0 Aug  2 14:45 test.py
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/testproject$ git add test.py
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/testproject$ git commit -m "Add test.py"
+[master (root-commit) 090875f] Add test.py
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 test.py
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/testproject$ git status
+On branch master
+nothing to commit, working tree clean
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/testproject$ git log
+commit 090875f22f0a0eaf0b530b0a3846fac87564dccc (HEAD -> master)
+Author: Martin Spacek <git@mspacek.mm.st>
+Date:   Tue Aug 2 14:46:11 2022 +0200
+
+    Add test.py
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/testproject$ touch test2.py
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/testproject$ git add test2.py
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/testproject$ git commit -m "Add test2.py"
+[master 861fe4b] Add test2.py
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 test2.py
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/testproject$ git log
+commit 861fe4bdd6a180b05ea44736e0671f3010be4a48 (HEAD -> master)
+Author: Martin Spacek <git@mspacek.mm.st>
+Date:   Tue Aug 2 14:47:06 2022 +0200
+
+    Add test2.py
+
+commit 090875f22f0a0eaf0b530b0a3846fac87564dccc
+Author: Martin Spacek <git@mspacek.mm.st>
+Date:   Tue Aug 2 14:46:11 2022 +0200
+
+    Add test.py
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/testproject$ ls -al
+total 12
+drwxrwxr-x 3 mspacek mspacek 4096 Aug  2 14:46 .
+drwxrwxr-x 5 mspacek mspacek 4096 Aug  2 14:45 ..
+drwxrwxr-x 8 mspacek mspacek 4096 Aug  2 14:47 .git
+-rw-rw-r-- 1 mspacek mspacek    0 Aug  2 14:46 test2.py
+-rw-rw-r-- 1 mspacek mspacek    0 Aug  2 14:45 test.py
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/testproject$ nano test.py
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/testproject$ nano test2.py
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/testproject$ nano test2.py
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/testproject$ git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+    modified:   test.py
+    modified:   test2.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/testproject$ git diff
+diff --git a/test.py b/test.py
+index e69de29..8d8c843 100644
+--- a/test.py
++++ b/test.py
+@@ -0,0 +1 @@
++print("this is test.py")
+diff --git a/test2.py b/test2.py
+index e69de29..4c91aa1 100644
+--- a/test2.py
++++ b/test2.py
+@@ -0,0 +1,5 @@
++print("This is test2.py")
++
++for i in range(10):
++    print(i)
++
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/testproject$ git-cola
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/testproject$ git log
+commit 16e2a985abf986f35691972599269d73bfe50bac (HEAD -> master)
+Author: Martin Spacek <git@mspacek.mm.st>
+Date:   Tue Aug 2 14:50:51 2022 +0200
+
+    Add informative messages to both files
+
+commit 861fe4bdd6a180b05ea44736e0671f3010be4a48
+Author: Martin Spacek <git@mspacek.mm.st>
+Date:   Tue Aug 2 14:47:06 2022 +0200
+
+    Add test2.py
+
+commit 090875f22f0a0eaf0b530b0a3846fac87564dccc
+Author: Martin Spacek <git@mspacek.mm.st>
+Date:   Tue Aug 2 14:46:11 2022 +0200
+
+    Add test.py
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/testproject$ git-dag
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/testproject$ git-cola
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/testproject$ git log
+commit 73ceebb6fe72ea38788ca31e1f0e14c3872b0fdc (HEAD -> master)
+Author: Martin Spacek <git@mspacek.mm.st>
+Date:   Tue Aug 2 14:51:37 2022 +0200
+
+    Add for loop to test2.py
+
+commit 16e2a985abf986f35691972599269d73bfe50bac
+Author: Martin Spacek <git@mspacek.mm.st>
+Date:   Tue Aug 2 14:50:51 2022 +0200
+
+    Add informative messages to both files
+
+commit 861fe4bdd6a180b05ea44736e0671f3010be4a48
+Author: Martin Spacek <git@mspacek.mm.st>
+Date:   Tue Aug 2 14:47:06 2022 +0200
+
+    Add test2.py
+
+commit 090875f22f0a0eaf0b530b0a3846fac87564dccc
+Author: Martin Spacek <git@mspacek.mm.st>
+Date:   Tue Aug 2 14:46:11 2022 +0200
+
+    Add test.py
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/testproject$ nano test2.py
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/testproject$ git diff
+diff --git a/test2.py b/test2.py
+index 4c91aa1..8c3fa49 100644
+--- a/test2.py
++++ b/test2.py
+@@ -1,5 +1,5 @@
+ print("This is test2.py")
+
+-for i in range(10):
++for i in range(100):
+     print(i)
+
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/testproject$ git checkout -- test2.py
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/testproject$ git status
+On branch master
+nothing to commit, working tree clean
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/testproject$ git diff
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/testproject$ nano test2.py
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/testproject$ git log
+commit 73ceebb6fe72ea38788ca31e1f0e14c3872b0fdc (HEAD -> master)
+Author: Martin Spacek <git@mspacek.mm.st>
+Date:   Tue Aug 2 14:51:37 2022 +0200
+
+    Add for loop to test2.py
+
+commit 16e2a985abf986f35691972599269d73bfe50bac
+Author: Martin Spacek <git@mspacek.mm.st>
+Date:   Tue Aug 2 14:50:51 2022 +0200
+
+    Add informative messages to both files
+
+commit 861fe4bdd6a180b05ea44736e0671f3010be4a48
+Author: Martin Spacek <git@mspacek.mm.st>
+Date:   Tue Aug 2 14:47:06 2022 +0200
+
+    Add test2.py
+
+commit 090875f22f0a0eaf0b530b0a3846fac87564dccc
+Author: Martin Spacek <git@mspacek.mm.st>
+Date:   Tue Aug 2 14:46:11 2022 +0200
+
+    Add test.py
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/testproject$ git checkout 16e2a9
+Note: switching to '16e2a9'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+
+  git switch -c <new-branch-name>
+
+Or undo this operation with:
+
+  git switch -
+
+Turn off this advice by setting config variable advice.detachedHead to false
+
+HEAD is now at 16e2a98 Add informative messages to both files
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/testproject$ git log
+commit 16e2a985abf986f35691972599269d73bfe50bac (HEAD)
+Author: Martin Spacek <git@mspacek.mm.st>
+Date:   Tue Aug 2 14:50:51 2022 +0200
+
+    Add informative messages to both files
+
+commit 861fe4bdd6a180b05ea44736e0671f3010be4a48
+Author: Martin Spacek <git@mspacek.mm.st>
+Date:   Tue Aug 2 14:47:06 2022 +0200
+
+    Add test2.py
+
+commit 090875f22f0a0eaf0b530b0a3846fac87564dccc
+Author: Martin Spacek <git@mspacek.mm.st>
+Date:   Tue Aug 2 14:46:11 2022 +0200
+
+    Add test.py
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/testproject$ ls -al
+total 20
+drwxrwxr-x 3 mspacek mspacek 4096 Aug  2 14:55 .
+drwxrwxr-x 5 mspacek mspacek 4096 Aug  2 14:45 ..
+drwxrwxr-x 8 mspacek mspacek 4096 Aug  2 14:55 .git
+-rw-rw-r-- 1 mspacek mspacek   26 Aug  2 14:55 test2.py
+-rw-rw-r-- 1 mspacek mspacek   25 Aug  2 14:47 test.py
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/testproject$ nano test2.py
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/testproject$ git checkout master
+Previous HEAD position was 16e2a98 Add informative messages to both files
+Switched to branch 'master'
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/testproject$ git status
+On branch master
+nothing to commit, working tree clean
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/testproject$ git log
+commit 73ceebb6fe72ea38788ca31e1f0e14c3872b0fdc (HEAD -> master)
+Author: Martin Spacek <git@mspacek.mm.st>
+Date:   Tue Aug 2 14:51:37 2022 +0200
+
+    Add for loop to test2.py
+
+commit 16e2a985abf986f35691972599269d73bfe50bac
+Author: Martin Spacek <git@mspacek.mm.st>
+Date:   Tue Aug 2 14:50:51 2022 +0200
+
+    Add informative messages to both files
+
+commit 861fe4bdd6a180b05ea44736e0671f3010be4a48
+Author: Martin Spacek <git@mspacek.mm.st>
+Date:   Tue Aug 2 14:47:06 2022 +0200
+
+    Add test2.py
+
+commit 090875f22f0a0eaf0b530b0a3846fac87564dccc
+Author: Martin Spacek <git@mspacek.mm.st>
+Date:   Tue Aug 2 14:46:11 2022 +0200
+
+    Add test.py
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/testproject$ nano test2.py
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/testproject$ ls -al
+total 20
+drwxrwxr-x 3 mspacek mspacek 4096 Aug  2 14:57 .
+drwxrwxr-x 5 mspacek mspacek 4096 Aug  2 14:45 ..
+drwxrwxr-x 8 mspacek mspacek 4096 Aug  2 14:57 .git
+-rw-rw-r-- 1 mspacek mspacek   61 Aug  2 14:57 test2.py
+-rw-rw-r-- 1 mspacek mspacek   25 Aug  2 14:47 test.py
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/testproject$ ls
+test2.py  test.py
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/testproject$ ipython
+Python 3.8.10 (default, Jun 22 2022, 20:18:18)
+Type 'copyright', 'credits' or 'license' for more information
+IPython 8.1.1 -- An enhanced Interactive Python. Type '?' for help.
+
+In [1]: run -i test.py
+hello!
+hello!
+hello!
+hello!
+hello!
+hello!
+hello!
+hello!
+hello!
+hello!
+
+In [2]:
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/testproject$ git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+    modified:   test.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/testproject$ git diff
+diff --git a/test.py b/test.py
+index 8d8c843..1791e50 100644
+--- a/test.py
++++ b/test.py
+@@ -1 +1,2 @@
+-print("this is test.py")
++for i in range(10):
++    print('hello!')
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/testproject$ git add test.py
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/testproject$ git commit -m "Add for loop to test.py"
+[master 1eae94f] Add for loop to test.py
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/testproject$ git log
+commit 1eae94fb787a8193257b32c0474da531b4317c6e (HEAD -> master)
+Author: Martin Spacek <git@mspacek.mm.st>
+Date:   Tue Aug 2 15:09:40 2022 +0200
+
+    Add for loop to test.py
+
+commit 73ceebb6fe72ea38788ca31e1f0e14c3872b0fdc
+Author: Martin Spacek <git@mspacek.mm.st>
+Date:   Tue Aug 2 14:51:37 2022 +0200
+
+    Add for loop to test2.py
+
+commit 16e2a985abf986f35691972599269d73bfe50bac
+Author: Martin Spacek <git@mspacek.mm.st>
+Date:   Tue Aug 2 14:50:51 2022 +0200
+
+    Add informative messages to both files
+
+commit 861fe4bdd6a180b05ea44736e0671f3010be4a48
+Author: Martin Spacek <git@mspacek.mm.st>
+Date:   Tue Aug 2 14:47:06 2022 +0200
+
+    Add test2.py
+
+commit 090875f22f0a0eaf0b530b0a3846fac87564dccc
+Author: Martin Spacek <git@mspacek.mm.st>
+Date:   Tue Aug 2 14:46:11 2022 +0200
+
+    Add test.py
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/testproject$ git status
+On branch master
+nothing to commit, working tree clean
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/testproject$ ipython
+Python 3.8.10 (default, Jun 22 2022, 20:18:18)
+Type 'copyright', 'credits' or 'license' for more information
+IPython 8.1.1 -- An enhanced Interactive Python. Type '?' for help.
+
+In [1]: run test.py
+hello!
+hello!
+hello!
+hello!
+hello!
+hello!
+hello!
+hello!
+hello!
+hello!
+
+In [2]:
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/testproject$ git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+    modified:   test.py
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+    __pycache__/
+    mylib.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/testproject$ git add test.py
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/testproject$ git add mylib.py
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/testproject$ git status
+On branch master
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+    new file:   mylib.py
+    modified:   test.py
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+    __pycache__/
+
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/testproject$ git commit -m "Factor out message printing with a function"
+[master 48f5bab] Factor out message printing with a function
+ 2 files changed, 6 insertions(+), 2 deletions(-)
+ create mode 100644 mylib.py
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/testproject$ git log
+commit 48f5babea239efd7c0ac956fc1ef82ddbfefe77a (HEAD -> master)
+Author: Martin Spacek <git@mspacek.mm.st>
+Date:   Tue Aug 2 15:16:51 2022 +0200
+
+    Factor out message printing with a function
+
+commit 1eae94fb787a8193257b32c0474da531b4317c6e
+Author: Martin Spacek <git@mspacek.mm.st>
+Date:   Tue Aug 2 15:09:40 2022 +0200
+
+    Add for loop to test.py
+
+commit 73ceebb6fe72ea38788ca31e1f0e14c3872b0fdc
+Author: Martin Spacek <git@mspacek.mm.st>
+Date:   Tue Aug 2 14:51:37 2022 +0200
+
+    Add for loop to test2.py
+
+commit 16e2a985abf986f35691972599269d73bfe50bac
+Author: Martin Spacek <git@mspacek.mm.st>
+Date:   Tue Aug 2 14:50:51 2022 +0200
+
+    Add informative messages to both files
+
+commit 861fe4bdd6a180b05ea44736e0671f3010be4a48
+Author: Martin Spacek <git@mspacek.mm.st>
+Date:   Tue Aug 2 14:47:06 2022 +0200
+
+    Add test2.py
+
+commit 090875f22f0a0eaf0b530b0a3846fac87564dccc
+Author: Martin Spacek <git@mspacek.mm.st>
+Date:   Tue Aug 2 14:46:11 2022 +0200
+
+    Add test.py
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/testproject$ git-dag
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/testproject$ cd ..
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing$ ls -al
+total 5608
+drwxrwxr-x  5 mspacek mspacek    4096 Aug  2 15:05 .
+drwxrwxr-x 22 mspacek mspacek    4096 May 10 14:34 ..
+-rw-rw-r--  1 mspacek mspacek    2112 Aug  2 11:50 12_exercises.md
+-rw-------  1 mspacek mspacek   32128 Aug  2 12:12 12_exercises.pdf
+-rw-rw-r--  1 mspacek mspacek   59849 Jul  6  2021 12_history.txt
+-rw-rw-r--  1 mspacek mspacek   15344 Aug  2 15:05 12_organizing.md
+-rw-------  1 mspacek mspacek  106118 Aug  2 12:11 12_organizing.pdf
+-rw-rw-r--  1 mspacek mspacek 4889591 Jul 11  2017 combined_vs_separate_organization.odp
+-rw-rw-r--  1 mspacek mspacek  201537 Jul 11  2017 combined_vs_separate_organization.pdf
+-rw-rw-r--  1 mspacek mspacek     229 Aug  2 13:52 example.py
+-rw-rw-r--  1 mspacek mspacek   14451 Jul 11  2017 git_file_states.png
+-rw-rw-r--  1 mspacek mspacek  377767 Jul 11  2017 github-git-cheat-sheet.pdf
+drwxrwxr-x  2 mspacek mspacek    4096 Aug  2 13:44 __pycache__
+drwxrwxr-x  3 mspacek mspacek    4096 Aug  2 14:36 test
+drwxrwxr-x  4 mspacek mspacek    4096 Aug  2 15:14 testproject
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing$ git clone git@github.com:SciPyCourse2022/notes.git
+Cloning into 'notes'...
+remote: Enumerating objects: 381, done.
+remote: Counting objects: 100% (40/40), done.
+remote: Compressing objects: 100% (34/34), done.
+remote: Total 381 (delta 9), reused 36 (delta 6), pack-reused 341
+Receiving objects: 100% (381/381), 29.58 MiB | 14.65 MiB/s, done.
+Resolving deltas: 100% (141/141), done.
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing$ ls
+12_exercises.md   12_organizing.pdf                      git_file_states.png         test
+12_exercises.pdf  combined_vs_separate_organization.odp  github-git-cheat-sheet.pdf  testproject
+12_history.txt    combined_vs_separate_organization.pdf  notes
+12_organizing.md  example.py                             __pycache__
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing$ cd notes
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/notes$ ls -al
+total 92
+drwxrwxr-x 21 mspacek mspacek 4096 Aug  2 15:19 .
+drwxrwxr-x  6 mspacek mspacek 4096 Aug  2 15:19 ..
+drwxrwxr-x  2 mspacek mspacek 4096 Aug  2 15:19 00_intro
+drwxrwxr-x  2 mspacek mspacek 4096 Aug  2 15:19 01_Python_basics
+drwxrwxr-x  2 mspacek mspacek 4096 Aug  2 15:19 02_Python_basics_2
+drwxrwxr-x  2 mspacek mspacek 4096 Aug  2 15:19 03_collections
+drwxrwxr-x  2 mspacek mspacek 4096 Aug  2 15:19 04_numpy
+drwxrwxr-x  2 mspacek mspacek 4096 Aug  2 15:19 05_numpy_dtype
+drwxrwxr-x  2 mspacek mspacek 4096 Aug  2 15:19 06_fileio_mpl
+drwxrwxr-x  2 mspacek mspacek 4096 Aug  2 15:19 07_mpl_matrices
+drwxrwxr-x  2 mspacek mspacek 4096 Aug  2 15:19 08_images
+drwxrwxr-x  2 mspacek mspacek 4096 Aug  2 15:19 09_pandas
+drwxrwxr-x  2 mspacek mspacek 4096 Aug  2 15:19 10_stats
+drwxrwxr-x  2 mspacek mspacek 4096 Aug  2 15:19 11_clustering
+drwxrwxr-x  2 mspacek mspacek 4096 Aug  2 15:19 12_organizing
+drwxrwxr-x  8 mspacek mspacek 4096 Aug  2 15:19 .git
+-rw-rw-r--  1 mspacek mspacek   52 Aug  2 15:19 .gitignore
+drwxrwxr-x  2 mspacek mspacek 4096 Aug  2 15:19 homework1
+drwxrwxr-x  2 mspacek mspacek 4096 Aug  2 15:19 homework2
+drwxrwxr-x  2 mspacek mspacek 4096 Aug  2 15:19 homework3
+drwxrwxr-x  2 mspacek mspacek 4096 Aug  2 15:19 homework4
+drwxrwxr-x  2 mspacek mspacek 4096 Aug  2 15:19 homework5
+-rw-rw-r--  1 mspacek mspacek   20 Aug  2 15:19 README.md
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/notes$ git pull
+remote: Enumerating objects: 7, done.
+remote: Counting objects: 100% (7/7), done.
+remote: Compressing objects: 100% (1/1), done.
+remote: Total 4 (delta 3), reused 4 (delta 3), pack-reused 0
+Unpacking objects: 100% (4/4), 679 bytes | 679.00 KiB/s, done.
+From github.com:SciPyCourse2022/notes
+   5c3a064..c9d5b94  master     -> origin/master
+Updating 5c3a064..c9d5b94
+Fast-forward
+ 12_organizing/12_organizing.md | 11 ++++++-----
+ 1 file changed, 6 insertions(+), 5 deletions(-)
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/notes$ git-dag
+mspacek@Godel:~/SciPyCourse2022/notes/12_organizing/notes$
